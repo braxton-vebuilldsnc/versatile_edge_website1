@@ -5,7 +5,7 @@ import { CheckCircle2, LoaderCircle, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { services } from "@/lib/site-data";
 
-declare global { interface Window { turnstile?: { render: (element: HTMLElement, options: { sitekey: string }) => void } } }
+declare global { interface Window { turnstile?: { reset: () => void } } }
 
 const budgets = ["Under $25,000", "$25,000 – $50,000", "$50,000 – $75,000", "$75,000 – $100,000", "$100,000 – $150,000", "$150,000 – $200,000", "$200,000 – $300,000", "Over $300,000", "Not sure yet"];
 const referrals = ["Neighbor or friend", "Yard sign", "Web search", "Social media", "Print advertisement", "Repeat client", "Other"];
@@ -18,11 +18,16 @@ export function InquiryForm() {
     setStatus("sending"); setMessage("");
     const form = event.currentTarget;
     try {
-      const response = await fetch("/api/inquiries", { method: "POST", body: new FormData(form) });
+      const response = await fetch("/api/inquiries.php", {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
       const data = await response.json() as { message?: string };
       if (!response.ok) throw new Error(data.message || "We could not send your inquiry.");
       setStatus("sent"); setMessage("Thank you. Your project details have been sent to Versatile Edge."); form.reset();
     } catch (error) {
+      window.turnstile?.reset();
       setStatus("error"); setMessage(error instanceof Error ? error.message : "Please call us to discuss your project.");
     }
   }

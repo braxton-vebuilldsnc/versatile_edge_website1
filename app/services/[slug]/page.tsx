@@ -5,6 +5,8 @@ import { ArrowRight, Check } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { services } from "@/lib/site-data";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() { return services.map(({ slug }) => ({ slug })); }
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> { const { slug } = await params; const service = services.find((item) => item.slug === slug); return service ? { title: service.title, description: `${service.summary} Serving Raleigh, Wake County, and the Triangle.` } : {}; }
 

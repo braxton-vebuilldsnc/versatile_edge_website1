@@ -38,6 +38,7 @@ yarn-error.log*
 /.wrangler/
 /outputs/
 /work/
+*.tsbuildinfo
 
 # Local high-resolution project-photo sources. The optimized WebP assets are committed.
 /public/images/projects/*.heic

@@ -7,6 +7,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { namedProjects } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
+export const dynamicParams = false;
+
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {

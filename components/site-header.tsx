@@ -5,7 +5,7 @@ import { useState } from "react";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { phoneDisplay, phoneHref, services } from "@/lib/site-data";
+import { namedProjects, phoneDisplay, phoneHref, services } from "@/lib/site-data";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -15,14 +15,13 @@ export function SiteHeader() {
       <header className="site-header">
         <div className="utility-bar">
           <div className="site-container utility-inner">
-            <span>Licensed NC General Contractor · Serving Raleigh & Wake County</span>
+            <span>NC General Contractor License #107393 · Serving Raleigh & Wake County</span>
             <a href={phoneHref}><Phone size={14} /> {phoneDisplay}</a>
           </div>
         </div>
         <div className="site-container nav-row">
           <Link href="/" className="brand" aria-label="Versatile Edge home" onClick={close}>
-            <span className="brand-mark">VE</span>
-            <span><strong>Versatile Edge</strong><small>Renovation & Remodeling</small></span>
+            <img className="brand-logo" src="/images/brand/versatile-edge-2026-logo.png" alt="Versatile Edge LLC" />
           </Link>
           <nav className="desktop-nav" aria-label="Main navigation">
             <Link href="/about">About</Link>
@@ -32,7 +31,13 @@ export function SiteHeader() {
                 {services.map((service) => <Link key={service.slug} href={`/services/${service.slug}`}>{service.shortTitle}</Link>)}
               </div>
             </div>
-            <Link href="/projects">Projects</Link>
+            <div className="nav-dropdown">
+              <Link href="/projects">Projects <ChevronDown size={14} /></Link>
+              <div className="dropdown-panel project-dropdown-panel">
+                <Link href="/projects">All projects</Link>
+                {namedProjects.map((project) => <Link key={project.slug} href={`/projects/${project.slug}`}>{project.shortTitle}</Link>)}
+              </div>
+            </div>
             <Link href="/process">Our Process</Link>
           </nav>
           <Link href="/contact" className={cn(buttonVariants({ size: "sm" }), "header-cta")}>Request consultation</Link>
@@ -46,6 +51,7 @@ export function SiteHeader() {
             <Link href="/services" onClick={close}>All services</Link>
             {services.map((service) => <Link key={service.slug} href={`/services/${service.slug}`} onClick={close}>{service.shortTitle}</Link>)}
             <Link href="/projects" onClick={close}>Projects</Link>
+            {namedProjects.map((project) => <Link className="mobile-project-link" key={project.slug} href={`/projects/${project.slug}`} onClick={close}>{project.shortTitle}</Link>)}
             <Link href="/process" onClick={close}>Our Process</Link>
             <Link href="/contact" onClick={close}>Request consultation</Link>
           </nav>

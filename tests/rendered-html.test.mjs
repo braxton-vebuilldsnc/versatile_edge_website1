@@ -15,7 +15,7 @@ test("renders the finished Versatile Edge homepage", async () => {
   const html = await response.text();
   assert.match(html, /Remodel with clarity/);
   assert.match(html, /Request a consultation/);
-  assert.match(html, /Licensed NC General Contractor/);
+  assert.match(html, /NC General Contractor License #107393/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
 });
 

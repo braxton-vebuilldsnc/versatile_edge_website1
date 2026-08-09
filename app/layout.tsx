@@ -17,6 +17,6 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const schema = { "@context": "https://schema.org", "@type": "GeneralContractor", name: "Versatile Edge LLC", telephone: "+1-888-381-1033", areaServed: ["Raleigh", "Wake County", "Cary", "Apex", "Wake Forest"], url: "https://versatileedgellc.com" };
+  const schema = { "@context": "https://schema.org", "@type": "GeneralContractor", name: "Versatile Edge LLC", telephone: "+1-888-381-1033", identifier: "NC General Contractor License #107393", areaServed: ["Raleigh", "Wake County", "Cary", "Apex", "Wake Forest"], url: "https://versatileedgellc.com" };
   return <html lang="en"><body className={`${manrope.variable} ${playfair.variable}`}><a className="skip-link" href="#main">Skip to content</a><SiteHeader /><main id="main">{children}</main><SiteFooter /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} /></body></html>;
 }

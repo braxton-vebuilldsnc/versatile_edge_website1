@@ -38,3 +38,10 @@ yarn-error.log*
 /.wrangler/
 /outputs/
 /work/
+
+# Local high-resolution project-photo sources. The optimized WebP assets are committed.
+/public/images/projects/*.heic
+/public/images/projects/*.heif
+/public/images/projects/*.jpg
+/public/images/projects/*.jpeg
+/public/images/projects/*.png

@@ -340,12 +340,13 @@ function build_email(array $config, array $fields, array $attachments): array
     if (!filter_var($replyTo, FILTER_VALIDATE_EMAIL)) {
         throw new RuntimeException('The inquiry Reply-To address is invalid.');
     }
+    $replyToName = header_text(trim($fields['firstName'] . ' ' . $fields['lastName']));
     $subject = 'WEBSITE LEAD';
     $headers = [
         'Date: ' . date(DATE_RFC2822),
         'From: ' . encoded_header($fromName) . ' <' . $fromEmail . '>',
         'To: <' . $toEmail . '>',
-        'Reply-To: ' . $replyTo,
+        'Reply-To: ' . encoded_header($replyToName) . ' <' . $replyTo . '>',
         'Subject: ' . encoded_header($subject),
         'Message-ID: <' . bin2hex(random_bytes(16)) . '@' . substr(strrchr($fromEmail, '@') ?: '@localhost', 1) . '>',
         'MIME-Version: 1.0',

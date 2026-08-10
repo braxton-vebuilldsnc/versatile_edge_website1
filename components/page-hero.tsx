@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export function PageHero({ eyebrow, title, text, image }: { eyebrow: string; title: string; text: string; image?: string }) {
@@ -10,7 +9,7 @@ export function PageHero({ eyebrow, title, text, image }: { eyebrow: string; tit
         <span className="eyebrow light">{eyebrow}</span>
         <h1>{title}</h1>
         <p>{text}</p>
-        <Link href="/contact" className="hero-link">Discuss your project <ArrowRight size={18} /></Link>
+        <a href="/contact" className="hero-link">Discuss your project <ArrowRight size={18} /></a>
       </div>
     </section>
   );

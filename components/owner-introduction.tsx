@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowRight, PlayCircle } from "lucide-react";
 
 type OwnerIntroductionProps = {
@@ -31,7 +30,7 @@ export function OwnerIntroduction({ showAboutLink = false }: OwnerIntroductionPr
             <div><dt>Don</dt><dd>Owner, Versatile Edge LLC</dd></div>
             <div><dt>NC License</dt><dd>General Contractor #107393</dd></div>
           </dl>
-          {showAboutLink && <Link href="/about" className="text-link">More about Versatile Edge <ArrowRight size={18} /></Link>}
+          {showAboutLink && <a href="/about" className="text-link">More about Versatile Edge <ArrowRight size={18} /></a>}
         </div>
       </div>
     </section>

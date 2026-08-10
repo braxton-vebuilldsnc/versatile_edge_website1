@@ -115,6 +115,26 @@ test("exports static search-engine and IONOS hosting files", async () => {
   assert.match(htaccess, /immutable/);
 });
 
+test("uses native document navigation on the static website", async () => {
+  const linkSources = [
+    "app/page.tsx",
+    "app/projects/[slug]/page.tsx",
+    "app/services/page.tsx",
+    "app/services/[slug]/page.tsx",
+    "components/owner-introduction.tsx",
+    "components/page-hero.tsx",
+    "components/project-gallery.tsx",
+    "components/site-footer.tsx",
+    "components/site-header.tsx",
+  ];
+
+  for (const source of linkSources) {
+    const contents = await readFile(path.join(root, source), "utf8");
+    assert.doesNotMatch(contents, /from ["']next\/link["']/, source);
+    assert.doesNotMatch(contents, /<\/?Link\b/, source);
+  }
+});
+
 test("exports the PHP inquiry endpoint and preserves the complete form", async () => {
   const [form, endpoint] = await Promise.all([
     readFile(path.join(root, "components", "inquiry-form.tsx"), "utf8"),

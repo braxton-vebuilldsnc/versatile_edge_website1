@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
@@ -92,8 +91,8 @@ export default async function NamedProjectPage({ params }: Props) {
         <div className="site-container project-story-cta-inner">
           <div><span className="eyebrow">Considering a similar project?</span><h2>Let’s talk about your home.</h2></div>
           <div className="button-row">
-            <Link href="/projects" className={cn(buttonVariants({ variant: "outline" }))}><ArrowLeft size={17} /> All projects</Link>
-            <Link href="/contact" className={cn(buttonVariants())}>Request consultation <ArrowRight size={17} /></Link>
+            <a href="/projects" className={cn(buttonVariants({ variant: "outline" }))}><ArrowLeft size={17} /> All projects</a>
+            <a href="/contact" className={cn(buttonVariants())}>Request consultation <ArrowRight size={17} /></a>
           </div>
         </div>
       </section>

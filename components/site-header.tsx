@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
@@ -20,44 +19,44 @@ export function SiteHeader() {
           </div>
         </div>
         <div className="site-container nav-row">
-          <Link href="/" className="brand" aria-label="Versatile Edge home" onClick={close}>
+          <a href="/" className="brand" aria-label="Versatile Edge home" onClick={close}>
             <img className="brand-logo" src="/images/brand/versatile-edge-2026-logo.png" alt="Versatile Edge LLC" />
-          </Link>
+          </a>
           <nav className="desktop-nav" aria-label="Main navigation">
-            <Link href="/about">About</Link>
+            <a href="/about">About</a>
             <div className="nav-dropdown">
-              <Link href="/services">Services <ChevronDown size={14} /></Link>
+              <a href="/services">Services <ChevronDown size={14} /></a>
               <div className="dropdown-panel">
-                {services.map((service) => <Link key={service.slug} href={`/services/${service.slug}`}>{service.shortTitle}</Link>)}
+                {services.map((service) => <a key={service.slug} href={`/services/${service.slug}`}>{service.shortTitle}</a>)}
               </div>
             </div>
             <div className="nav-dropdown">
-              <Link href="/projects">Projects <ChevronDown size={14} /></Link>
+              <a href="/projects">Projects <ChevronDown size={14} /></a>
               <div className="dropdown-panel project-dropdown-panel">
-                <Link href="/projects">All projects</Link>
-                {namedProjects.map((project) => <Link key={project.slug} href={`/projects/${project.slug}`}>{project.shortTitle}</Link>)}
+                <a href="/projects">All projects</a>
+                {namedProjects.map((project) => <a key={project.slug} href={`/projects/${project.slug}`}>{project.shortTitle}</a>)}
               </div>
             </div>
-            <Link href="/process">Our Process</Link>
+            <a href="/process">Our Process</a>
           </nav>
-          <Link href="/contact" className={cn(buttonVariants({ size: "sm" }), "header-cta")}>Request consultation</Link>
+          <a href="/contact" className={cn(buttonVariants({ size: "sm" }), "header-cta")}>Request consultation</a>
           <button className="menu-toggle" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(!open)}>
             {open ? <X /> : <Menu />}
           </button>
         </div>
         {open && (
           <nav className="mobile-nav" aria-label="Mobile navigation">
-            <Link href="/about" onClick={close}>About</Link>
-            <Link href="/services" onClick={close}>All services</Link>
-            {services.map((service) => <Link key={service.slug} href={`/services/${service.slug}`} onClick={close}>{service.shortTitle}</Link>)}
-            <Link href="/projects" onClick={close}>Projects</Link>
-            {namedProjects.map((project) => <Link className="mobile-project-link" key={project.slug} href={`/projects/${project.slug}`} onClick={close}>{project.shortTitle}</Link>)}
-            <Link href="/process" onClick={close}>Our Process</Link>
-            <Link href="/contact" onClick={close}>Request consultation</Link>
+            <a href="/about" onClick={close}>About</a>
+            <a href="/services" onClick={close}>All services</a>
+            {services.map((service) => <a key={service.slug} href={`/services/${service.slug}`} onClick={close}>{service.shortTitle}</a>)}
+            <a href="/projects" onClick={close}>Projects</a>
+            {namedProjects.map((project) => <a className="mobile-project-link" key={project.slug} href={`/projects/${project.slug}`} onClick={close}>{project.shortTitle}</a>)}
+            <a href="/process" onClick={close}>Our Process</a>
+            <a href="/contact" onClick={close}>Request consultation</a>
           </nav>
         )}
       </header>
-      <Link href="/contact" className="mobile-sticky-cta">Request a consultation</Link>
+      <a href="/contact" className="mobile-sticky-cta">Request a consultation</a>
     </>
   );
 }

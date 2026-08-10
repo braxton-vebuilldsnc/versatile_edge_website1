@@ -151,6 +151,13 @@ test("exports the PHP inquiry endpoint and preserves the complete form", async (
   assert.match(endpoint, /challenges\.cloudflare\.com\/turnstile\/v0\/siteverify/);
   assert.match(endpoint, /AUTH LOGIN/);
   assert.match(endpoint, /\$subject = 'WEBSITE LEAD';/);
+  assert.match(endpoint, /\$subject = 'Thank You for Contacting Versatile Edge';/);
+  assert.match(endpoint, /Someone from our team will email or call you within 24 hours/);
+  assert.match(endpoint, /We look forward to learning more about your project\./);
+  assert.match(endpoint, /build_confirmation_email\(array \$config, array \$fields\)/);
+  assert.match(endpoint, /send_smtp\(\$config, \$confirmation, \$fields\['email'\]\)/);
+  assert.match(endpoint, /Content-Type: multipart\/alternative/);
+  assert.doesNotMatch(endpoint.match(/function build_confirmation_email[\s\S]*?function send_smtp/)?.[0] ?? "", /Content-Disposition: attachment/);
   assert.match(endpoint, /google\.com\/maps\/search/);
   assert.match(endpoint, /is_uploaded_file/);
   assert.equal(await exists(path.join(output, "ionos-private-config.example.php")), false);

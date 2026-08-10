@@ -350,7 +350,70 @@ function build_email(array $config, array $fields, array $attachments): array
     return [implode("\r\n", $headers) . "\r\n\r\n" . $body, $subject];
 }
 
-function send_smtp(array $config, string $message): void
+function confirmation_site_origin(array $config): string
+{
+    $host = strtolower((string) ($_SERVER['HTTP_HOST'] ?? ''));
+    $host = preg_replace('/:\d+$/', '', $host) ?? '';
+    $allowedHosts = config_value($config, 'turnstile_allowed_hostnames', []);
+    if (!is_array($allowedHosts) || !in_array($host, $allowedHosts, true)) {
+        $host = 'versatileedgellc.com';
+    }
+    return 'https://' . $host;
+}
+
+function build_confirmation_email(array $config, array $fields): array
+{
+    $fromEmail = header_text((string) $config['from_email']);
+    $fromName = 'Versatile Edge LLC';
+    $toEmail = header_text($fields['email']);
+    $subject = 'Thank You for Contacting Versatile Edge';
+    $origin = confirmation_site_origin($config);
+    $logoUrl = $origin . '/images/brand/versatile-edge-2026-logo.png';
+    $message = 'Thank you for your interest in Versatile Edge. Someone from our team will email or call you within 24 hours to learn more about your project and schedule an on-site appointment.';
+    $closing = 'We look forward to learning more about your project.';
+
+    $plainBody = "Thank You for Contacting Versatile Edge\n\n"
+        . "Hello {$fields['firstName']},\n\n"
+        . $message . "\n\n"
+        . $closing . "\n\n"
+        . "Versatile Edge LLC\nversatileedgellc.com\nbraxton@versatileedgellc.com\n";
+
+    $htmlBody = '<!doctype html><html><body style="margin:0;padding:0;background:#eef1f3;color:#15202e;font-family:Arial,Helvetica,sans-serif">'
+        . '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#eef1f3"><tr><td align="center" style="padding:24px 12px">'
+        . '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:620px;background:#ffffff;border:1px solid #d5dadd">'
+        . '<tr><td style="background:#0b213d;padding:22px 28px;text-align:center">'
+        . '<img src="' . html($logoUrl) . '" width="210" alt="Versatile Edge LLC" style="display:block;width:210px;max-width:100%;height:auto;margin:0 auto;border:0">'
+        . '</td></tr><tr><td style="padding:34px 34px 28px">'
+        . '<div style="width:48px;height:4px;background:#f1b544;margin:0 0 22px"></div>'
+        . '<h1 style="margin:0 0 20px;color:#0b213d;font-size:28px;line-height:1.2">Thank You for Contacting Versatile Edge</h1>'
+        . '<p style="margin:0 0 18px;font-size:16px;line-height:1.65">Hello ' . html($fields['firstName']) . ',</p>'
+        . '<p style="margin:0 0 18px;font-size:16px;line-height:1.65">' . html($message) . '</p>'
+        . '<p style="margin:0;font-size:16px;line-height:1.65">' . html($closing) . '</p>'
+        . '</td></tr><tr><td style="background:#f5f6f7;border-top:1px solid #d5dadd;padding:22px 34px;color:#43505d;font-size:14px;line-height:1.6">'
+        . '<strong style="color:#0b213d">Versatile Edge LLC</strong><br>'
+        . '<a href="https://versatileedgellc.com" style="color:#0b5575;text-decoration:none">versatileedgellc.com</a><br>'
+        . '<a href="mailto:braxton@versatileedgellc.com" style="color:#0b5575;text-decoration:none">braxton@versatileedgellc.com</a>'
+        . '</td></tr></table></td></tr></table></body></html>';
+
+    $alternative = 'alt_' . bin2hex(random_bytes(16));
+    $body = "--{$alternative}\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n" . chunk_split(base64_encode($plainBody));
+    $body .= "--{$alternative}\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n" . chunk_split(base64_encode($htmlBody));
+    $body .= "--{$alternative}--\r\n";
+
+    $headers = [
+        'Date: ' . date(DATE_RFC2822),
+        'From: ' . encoded_header($fromName) . ' <' . $fromEmail . '>',
+        'To: <' . $toEmail . '>',
+        'Reply-To: braxton@versatileedgellc.com',
+        'Subject: ' . encoded_header($subject),
+        'Message-ID: <' . bin2hex(random_bytes(16)) . '@' . substr(strrchr($fromEmail, '@') ?: '@localhost', 1) . '>',
+        'MIME-Version: 1.0',
+        'Content-Type: multipart/alternative; boundary="' . $alternative . '"',
+    ];
+    return [implode("\r\n", $headers) . "\r\n\r\n" . $body, $subject];
+}
+
+function send_smtp(array $config, string $message, string $recipient): void
 {
     $host = header_text((string) $config['smtp_host']);
     $port = (int) config_value($config, 'smtp_port', 587);
@@ -383,7 +446,7 @@ function send_smtp(array $config, string $message): void
         smtp_command($socket, base64_encode((string) $config['smtp_username']), [334]);
         smtp_command($socket, base64_encode((string) $config['smtp_password']), [235]);
         smtp_command($socket, 'MAIL FROM:<' . header_text((string) $config['from_email']) . '>', [250]);
-        smtp_command($socket, 'RCPT TO:<' . header_text((string) $config['to_email']) . '>', [250, 251]);
+        smtp_command($socket, 'RCPT TO:<' . header_text($recipient) . '>', [250, 251]);
         smtp_command($socket, 'DATA', [354]);
         $dotStuffed = preg_replace('/(?m)^\./', '..', $message);
         if (fwrite($socket, $dotStuffed . "\r\n.\r\n") === false) {
@@ -504,7 +567,13 @@ try {
     verify_turnstile($config, $ip);
     $attachments = validate_uploads($config);
     [$message] = build_email($config, $fields, $attachments);
-    send_smtp($config, $message);
+    send_smtp($config, $message, (string) $config['to_email']);
+    try {
+        [$confirmation] = build_confirmation_email($config, $fields);
+        send_smtp($config, $confirmation, $fields['email']);
+    } catch (Throwable $confirmationError) {
+        error_log('Versatile Edge confirmation email failure: ' . $confirmationError->getMessage());
+    }
     respond(200, 'sent', 'Your project details were sent successfully.');
 } catch (Throwable $error) {
     error_log('Versatile Edge inquiry failure: ' . $error->getMessage());

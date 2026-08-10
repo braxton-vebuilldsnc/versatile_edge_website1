@@ -13,8 +13,8 @@ return [
     'to_email' => 'REPLACE_WITH_INQUIRY_RECIPIENT',
     'turnstile_secret' => 'REPLACE_WITH_CLOUDFLARE_TURNSTILE_SECRET',
     'turnstile_allowed_hostnames' => [
+        'staging.versatileedgellc.com',
         'versatileedgellc.com',
-        'www.versatileedgellc.com',
     ],
     'max_files' => 5,
     'max_file_bytes' => 10 * 1024 * 1024,

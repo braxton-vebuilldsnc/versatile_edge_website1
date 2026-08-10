@@ -145,8 +145,12 @@ test("exports the PHP inquiry endpoint and preserves the complete form", async (
   assert.match(form, /name="zip"[^>]*required/);
   assert.match(form, /fetch\("\/api\/inquiries\.php"/);
   assert.doesNotMatch(form, /fetch\("\/api\/inquiries"/);
+  assert.match(form, /turnstile\.render/);
+  assert.match(form, /api\.js\?render=explicit/);
+  assert.doesNotMatch(form, /<script[^>]+challenges\.cloudflare\.com/);
   assert.match(endpoint, /challenges\.cloudflare\.com\/turnstile\/v0\/siteverify/);
   assert.match(endpoint, /AUTH LOGIN/);
+  assert.match(endpoint, /\$subject = 'WEBSITE LEAD';/);
   assert.match(endpoint, /google\.com\/maps\/search/);
   assert.match(endpoint, /is_uploaded_file/);
   assert.equal(await exists(path.join(output, "ionos-private-config.example.php")), false);

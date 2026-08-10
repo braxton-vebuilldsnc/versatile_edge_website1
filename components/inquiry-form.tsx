@@ -1,11 +1,19 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { CheckCircle2, LoaderCircle, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { services } from "@/lib/site-data";
 
-declare global { interface Window { turnstile?: { reset: () => void } } }
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (container: HTMLElement, options: { sitekey: string }) => string;
+      remove: (widgetId: string) => void;
+      reset: (widgetId?: string) => void;
+    };
+  }
+}
 
 const budgets = ["Under $25,000", "$25,000 – $50,000", "$50,000 – $75,000", "$75,000 – $100,000", "$100,000 – $150,000", "$150,000 – $200,000", "$200,000 – $300,000", "Over $300,000", "Not sure yet"];
 const referrals = ["Neighbor or friend", "Yard sign", "Web search", "Social media", "Print advertisement", "Repeat client", "Other"];
@@ -13,6 +21,39 @@ const referrals = ["Neighbor or friend", "Yard sign", "Web search", "Social medi
 export function InquiryForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [message, setMessage] = useState("");
+  const turnstileContainer = useRef<HTMLDivElement>(null);
+  const turnstileWidget = useRef<string | null>(null);
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+  useEffect(() => {
+    if (!turnstileSiteKey || !turnstileContainer.current) return;
+
+    const renderWidget = () => {
+      if (!window.turnstile || !turnstileContainer.current || turnstileWidget.current) return;
+      turnstileWidget.current = window.turnstile.render(turnstileContainer.current, { sitekey: turnstileSiteKey });
+    };
+
+    const existingScript = document.querySelector<HTMLScriptElement>('script[data-versatile-edge-turnstile]');
+    if (existingScript) {
+      if (window.turnstile) renderWidget();
+      else existingScript.addEventListener("load", renderWidget, { once: true });
+    } else {
+      const script = document.createElement("script");
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.async = true;
+      script.defer = true;
+      script.dataset.versatileEdgeTurnstile = "true";
+      script.addEventListener("load", renderWidget, { once: true });
+      document.head.appendChild(script);
+    }
+
+    return () => {
+      existingScript?.removeEventListener("load", renderWidget);
+      if (window.turnstile && turnstileWidget.current) window.turnstile.remove(turnstileWidget.current);
+      turnstileWidget.current = null;
+    };
+  }, [turnstileSiteKey]);
+
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("sending"); setMessage("");
@@ -27,7 +68,7 @@ export function InquiryForm() {
       if (!response.ok) throw new Error(data.message || "We could not send your inquiry.");
       setStatus("sent"); setMessage("Thank you. Your project details have been sent to Versatile Edge."); form.reset();
     } catch (error) {
-      window.turnstile?.reset();
+      window.turnstile?.reset(turnstileWidget.current ?? undefined);
       setStatus("error"); setMessage(error instanceof Error ? error.message : "Please call us to discuss your project.");
     }
   }
@@ -57,7 +98,7 @@ export function InquiryForm() {
         <label className="full upload-label"><span><Paperclip size={18} /> Project photos or plans</span><input name="files" type="file" multiple accept="image/jpeg,image/png,image/webp,image/heic,application/pdf" /><small>Up to 5 images or PDFs, 10 MB each.</small></label>
       </div>
       <input name="companyWebsite" className="honeypot" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-      {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && <><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer /><div className="cf-turnstile" data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY} /></>}
+      {turnstileSiteKey && <div className="cf-turnstile" ref={turnstileContainer} />}
       <label className="consent"><input name="consent" type="checkbox" required /> <span>I agree that Versatile Edge may use this information to evaluate my property and respond to my inquiry. *</span></label>
       <Button type="submit" size="lg" disabled={status === "sending"}>{status === "sending" ? <><LoaderCircle className="spin" /> Sending</> : "Send project details"}</Button>
       {message && <p className={`form-message ${status}`} role="status">{status === "sent" && <CheckCircle2 size={20} />}{message}</p>}

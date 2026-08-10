@@ -336,7 +336,7 @@ function build_email(array $config, array $fields, array $attachments): array
     $fromEmail = header_text((string) $config['from_email']);
     $fromName = header_text((string) config_value($config, 'from_name', 'Versatile Edge Website'));
     $toEmail = header_text((string) $config['to_email']);
-    $subject = 'New ' . $fields['projectType'] . ' inquiry - ' . $fields['city'] . ', ' . strtoupper($fields['state']);
+    $subject = 'WEBSITE LEAD';
     $headers = [
         'Date: ' . date(DATE_RFC2822),
         'From: ' . encoded_header($fromName) . ' <' . $fromEmail . '>',

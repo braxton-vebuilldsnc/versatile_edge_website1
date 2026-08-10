@@ -151,6 +151,7 @@ test("exports the PHP inquiry endpoint and preserves the complete form", async (
   assert.match(endpoint, /challenges\.cloudflare\.com\/turnstile\/v0\/siteverify/);
   assert.match(endpoint, /AUTH LOGIN/);
   assert.match(endpoint, /\$subject = 'WEBSITE LEAD';/);
+  assert.match(endpoint, /\$replyTo = header_text\(\$fields\['email'\]\);[\s\S]*?filter_var\(\$replyTo, FILTER_VALIDATE_EMAIL\)[\s\S]*?'Reply-To: ' \. \$replyTo/);
   assert.match(endpoint, /\$subject = 'Thank You for Contacting Versatile Edge';/);
   assert.match(endpoint, /Someone from our team will email or call you within 24 hours/);
   assert.match(endpoint, /We look forward to learning more about your project\./);

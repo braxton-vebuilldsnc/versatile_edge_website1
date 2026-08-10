@@ -336,12 +336,16 @@ function build_email(array $config, array $fields, array $attachments): array
     $fromEmail = header_text((string) $config['from_email']);
     $fromName = header_text((string) config_value($config, 'from_name', 'Versatile Edge Website'));
     $toEmail = header_text((string) $config['to_email']);
+    $replyTo = header_text($fields['email']);
+    if (!filter_var($replyTo, FILTER_VALIDATE_EMAIL)) {
+        throw new RuntimeException('The inquiry Reply-To address is invalid.');
+    }
     $subject = 'WEBSITE LEAD';
     $headers = [
         'Date: ' . date(DATE_RFC2822),
         'From: ' . encoded_header($fromName) . ' <' . $fromEmail . '>',
         'To: <' . $toEmail . '>',
-        'Reply-To: ' . header_text($fields['email']),
+        'Reply-To: ' . $replyTo,
         'Subject: ' . encoded_header($subject),
         'Message-ID: <' . bin2hex(random_bytes(16)) . '@' . substr(strrchr($fromEmail, '@') ?: '@localhost', 1) . '>',
         'MIME-Version: 1.0',

@@ -103,7 +103,14 @@ test("exports static search-engine and IONOS hosting files", async () => {
     const canonical = `https://versatileedgellc.com${route}`;
     assert.match(sitemap, new RegExp(`<loc>${canonical.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}<\\/loc>`), route);
   }
+  assert.match(htaccess, /RewriteBase \/\n/);
+  assert.match(htaccess, /DirectorySlash Off/);
+  assert.match(htaccess, /RewriteCond %\{REQUEST_URI\} !\\\.\[\^\/\]\+\$/);
   assert.match(htaccess, /RewriteRule \^\(\.\+\?\)\/\?\$ \$1\.html \[L\]/);
+  assert.ok(
+    htaccess.indexOf("%{REQUEST_URI} !\\.[^/]+$") < htaccess.indexOf("%{REQUEST_FILENAME} -d"),
+    "clean-page rewrite must run before the real-directory bypass",
+  );
   assert.match(htaccess, /ErrorDocument 404 \/404\.html/);
   assert.match(htaccess, /immutable/);
 });

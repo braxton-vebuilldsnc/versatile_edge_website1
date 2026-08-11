@@ -153,6 +153,8 @@ test("exports the PHP inquiry endpoint and preserves the complete form", async (
   assert.match(endpoint, /\$subject = 'WEBSITE LEAD';/);
   assert.match(endpoint, /\$replyTo = header_text\(\$fields\['email'\]\);[\s\S]*?filter_var\(\$replyTo, FILTER_VALIDATE_EMAIL\)[\s\S]*?'Reply-To: ' \. encoded_header\(\$replyToName\) \. ' <' \. \$replyTo \. '>'/);
   assert.match(endpoint, /\$subject = 'Thank You for Contacting Versatile Edge';/);
+  assert.match(endpoint, /images\/brand\/versatile-edge-official-logo-v2\.png/);
+  assert.doesNotMatch(endpoint, /images\/brand\/versatile-edge-2026-logo\.png/);
   assert.match(endpoint, /Someone from our team will email or call you within 24 hours/);
   assert.match(endpoint, /We look forward to learning more about your project\./);
   assert.match(endpoint, /build_confirmation_email\(array \$config, array \$fields\)/);

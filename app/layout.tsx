@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://versatileedgellc.com"),
   title: { default: "Versatile Edge | Raleigh Remodeling & Renovations", template: "%s | Versatile Edge" },
   description: "Licensed Raleigh general contractor for kitchens, bathrooms, additions, decks, window replacement, and whole-home renovations across Wake County.",
-  icons: { icon: "/images/brand/versatile-edge-logo.png" },
+  icons: { icon: "/images/brand/versatile-edge-official-logo-v2.png" },
   openGraph: { type: "website", locale: "en_US", siteName: "Versatile Edge LLC", images: [{ url: "/og.png", width: 1200, height: 630, alt: "Versatile Edge — Remodel with clarity. Live with confidence." }] },
   twitter: { card: "summary_large_image", images: ["/og.png"] },
 };

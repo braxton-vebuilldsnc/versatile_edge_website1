@@ -373,7 +373,7 @@ function build_confirmation_email(array $config, array $fields): array
     $toEmail = header_text($fields['email']);
     $subject = 'Thank You for Contacting Versatile Edge';
     $origin = confirmation_site_origin($config);
-    $logoUrl = $origin . '/images/brand/versatile-edge-2026-logo.png';
+    $logoUrl = $origin . '/images/brand/versatile-edge-official-logo-v2.png';
     $message = 'Thank you for your interest in Versatile Edge. Someone from our team will email or call you within 24 hours to learn more about your project and schedule an on-site appointment.';
     $closing = 'We look forward to learning more about your project.';
 

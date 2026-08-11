@@ -20,7 +20,7 @@ export function SiteHeader() {
         </div>
         <div className="site-container nav-row">
           <a href="/" className="brand" aria-label="Versatile Edge home" onClick={close}>
-            <img className="brand-logo" src="/images/brand/versatile-edge-2026-logo.png" alt="Versatile Edge LLC" />
+            <img className="brand-logo" src="/images/brand/versatile-edge-official-logo-v2.png" alt="Versatile Edge LLC" />
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
             <a href="/about">About</a>

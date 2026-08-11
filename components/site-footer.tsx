@@ -6,7 +6,7 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="site-container footer-grid">
         <div className="footer-lead">
-          <a href="/" aria-label="Versatile Edge home"><img className="footer-logo" src="/images/brand/versatile-edge-2026-logo.png" alt="Versatile Edge LLC" /></a>
+          <a href="/" aria-label="Versatile Edge home"><img className="footer-logo" src="/images/brand/versatile-edge-official-logo-v2.png" alt="Versatile Edge LLC" /></a>
           <span className="eyebrow light">Plan your next project</span>
           <h2>Ready to make your home work better?</h2>
           <p>Tell us what you want to change. We’ll start with the house, the goals, and a straightforward conversation.</p>

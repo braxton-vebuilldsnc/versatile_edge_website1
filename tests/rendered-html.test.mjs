@@ -165,6 +165,23 @@ test("exports the approved content and global back-to-top control", async () => 
   }
 });
 
+test("exports the approved homepage SEO metadata and contractor schema", async () => {
+  const home = await readFile(htmlPath("/"), "utf8");
+  assert.match(home, /<title>Home Remodeling Raleigh NC \| Versatile Edge LLC<\/title>/);
+  assert.match(home, /<meta name="description" content="Versatile Edge provides quality home remodeling in Raleigh, NC, including kitchens, bathrooms, additions, screened porches, decks, windows, and whole-home renovations\."/);
+  // Vinext normalizes the root URL by omitting its trailing slash in rendered HTML.
+  assert.match(home, /<link rel="canonical" href="https:\/\/versatileedgellc\.com\/?"/);
+  assert.match(home, /<meta property="og:title" content="Home Remodeling Raleigh NC \| Versatile Edge LLC"/);
+  assert.match(home, /Raleigh Home Remodeling, Built Around the Way You Live\./);
+  assert.match(home, /licensed residential general contractor helping Raleigh and Wake County homeowners/);
+  assert.match(home, /href="\/projects\/hutter-whole-house-remodel-addition"/);
+  assert.match(home, /Built for Raleigh and Wake County Homes\./);
+  assert.match(home, /"@type":"GeneralContractor"/);
+  assert.match(home, /"@id":"https:\/\/versatileedgellc\.com\/#contractor"/);
+  assert.match(home, /"hasOfferCatalog"/);
+  assert.match(home, /"Screened porches and decks"/);
+});
+
 test("exports the PHP inquiry endpoint and preserves the complete form", async () => {
   const [form, endpoint] = await Promise.all([
     readFile(path.join(root, "components", "inquiry-form.tsx"), "utf8"),

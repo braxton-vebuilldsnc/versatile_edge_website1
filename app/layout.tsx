@@ -18,6 +18,33 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const schema = { "@context": "https://schema.org", "@type": "GeneralContractor", name: "Versatile Edge LLC", telephone: "+1-888-381-1033", identifier: "NC General Contractor License #107393", areaServed: ["Raleigh", "Wake County", "Cary", "Apex", "Wake Forest"], url: "https://versatileedgellc.com" };
+  const schema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "GeneralContractor",
+    "@id": "https://versatileedgellc.com/#contractor",
+    name: "Versatile Edge LLC",
+    description: "Licensed residential general contractor providing home remodeling and renovations in Raleigh, Wake County, and surrounding Triangle communities.",
+    url: "https://versatileedgellc.com/",
+    telephone: "+1-888-381-1033",
+    identifier: "NC General Contractor License #107393",
+    logo: "https://versatileedgellc.com/images/brand/versatile-edge-official-logo-v2.png",
+    image: "https://versatileedgellc.com/og.png",
+    areaServed: [
+      { "@type": "AdministrativeArea", name: "Wake County" },
+      ...["Raleigh", "Cary", "Wake Forest", "Apex", "Morrisville", "Fuquay-Varina", "Holly Springs"].map((name) => ({ "@type": "City", name })),
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Residential remodeling services",
+      itemListElement: [
+        "Kitchen renovations",
+        "Bathroom renovations",
+        "Home additions",
+        "Screened porches and decks",
+        "Window replacement",
+        "Whole-home remodeling",
+      ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name } })),
+    },
+  };
   return <html lang="en"><body className={`${manrope.variable} ${playfair.variable}`}><a className="skip-link" href="#main">Skip to content</a><SiteHeader /><main id="main">{children}</main><SiteFooter /><BackToTop /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} /></body></html>;
 }

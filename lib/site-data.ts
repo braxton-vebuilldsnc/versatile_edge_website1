@@ -144,22 +144,22 @@ export const services = [
 ] as const;
 
 export const projects = [
-  { title: "Hutter Kitchen — Gathering Island", category: "Kitchens", location: "Versatile Edge Project", image: "/images/projects/hutter-kitchen-05.webp", summary: "A generous working island, tailored white cabinetry, warm brass lighting, and a dedicated pantry create a kitchen made for everyday gathering." },
-  { title: "Hutter Kitchen — Open Living", category: "Kitchens", location: "Versatile Edge Project", image: "/images/projects/hutter-kitchen-03.webp", summary: "The renovated kitchen opens naturally into a light-filled living space while retaining the home’s original brick character." },
+  { title: "Hutter Kitchen — Gathering Island", category: "Kitchens", location: "Historic Raleigh, NC", image: "/images/projects/hutter-kitchen-05.webp", summary: "A generous working island, tailored white cabinetry, warm brass lighting, and a dedicated pantry create a kitchen made for everyday gathering." },
+  { title: "Hutter Kitchen — Family Room Addition", category: "Kitchens", location: "Versatile Edge Project", image: "/images/projects/hutter-kitchen-03.webp", summary: "The renovated kitchen opens naturally into a light-filled family room addition, creating an inviting everyday gathering space around the home’s original brick fireplace." },
   { title: "Hutter Kitchen — Cooking Wall", category: "Kitchens", location: "Versatile Edge Project", image: "/images/projects/hutter-kitchen-02.webp", summary: "Integrated appliances, a statement range hood, and full-height geometric tile bring performance and visual rhythm to the cooking zone." },
   { title: "Hutter Kitchen — Pantry View", category: "Kitchens", location: "Versatile Edge Project", image: "/images/projects/hutter-kitchen-01.webp", summary: "Purposeful storage and a direct pantry connection support a clean, efficient path through the heart of the home." },
   { title: "Hutter Kitchen — Connected Flow", category: "Kitchens", location: "Versatile Edge Project", image: "/images/projects/hutter-kitchen-04.webp", summary: "A long island, durable surfaces, and carefully layered lighting connect cooking, dining, and conversation areas." },
-  { title: "Johnson Bath — Herringbone Shower", category: "Bathrooms", location: "Versatile Edge Project", image: "/images/projects/johnson-bath-04.webp", summary: "A spacious frameless shower with a full-height herringbone feature wall, integrated niches, and a built-in bench." },
+  { title: "Johnson Bath — Herringbone Shower", category: "Bathrooms", location: "Wake Forest, NC", image: "/images/projects/johnson-bath-04.webp", summary: "A spacious frameless shower with a full-height herringbone feature wall, integrated niches, and a built-in bench." },
   { title: "Johnson Bath — Double Vanity", category: "Bathrooms", location: "Versatile Edge Project", image: "/images/projects/johnson-bath-02.webp", summary: "A tailored double vanity combines deep navy cabinetry, generous storage, floral wallcovering, and warm metal fixtures." },
   { title: "Johnson Bath — Vanity Details", category: "Bathrooms", location: "Versatile Edge Project", image: "/images/projects/johnson-bath-01.webp", summary: "Custom storage, quartz surfaces, individual mirrors, and layered lighting make the everyday routine feel considered." },
   { title: "Johnson Bath — Shower Entry", category: "Bathrooms", location: "Versatile Edge Project", image: "/images/projects/johnson-bath-03.webp", summary: "Clear frameless glass keeps the herringbone tilework visible while preserving an open feeling in the room." },
   { title: "Johnson Bath — Freestanding Tub", category: "Bathrooms", location: "Versatile Edge Project", image: "/images/projects/johnson-bath-05-color-corrected.webp", summary: "A sculptural soaking tub, glass-block daylight, gray-green tile, and custom storage create a calm companion space to the walk-in shower." },
-  { title: "Brown Bath — Marble-Look Shower", category: "Bathrooms", location: "Versatile Edge Project", image: "/images/projects/brown-bath-01.webp", summary: "A compact bathroom gains a bright frameless shower, large-format marble-look surfaces, and a coordinated vanity." },
-  { title: "Brown Bath — Shower Details", category: "Bathrooms", location: "Versatile Edge Project", image: "/images/projects/brown-bath-02.webp", summary: "A sliding glass enclosure, recessed storage niche, and mosaic shower floor maximize function in a carefully planned footprint." },
-  { title: "Brown Bath — Vanity Installation", category: "Behind the Build", location: "Versatile Edge Project", image: "/images/projects/brown-working-vanity-install.webp", summary: "A real construction-stage view of the vanity installation, protected flooring, layout checks, and preparation for the finished countertop." },
-  { title: "Brown Bath — Vanity Dry-Fit", category: "Behind the Build", location: "Versatile Edge Project", image: "/images/projects/brown-working-vanity-dry-fit.webp", summary: "Cabinet placement and clearances are checked against the newly tiled floor before final fixtures and finish details are installed." },
-  { title: "Brown Bath — Shower-Base Preparation", category: "Behind the Build", location: "Versatile Edge Project", image: "/images/projects/brown-working-shower-base.webp", summary: "The mosaic shower floor and backer-board preparation show the moisture-conscious construction beneath the finished glass enclosure." },
-  { title: "Walsh Deck — Cable Railing", category: "Outdoor Living", location: "Versatile Edge Project", image: "/images/projects/walsh-deck-cable-railing.webp", summary: "Low-maintenance composite decking and slim cable rails create an open outdoor platform with clear views to the landscape." },
+  { title: "Brown — Marble-Look Shower", category: "Multiple Rooms", location: "Raleigh, NC", image: "/images/projects/brown-bath-01.webp", summary: "A compact bathroom gains a bright frameless shower, large-format marble-look surfaces, and a coordinated vanity." },
+  { title: "Brown — Shower Details", category: "Multiple Rooms", location: "Versatile Edge Project", image: "/images/projects/brown-bath-02.webp", summary: "A sliding glass enclosure, recessed storage niche, and mosaic shower floor maximize function in a carefully planned footprint." },
+  { title: "Brown - New Wet Bar Installation", category: "Multiple Rooms", location: "Versatile Edge Project", image: "/images/projects/brown-working-vanity-install.webp", summary: "A construction-stage view of the new wet bar installation, including protected flooring, cabinet layout checks, and preparation for the finished countertop." },
+  { title: "Brown — Wet Bar Cabinet Dry-Fit", category: "Multiple Rooms", location: "Versatile Edge Project", image: "/images/projects/brown-working-vanity-dry-fit.webp", summary: "Cabinet placement and clearances are checked before the wet bar’s countertop, fixtures, and finish details are installed." },
+  { title: "Brown — Shower-Base Preparation", category: "Multiple Rooms", location: "Versatile Edge Project", image: "/images/projects/brown-working-shower-base.webp", summary: "The mosaic shower floor and backer-board preparation show the moisture-conscious construction beneath the finished glass enclosure." },
+  { title: "Walsh Deck — Cable Railing", category: "Outdoor Living", location: "Apex, NC", image: "/images/projects/walsh-deck-cable-railing.webp", summary: "Low-maintenance composite decking and slim cable rails create an open outdoor platform with clear views to the landscape." },
   { title: "Walsh Deck — Stair Approach", category: "Outdoor Living", location: "Versatile Edge Project", image: "/images/projects/walsh-deck-steps.webp", summary: "A generous stair run and coordinated cable railing provide a clean, durable transition from the yard to the elevated deck." },
   { title: "Walsh Deck — Framing Details", category: "Outdoor Living", location: "Versatile Edge Project", image: "/images/projects/walsh-deck-rim-joist.webp", summary: "Finished rim boards, structural posts, bracing, and cable railing show the practical construction behind the completed deck." },
   { title: "Brick & Brass Kitchen", category: "Kitchens", location: "Wake County", image: "/images/projects/kitchen-wooley.webp", summary: "A warm, highly functional kitchen centered on custom details and a generous gathering island." },
@@ -180,10 +180,10 @@ export const namedProjects = [
     type: "Whole-house remodel and addition",
     status: "Completed project",
     heroImage: "/images/projects/hutter-living-03.webp",
-    overview: "A broad transformation that brings a new bedroom addition, expanded living spaces, a highly functional kitchen, two bathrooms, and purpose-built storage into one cohesive home.",
+    overview: "A broad transformation in Historic Raleigh, NC, bringing a new bedroom and family room addition, expanded living spaces, a highly functional kitchen, two bathrooms, and purpose-built storage into one cohesive home.",
     rooms: [
       { name: "Kitchen", description: "White tailored cabinetry, generous work surfaces, warm brass lighting, and a direct pantry connection create an inviting center for daily life.", images: ["hutter-kitchen-05.webp", "hutter-kitchen-04.webp", "hutter-kitchen-03.webp", "hutter-kitchen-02.webp", "hutter-kitchen-01.webp"] },
-      { name: "New Living Room", description: "A vaulted, beam-detailed ceiling and original brick fireplace anchor the expanded living area while broad windows bring in the landscape.", images: ["hutter-living-01-corrected.webp", "hutter-living-02.webp", "hutter-living-04.webp", "hutter-living-05.webp", "hutter-living-06.webp"] },
+      { name: "New Family Room Addition", description: "Constructed as part of the addition, the new family room pairs a vaulted, beam-detailed ceiling with the home’s original brick fireplace and broad windows overlooking the landscape.", images: ["hutter-living-01-corrected.webp", "hutter-living-02.webp", "hutter-living-04.webp", "hutter-living-05.webp", "hutter-living-06.webp"] },
       { name: "Dining, Front Living & Entry", description: "Connected rooms preserve the character of the original home while improving movement and sightlines between everyday spaces.", images: ["hutter-dining-01-corrected.webp", "hutter-dining-02.webp", "hutter-dining-03.webp", "hutter-front-living.webp", "hutter-entry-view.webp"] },
       { name: "Bedroom Addition", description: "The new bedroom suite extends the home with abundant daylight, a calm material palette, and a natural connection to the remodeled interior.", images: ["hutter-bedroom-addition-01.webp", "hutter-bedroom-addition-02.webp", "hutter-bedroom.webp"] },
       { name: "Primary Bathroom", description: "A long double vanity, walk-in tiled shower, and thoughtful circulation make the primary bath feel spacious and practical.", images: ["hutter-primary-bath-01.webp", "hutter-primary-bath-02.webp", "hutter-primary-bath-03.webp"] },
@@ -194,7 +194,7 @@ export const namedProjects = [
   },
   {
     slug: "johnson-bathroom", title: "Johnson – Bathroom", shortTitle: "Johnson – Bathroom", type: "Bathroom renovation", status: "Completed project", heroImage: "/images/projects/johnson-bath-04.webp",
-    overview: "A full bathroom renovation combining a frameless walk-in shower, sculptural soaking tub, custom vanity storage, and carefully coordinated gray-green tile.",
+    overview: "A full bathroom renovation in Wake Forest, NC, combining a frameless walk-in shower, sculptural soaking tub, custom vanity storage, and carefully coordinated gray-green tile.",
     rooms: [
       { name: "Walk-In Shower", description: "A full-height herringbone feature wall, integrated niches, bench, and frameless glass make the tilework the focal point.", images: ["johnson-bath-03.webp"] },
       { name: "Vanity", description: "Deep navy cabinetry, warm metal fixtures, quartz surfaces, and layered lighting bring character and function to the double vanity.", images: ["johnson-bath-01.webp", "johnson-bath-02.webp"] },
@@ -202,16 +202,16 @@ export const namedProjects = [
     ],
   },
   {
-    slug: "brown-bathroom", title: "Brown – Bathroom", shortTitle: "Brown – Bathroom", type: "Bathroom renovation", status: "Completed project + construction documentation", heroImage: "/images/projects/brown-bath-01.webp",
-    overview: "A compact bathroom remodeled around bright marble-look surfaces, a coordinated vanity, and a carefully built frameless shower.",
+    slug: "brown-bathroom", title: "Brown – Multiple Rooms", shortTitle: "Brown – Multiple Rooms", type: "Multiple rooms", status: "Completed project + construction documentation", heroImage: "/images/projects/brown-bath-01.webp",
+    overview: "A multi-room renovation in Raleigh, NC, including a bright bathroom with marble-look surfaces and a carefully built frameless shower, plus a new wet bar with fitted cabinetry.",
     rooms: [
       { name: "Finished Bathroom", description: "Large-format surfaces, a mosaic shower floor, recessed niche, and glass enclosure maximize light and function.", images: ["brown-bath-02.webp"] },
-      { name: "Behind the Build", description: "Working photographs document cabinet layout, shower-base preparation, and the construction beneath the finished room.", images: ["brown-working-vanity-install.webp", "brown-working-vanity-dry-fit.webp", "brown-working-shower-base.webp"] },
+      { name: "Wet Bar & Behind the Build", description: "Working photographs document the new wet bar cabinetry, layout checks, shower-base preparation, and the construction beneath the finished rooms.", images: ["brown-working-vanity-install.webp", "brown-working-vanity-dry-fit.webp", "brown-working-shower-base.webp"] },
     ],
   },
   {
     slug: "walsh-sunroom-deck", title: "Walsh – Sunroom and Deck", shortTitle: "Walsh – Sunroom & Deck", type: "Sunroom addition and deck", status: "Completed project", heroImage: "/images/projects/walsh-sunroom-03.webp",
-    overview: "A light-filled sunroom addition and low-maintenance deck create complementary indoor and outdoor places to enjoy the surrounding landscape.",
+    overview: "A light-filled sunroom addition and low-maintenance deck in Apex, NC, create complementary indoor and outdoor places to enjoy the surrounding landscape.",
     rooms: [
       { name: "Sunroom Addition", description: "Abundant glass, a soft green ceiling, and a clean white interior create a comfortable year-round room connected to the existing home.", images: ["walsh-sunroom-01.webp", "walsh-sunroom-02.webp"] },
       { name: "Deck", description: "Composite decking, a generous stair run, cable railing, and sound structural details create a durable outdoor platform.", images: ["walsh-deck-cable-railing.webp", "walsh-deck-steps.webp", "walsh-deck-rim-joist.webp"] },
@@ -219,7 +219,7 @@ export const namedProjects = [
   },
   {
     slug: "janet-home-addition", title: "Janet – Home Addition", shortTitle: "Janet – Home Addition", type: "Home addition", status: "Currently in progress", heroImage: "/images/projects/janet-floor-plan.webp",
-    overview: "An active home-addition project expanding the house with a new bedroom, bathroom and laundry functions, improved everyday circulation, and a stronger connection to the back porch.",
+    overview: "An active home-addition project in Five Points, Raleigh, NC, expanding the house with a new bedroom, bathroom and laundry functions, improved everyday circulation, and a stronger connection to the back porch.",
     video: { src: "/videos/janet-jobsite-introduction.m4v", poster: "/videos/janet-jobsite-introduction-poster.webp", title: "At the start of the Janet addition" },
     rooms: [
       { name: "Project Planning", description: "The demolition and proposed-construction plans document the coordinated layout, new bedroom, bathroom and laundry functions, and porch connection before construction began.", images: [] },

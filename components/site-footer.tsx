@@ -13,7 +13,7 @@ export function SiteFooter() {
           <a className="text-link light" href="/contact">Request a consultation <ArrowUpRight size={18} /></a>
         </div>
         <div><h3>Explore</h3><a href="/about">About</a><a href="/projects">Projects</a><a href="/process">Our Process</a><a href="/contact">Contact</a></div>
-        <div><h3>Services</h3>{services.slice(0, 5).map((s) => <a key={s.slug} href={`/services/${s.slug}`}>{s.shortTitle}</a>)}</div>
+        <div><h3>Services</h3>{services.map((s) => <a key={s.slug} href={`/services/${s.slug}`}>{s.slug === "window-replacement" ? "Window Replacement" : s.shortTitle}</a>)}</div>
         <div><h3>Call us</h3><a href={phoneHref} className="footer-phone"><Phone size={18} />{phoneDisplay}</a><p>Raleigh, Wake County, and surrounding Triangle communities.</p></div>
       </div>
       <div className="site-container footer-bottom"><span>© {new Date().getFullYear()} Versatile Edge LLC</span><a href="/privacy">Privacy</a></div>

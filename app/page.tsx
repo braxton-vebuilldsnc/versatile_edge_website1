@@ -12,7 +12,7 @@ export default function Home() {
         <div className="home-hero-overlay" />
         <div className="site-container home-hero-content">
           <span className="eyebrow light">Raleigh · Wake County · The Triangle</span>
-          <h1>Remodel with clarity.<br /><em>Live with confidence.</em></h1>
+          <h1>Quality Renovations and Builds.<br /><em>Improving the Way You Live.</em></h1>
           <p>Thoughtful renovation, dependable project management, and craftsmanship built around the way you live.</p>
           <div className="hero-actions"><a href="/contact" className={buttonVariants({ size: "lg" })}>Request a consultation <ArrowRight size={18} /></a><a href="/projects" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "light")}>Explore our work</a></div>
         </div>

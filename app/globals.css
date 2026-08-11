@@ -62,6 +62,10 @@ h3 { line-height: 1.25; }
 .menu-toggle { display: none; border: 0; background: transparent; color: var(--navy); }
 .mobile-nav { display: none; }
 .mobile-sticky-cta { display: none; }
+.back-to-top { position: fixed; z-index: 55; right: 24px; bottom: 24px; width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.24); border-radius: 50%; background: var(--accent); color: var(--navy); box-shadow: 0 12px 30px rgba(7,25,47,.24); cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity .2s ease, visibility .2s ease, transform .2s ease, background-color .2s ease; }
+.back-to-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { background: var(--accent-strong); }
+.back-to-top:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
 
 .home-hero { position: relative; min-height: min(790px, calc(100vh - 126px)); display: flex; align-items: center; overflow: hidden; background: var(--navy); color: white; }
 .home-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -318,6 +322,11 @@ h3 { line-height: 1.25; }
   .service-list article img { grid-column: 1 / -1; }
   .service-detail { gap: 30px; }
   .project-card, .project-card-wide { grid-column: auto; min-height: 490px; }
+  .project-card-overlay { padding: 44px 20px 18px; }
+  .project-card-overlay span { font-size: .6rem; letter-spacing: .08em; }
+  .project-card-overlay h2 { margin: 5px 0; font-size: clamp(1.35rem, 7vw, 1.9rem); line-height: 1.08; }
+  .project-card-overlay p { font-size: .8rem; line-height: 1.45; }
+  .project-card-link { margin-top: 11px; font-size: .68rem; }
   .project-story-summary { grid-template-columns: 1fr; gap: 24px; }
   .project-jobsite-video-grid { grid-template-columns: 1fr; gap: 55px; }
   .project-jobsite-video-wrap { width: min(88%, 420px); }
@@ -333,6 +342,13 @@ h3 { line-height: 1.25; }
   .form-grid label.full { grid-column: auto; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-lead { grid-column: 1 / -1; }
+  .back-to-top { right: 16px; bottom: 70px; width: 46px; height: 46px; }
+}
+
+@media (max-width: 480px) {
+  .project-card-overlay { padding: 28px 14px 12px; }
+  .project-card-overlay h2 { font-size: 1.22rem; }
+  .project-card-overlay p { font-size: .74rem; line-height: 1.32; }
 }
 
 @media (max-width: 420px) {

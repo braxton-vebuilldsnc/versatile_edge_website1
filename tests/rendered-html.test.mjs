@@ -135,6 +135,36 @@ test("uses native document navigation on the static website", async () => {
   }
 });
 
+test("exports the approved content and global back-to-top control", async () => {
+  const [home, services, process, projects, hutter, brown, johnson, walsh, janet] = await Promise.all([
+    readFile(htmlPath("/"), "utf8"),
+    readFile(htmlPath("/services"), "utf8"),
+    readFile(htmlPath("/process"), "utf8"),
+    readFile(htmlPath("/projects"), "utf8"),
+    readFile(htmlPath("/projects/hutter-whole-house-remodel-addition"), "utf8"),
+    readFile(htmlPath("/projects/brown-bathroom"), "utf8"),
+    readFile(htmlPath("/projects/johnson-bathroom"), "utf8"),
+    readFile(htmlPath("/projects/walsh-sunroom-deck"), "utf8"),
+    readFile(htmlPath("/projects/janet-home-addition"), "utf8"),
+  ]);
+
+  assert.match(home, /Quality Renovations and Builds\./);
+  assert.match(home, /Improving the Way You Live\./);
+  assert.match(services, /Every project follows the same standard: thoughtful planning/);
+  assert.match(process, /A clear plan makes the best work possible\./);
+  assert.match(projects, /Brown - New Wet Bar Installation/);
+  assert.match(projects, /Multiple Rooms/);
+  assert.match(hutter, /Historic Raleigh, NC/);
+  assert.match(hutter, /New Family Room Addition/);
+  assert.match(johnson, /Wake Forest, NC/);
+  assert.match(brown, /Raleigh, NC/);
+  assert.match(walsh, /Apex, NC/);
+  assert.match(janet, /Five Points, Raleigh, NC/);
+  for (const route of publicRoutes) {
+    assert.match(await readFile(htmlPath(route), "utf8"), /aria-label="Back to top"/, route);
+  }
+});
+
 test("exports the PHP inquiry endpoint and preserves the complete form", async () => {
   const [form, endpoint] = await Promise.all([
     readFile(path.join(root, "components", "inquiry-form.tsx"), "utf8"),

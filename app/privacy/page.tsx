@@ -1,3 +1,7 @@
 import type { Metadata } from "next";
-export const metadata: Metadata = { title: "Privacy Policy" };
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "Learn how Versatile Edge uses and protects information submitted through its project inquiry form.",
+  alternates: { canonical: "https://versatileedgellc.com/privacy" },
+};
 export default function PrivacyPage() { return <section className="section legal-page"><div className="site-container narrow"><span className="eyebrow">Privacy</span><h1>Your project information stays project information.</h1><p>Versatile Edge collects the information you submit through this website to evaluate your property, understand your requested work, and respond to your inquiry.</p><h2>Information we collect</h2><p>This may include your name, contact details, property address, project description, budget range, timeline, referral source, and files you choose to upload.</p><h2>How we use it</h2><p>We use submitted information only for project qualification, communication, estimating preparation, and related business records. Property addresses may be reviewed using publicly available mapping and property information services.</p><h2>Files and retention</h2><p>Uploaded files are stored privately and are scheduled for deletion after 30 days unless they become part of an active project record.</p><h2>Contact</h2><p>Call 888-381-1033 with questions about information submitted through this website.</p></div></section>; }

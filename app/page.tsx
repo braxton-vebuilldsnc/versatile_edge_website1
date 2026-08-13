@@ -4,6 +4,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { processSteps, projects, serviceAreas, services } from "@/lib/site-data";
 import { OwnerIntroduction } from "@/components/owner-introduction";
+import { JsonLd } from "@/components/json-ld";
+import { serviceCatalogSchema } from "@/lib/structured-data";
 
 const homepageDescription = "Versatile Edge provides quality home remodeling in Raleigh, NC, including kitchens, bathrooms, additions, screened porches, decks, windows, and whole-home renovations.";
 
@@ -29,6 +31,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      <JsonLd data={serviceCatalogSchema()} />
       <section className="home-hero">
         <img src="/images/projects/hutter-kitchen-04.webp" alt="Completed Versatile Edge Hutter kitchen renovation with white cabinetry and an open dining connection" />
         <div className="home-hero-overlay" />

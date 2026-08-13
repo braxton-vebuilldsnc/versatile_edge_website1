@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
+import { JsonLd } from "@/components/json-ld";
 import { buttonVariants } from "@/components/ui/button";
 import { namedProjects } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
+import { projectBreadcrumbSchema } from "@/lib/structured-data";
 
 export const dynamicParams = false;
 
@@ -21,6 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: project.title,
     description: project.overview,
+    alternates: { canonical: `https://versatileedgellc.com/projects/${project.slug}` },
     openGraph: { images: [project.heroImage] },
   };
 }
@@ -32,6 +35,7 @@ export default async function NamedProjectPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd data={projectBreadcrumbSchema(project)} />
       <PageHero eyebrow={project.type} title={project.title} text={project.overview} image={project.heroImage} />
 
       <section className="section project-story-intro">

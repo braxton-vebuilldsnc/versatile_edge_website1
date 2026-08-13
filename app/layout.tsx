@@ -33,18 +33,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       { "@type": "AdministrativeArea", name: "Wake County" },
       ...["Raleigh", "Cary", "Wake Forest", "Apex", "Morrisville", "Fuquay-Varina", "Holly Springs"].map((name) => ({ "@type": "City", name })),
     ],
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Residential remodeling services",
-      itemListElement: [
-        "Kitchen renovations",
-        "Bathroom renovations",
-        "Home additions",
-        "Screened porches and decks",
-        "Window replacement",
-        "Whole-home remodeling",
-      ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name } })),
-    },
   };
   return <html lang="en"><body className={`${manrope.variable} ${playfair.variable}`}><a className="skip-link" href="#main">Skip to content</a><SiteHeader /><main id="main">{children}</main><SiteFooter /><BackToTop /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} /></body></html>;
 }

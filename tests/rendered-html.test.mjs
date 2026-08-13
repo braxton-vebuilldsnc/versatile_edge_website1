@@ -98,12 +98,58 @@ test("exports static search-engine and IONOS hosting files", async () => {
     readFile(path.join(output, ".htaccess"), "utf8"),
   ]);
 
-  assert.match(robots, /Sitemap: https:\/\/versatileedgellc\.com\/sitemap\.xml/);
-  for (const route of publicRoutes) {
-    const canonical = `https://versatileedgellc.com${route}`;
-    assert.match(sitemap, new RegExp(`<loc>${canonical.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}<\\/loc>`), route);
+  assert.match(robots, /^User-agent: \*$/m);
+  assert.match(robots, /^Allow: \/$/m);
+  assert.match(robots, /^Disallow: \/api\/$/m);
+  assert.equal([...robots.matchAll(/^Disallow:/gm)].length, 1, "robots should exclude only the form API");
+  assert.match(robots, /^Sitemap: https:\/\/versatileedgellc\.com\/sitemap\.xml$/m);
+  const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+  const productionUrls = publicRoutes.map((route) => `https://versatileedgellc.com${route}`);
+  assert.deepEqual(
+    [...sitemapUrls].sort(),
+    [...productionUrls].sort(),
+    "sitemap should exactly match the public production routes",
+  );
+  assert.equal(new Set(sitemapUrls).size, sitemapUrls.length, "sitemap URLs should be unique");
+  assert.ok(
+    sitemapUrls.every((url) => new URL(url).origin === "https://versatileedgellc.com"),
+    "sitemap URLs should use only the production origin",
+  );
+
+  for (const [index, route] of publicRoutes.entries()) {
+    const html = await readFile(htmlPath(route), "utf8");
+    const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+    assert.ok(canonical, `${route} should declare a canonical`);
+    assert.equal(
+      new URL(canonical).href,
+      new URL(productionUrls[index]).href,
+      `${route} should declare its production canonical`,
+    );
+    assert.doesNotMatch(html, /<meta name="robots" content="[^"]*noindex/i, `${route} should be indexable`);
   }
+  const notFound = await readFile(path.join(output, "404.html"), "utf8");
+  assert.match(notFound, /<meta name="robots" content="noindex"/);
+  assert.equal(sitemapUrls.includes("https://versatileedgellc.com/404"), false);
   assert.match(htaccess, /RewriteBase \/\n/);
+  assert.match(htaccess, /RewriteRule \^about-versatile-edge\/\?\$ https:\/\/versatileedgellc\.com\/about \[R=301,L,NE\]/);
+  assert.match(htaccess, /RewriteRule \^services1\/\?\$ https:\/\/versatileedgellc\.com\/services \[R=301,L,NE\]/);
+  assert.match(htaccess, /RewriteRule \^contact-versatile-edge-llc\/\?\$ https:\/\/versatileedgellc\.com\/contact \[R=301,L,NE\]/);
+  assert.doesNotMatch(htaccess, /versatile-edge-general-contractor-in-wake-forest/);
+  assert.doesNotMatch(htaccess, /general-contractor-services-in-raleigh/);
+  assert.doesNotMatch(htaccess, /general-contractor-in-apex/);
+  assert.match(htaccess, /SetEnvIfNoCase Host "\^staging\\\.versatileedgellc\\\.com/);
+  assert.match(htaccess, /Header always set X-Robots-Tag "noindex, nofollow" env=versatile_edge_staging/);
+  assert.match(htaccess, /# Generated from exported indexable canonicals/);
+  assert.match(htaccess, /RewriteRule \^index\(\?:\\\.html\)\?\/\?\$/);
+  assert.match(htaccess, /RewriteRule \^\(\(\?:[\s\S]+\)\)\(\?:\\\.html\|\/\)\$/);
+  for (const route of publicRoutes.filter((route) => route !== "/")) {
+    assert.match(htaccess, new RegExp(route.slice(1).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), `${route} should be generated into normalization rules`);
+  }
+  assert.doesNotMatch(htaccess, /RewriteRule \^\(\.\+\)\\\.html/);
+  assert.doesNotMatch(htaccess, /RewriteRule \^\(\.\+\)\/\$/);
+  assert.match(htaccess, /RewriteRule \^404\(\?:\\\.html\)\?\/\?\$ - \[R=404,L\]/);
+  assert.match(htaccess, /RewriteRule \^ https:\/\/versatileedgellc\.com%\{REQUEST_URI\}/);
+  assert.match(htaccess, /RewriteRule \^ https:\/\/staging\.versatileedgellc\.com%\{REQUEST_URI\}/);
   assert.match(htaccess, /DirectorySlash Off/);
   assert.match(htaccess, /RewriteCond %\{REQUEST_URI\} !\\\.\[\^\/\]\+\$/);
   assert.match(htaccess, /RewriteRule \^\(\.\+\?\)\/\?\$ \$1\.html \[L\]/);
@@ -113,6 +159,16 @@ test("exports static search-engine and IONOS hosting files", async () => {
   );
   assert.match(htaccess, /ErrorDocument 404 \/404\.html/);
   assert.match(htaccess, /immutable/);
+});
+
+test("tracks city-targeted legacy URLs without prematurely redirecting them", async () => {
+  const inventory = await readFile(path.join(root, "deployment", "LEGACY-URL-INVENTORY.md"), "utf8");
+  assert.match(inventory, /versatile-edge-general-contractor-in-wake-forest-nc-kitchens-baths-additions-decks-more/);
+  assert.match(inventory, /general-contractor-services-in-raleigh-nc/);
+  assert.match(inventory, /general-contractor-in-apex-nc-kitchens-bath-additions-decks-more/);
+  assert.match(inventory, /Hold for future Wake Forest city page/);
+  assert.match(inventory, /Hold for future Raleigh city page/);
+  assert.match(inventory, /Hold for future Apex city page/);
 });
 
 test("uses native document navigation on the static website", async () => {
@@ -178,8 +234,8 @@ test("exports the approved homepage SEO metadata and contractor schema", async (
   assert.match(home, /Built for Raleigh and Wake County Homes\./);
   assert.match(home, /"@type":"GeneralContractor"/);
   assert.match(home, /"@id":"https:\/\/versatileedgellc\.com\/#contractor"/);
-  assert.match(home, /"hasOfferCatalog"/);
-  assert.match(home, /"Screened porches and decks"/);
+  assert.match(home, /"@type":"OfferCatalog"/);
+  assert.match(home, /"name":"Interior Remodeling"/);
 });
 
 test("exports the PHP inquiry endpoint and preserves the complete form", async () => {

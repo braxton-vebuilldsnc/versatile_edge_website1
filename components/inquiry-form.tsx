@@ -101,7 +101,7 @@ export function InquiryForm() {
       {turnstileSiteKey && <div className="cf-turnstile" ref={turnstileContainer} />}
       <label className="consent"><input name="consent" type="checkbox" required /> <span>I agree that Versatile Edge may use this information to evaluate my property and respond to my inquiry. *</span></label>
       <Button type="submit" size="lg" disabled={status === "sending"}>{status === "sending" ? <><LoaderCircle className="spin" /> Sending</> : "Send project details"}</Button>
-      {message && <p className={`form-message ${status}`} role="status">{status === "sent" && <CheckCircle2 size={20} />}{message}</p>}
+      {message && <p className={`form-message ${status}`} role={status === "error" ? "alert" : "status"}>{status === "sent" && <CheckCircle2 size={20} />}{message}</p>}
     </form>
   );
 }

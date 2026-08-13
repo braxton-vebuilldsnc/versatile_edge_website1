@@ -57,9 +57,13 @@ test("exports every public route as static HTML", async () => {
 test("exports every local asset referenced by public HTML", async () => {
   for (const route of publicRoutes) {
     const html = await readFile(htmlPath(route), "utf8");
-    const references = [...html.matchAll(/(?:src|poster)="(\/[^"]+)"/g)]
+    const directReferences = [...html.matchAll(/(?:src|poster)="(\/[^"]+)"/g)]
       .map((match) => match[1].split("?")[0])
       .filter((url) => !url.startsWith("/api/"));
+    const responsiveReferences = [...html.matchAll(/srcset="([^"]+)"/g)]
+      .flatMap((match) => match[1].split(","))
+      .map((candidate) => candidate.trim().split(/\s+/)[0]);
+    const references = [...directReferences, ...responsiveReferences];
 
     for (const reference of references) {
       assert.equal(
@@ -69,6 +73,59 @@ test("exports every local asset referenced by public HTML", async () => {
       );
     }
   }
+});
+
+test("generates responsive images without upscaling and prioritizes only page heroes", async () => {
+  for (const route of publicRoutes) {
+    const html = await readFile(htmlPath(route), "utf8");
+    assert.doesNotMatch(html, /data-responsive-widths=/, `${route} should not expose build markers`);
+    for (const match of html.matchAll(/<img\b[^>]*srcset="([^"]+)"[^>]*>/g)) {
+      const tag = match[0];
+      const sourceWidth = Number(tag.match(/\swidth="(\d+)"/)?.[1]);
+      const sourceHeight = Number(tag.match(/\sheight="(\d+)"/)?.[1]);
+      assert.ok(sourceWidth > 0 && sourceHeight > 0, `${route} responsive images need intrinsic dimensions`);
+      assert.match(tag, /\ssizes="[^"]+"/, `${route} responsive images need sizes`);
+      assert.match(tag, /\sdecoding="async"/, `${route} responsive images should decode asynchronously`);
+      for (const candidate of match[1].split(",")) {
+        const [, url, width] = candidate.trim().match(/^(\/\S+)\s+(\d+)w$/) ?? [];
+        assert.ok(url && width, `${route} has malformed srcset candidate ${candidate}`);
+        assert.ok(Number(width) <= sourceWidth, `${route} must not upscale ${url}`);
+        assert.equal(await exists(path.join(output, url)), true, `${route} references missing responsive asset ${url}`);
+      }
+    }
+  }
+
+  for (const route of ["/", "/services/kitchen-renovations", "/projects/hutter-whole-house-remodel-addition"]) {
+    const html = await readFile(htmlPath(route), "utf8");
+    const hero = html.match(/<img\b[^>]*loading="eager"[^>]*>/)?.[0] ?? "";
+    assert.match(hero, /fetchPriority="high"/i, `${route} hero should receive high fetch priority`);
+    assert.match(hero, /srcset=/, `${route} hero should be responsive`);
+  }
+  const home = await readFile(htmlPath("/"), "utf8");
+  assert.match(home, /hutter-kitchen-05\.webp"[^>]*loading="lazy"/);
+  const service = await readFile(htmlPath("/services/kitchen-renovations"), "utf8");
+  assert.match(service, /hutter-kitchen-02\.webp"[^>]*loading="lazy"/);
+  const project = await readFile(htmlPath("/projects/hutter-whole-house-remodel-addition"), "utf8");
+  assert.match(project, /hutter-kitchen-05\.webp"[^>]*loading="lazy"/);
+});
+
+test("exports approved focus, landmark, contrast, and form-error accessibility corrections", async () => {
+  const [styles, header, form, service, contact] = await Promise.all([
+    readFile(path.join(root, "app", "globals.css"), "utf8"),
+    readFile(path.join(root, "components", "site-header.tsx"), "utf8"),
+    readFile(path.join(root, "components", "inquiry-form.tsx"), "utf8"),
+    readFile(htmlPath("/services/kitchen-renovations"), "utf8"),
+    readFile(htmlPath("/contact"), "utf8"),
+  ]);
+  assert.match(styles, /--muted: #5f6a76/);
+  assert.match(styles, /--accent-foreground: #8a5a00/);
+  assert.doesNotMatch(styles, /a \{ color: inherit;/);
+  assert.match(styles, /:focus-visible \{ outline: 3px solid currentColor;/);
+  assert.match(styles, /\.menu-toggle \{[^}]*width: 44px;[^}]*height: 44px;/);
+  assert.match(header, /<header[\s\S]*mobile-sticky-cta[\s\S]*<\/header>/);
+  assert.match(form, /role=\{status === "error" \? "alert" : "status"\}/);
+  assert.doesNotMatch(service, /<aside\b/);
+  assert.doesNotMatch(contact, /<aside\b/);
 });
 
 test("resolves every internal page link to an exported file", async () => {

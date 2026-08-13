@@ -1,5 +1,6 @@
 import { access, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
+import sharp from "sharp";
 
 const output = path.resolve("dist", "client");
 const projectImages = path.join(output, "images", "projects");
@@ -39,6 +40,59 @@ function escapeRewritePattern(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+function imageAttribute(tag, name) {
+  return tag.match(new RegExp(`\\s${name}="([^"]*)"`))?.[1];
+}
+
+function responsiveImageUrl(src, width) {
+  const extension = path.posix.extname(src);
+  return `${src.slice(0, -extension.length)}-${width}w.webp`;
+}
+
+const generatedResponsiveImages = new Set();
+async function prepareResponsiveImages(file) {
+  let html = await readFile(file, "utf8");
+  const tags = [...html.matchAll(/<img\b[^>]*\sdata-responsive-widths="[^"]+"[^>]*>/g)].map((match) => match[0]);
+
+  for (const tag of tags) {
+    const src = imageAttribute(tag, "src");
+    const requestedWidths = imageAttribute(tag, "data-responsive-widths")
+      ?.split(",")
+      .map(Number)
+      .filter(Number.isFinite) ?? [];
+    if (!src?.startsWith("/")) throw new Error(`Responsive image must use a root-relative source in ${file}`);
+
+    const sourceFile = path.join(output, src.replace(/^\/+/, ""));
+    const metadata = await sharp(sourceFile).metadata();
+    if (!metadata.width || !metadata.height) throw new Error(`Unable to read responsive image dimensions: ${sourceFile}`);
+
+    const widths = [...new Set(requestedWidths)]
+      .filter((width) => width > 0 && width <= metadata.width)
+      .sort((left, right) => left - right);
+    const candidates = [];
+    for (const width of widths) {
+      const url = responsiveImageUrl(src, width);
+      const destination = path.join(output, url.replace(/^\/+/, ""));
+      if (!generatedResponsiveImages.has(destination)) {
+        await sharp(sourceFile).resize({ width, withoutEnlargement: true }).webp({ quality: 78 }).toFile(destination);
+        generatedResponsiveImages.add(destination);
+      }
+      candidates.push(`${url} ${width}w`);
+    }
+
+    let replacement = tag
+      .replace(/\sdata-responsive-widths="[^"]+"/, "")
+      .replace(/\swidth="[^"]*"/, "")
+      .replace(/\sheight="[^"]*"/, "")
+      .replace(/\ssrcset="[^"]*"/, "");
+    replacement = replacement.replace(/\s*\/>$/, ` width="${metadata.width}" height="${metadata.height}" />`);
+    if (candidates.length > 0) replacement = replacement.replace(/\ssizes="/, ` srcset="${candidates.join(", ")}" sizes="`);
+    html = html.replace(tag, replacement);
+  }
+
+  await writeFile(file, html, "utf8");
+}
+
 function generatedNormalizationRules(urls) {
   const routes = urls
     .map((url) => new URL(url).pathname.replace(/^\/+|\/+$/g, ""))
@@ -71,8 +125,11 @@ function generatedNormalizationRules(urls) {
   ].join("\n");
 }
 
+const exportedHtmlFiles = await htmlFiles(output);
+for (const file of exportedHtmlFiles) await prepareResponsiveImages(file);
+
 const sitemapUrls = [];
-for (const file of await htmlFiles(output)) {
+for (const file of exportedHtmlFiles) {
   if (path.basename(file) === "404.html") continue;
 
   const html = await readFile(file, "utf8");

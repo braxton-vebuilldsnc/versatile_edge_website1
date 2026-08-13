@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
+import { ResponsiveImage } from "@/components/responsive-image";
 import { JsonLd } from "@/components/json-ld";
 import { buttonVariants } from "@/components/ui/button";
 import { namedProjects } from "@/lib/site-data";
@@ -81,8 +82,8 @@ export default async function NamedProjectPage({ params }: Props) {
             {room.images.length > 0 && (
               <div className="project-story-gallery">
                 {room.images.map((image, index) => (
-                  <figure className={index === 0 && room.images.length > 2 ? "project-story-image project-story-image-wide" : "project-story-image"} key={image}>
-                    <img src={`/images/projects/${image}`} alt={`${project.title}: ${room.name}, view ${index + 1}`} loading="lazy" />
+                  <figure className={room.images.length === 1 ? "project-story-image project-story-image-natural" : index === 0 && room.images.length > 2 ? `project-story-image project-story-image-wide${roomIndex === 0 ? " project-story-image-wide-lead" : ""}` : "project-story-image"} key={image}>
+                    <ResponsiveImage src={`/images/projects/${image}`} alt={`${project.title}: ${room.name}, view ${index + 1}`} sizes="(max-width: 760px) calc(100vw - 30px), (max-width: 1240px) 50vw, 610px" />
                   </figure>
                 ))}
               </div>

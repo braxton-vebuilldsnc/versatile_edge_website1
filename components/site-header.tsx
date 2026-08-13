@@ -20,7 +20,7 @@ export function SiteHeader() {
         </div>
         <div className="site-container nav-row">
           <a href="/" className="brand" aria-label="Versatile Edge home" onClick={close}>
-            <img className="brand-logo" src="/images/brand/versatile-edge-official-logo-v2.png" alt="Versatile Edge LLC" />
+            <img className="brand-logo" src="/images/brand/versatile-edge-official-logo-v2.png" alt="Versatile Edge LLC" width="1040" height="719" decoding="async" />
           </a>
           <nav className="desktop-nav" aria-label="Main navigation">
             <a href="/about">About</a>
@@ -55,8 +55,8 @@ export function SiteHeader() {
             <a href="/contact" onClick={close}>Request consultation</a>
           </nav>
         )}
+        <a href="/contact" className="mobile-sticky-cta">Request a consultation</a>
       </header>
-      <a href="/contact" className="mobile-sticky-cta">Request a consultation</a>
     </>
   );
 }

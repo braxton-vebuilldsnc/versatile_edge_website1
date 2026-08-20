@@ -7,8 +7,8 @@
   },
   "scripts": {
     "dev": "vinext dev",
-    "build": "vinext build",
-    "postbuild": "node scripts/prepare-static-output.mjs",
+    "build": "node scripts/build-production.mjs",
+    "postbuild": "node scripts/prepare-static-output.mjs && node scripts/validate-inquiry-release.mjs",
     "typecheck:static": "tsc --noEmit -p tsconfig.static.json",
     "start": "vinext start",
     "test": "npm run build && node --test tests/*.test.mjs",

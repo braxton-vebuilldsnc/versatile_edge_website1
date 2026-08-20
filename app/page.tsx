@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ArrowRight, BadgeCheck, ClipboardCheck, MapPin, MessageSquareText, ShieldCheck } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { processSteps, projects, serviceAreas, services } from "@/lib/site-data";
+import { processSteps, projects, serviceAreaPages, serviceAreas, services } from "@/lib/site-data";
 import { OwnerIntroduction } from "@/components/owner-introduction";
 import { JsonLd } from "@/components/json-ld";
 import { ResponsiveImage } from "@/components/responsive-image";
@@ -57,7 +57,7 @@ export default function Home() {
 
       <section className="trust-section section"><div className="site-container trust-grid"><div><span className="eyebrow light">Why Versatile Edge</span><h2>Professional oversight. Personal accountability.</h2><p>Your project is managed with the standards we would expect in our own homes.</p></div><div className="trust-points"><article><ShieldCheck /><h3>Licensed & insured</h3><p>Professional oversight and code-conscious execution from day one.</p></article><article><MessageSquareText /><h3>Clear communication</h3><p>Direct updates, understandable decisions, and no disappearing act.</p></article><article><ClipboardCheck /><h3>Detailed planning</h3><p>A defined scope and practical sequence before construction accelerates.</p></article><article><BadgeCheck /><h3>Experienced trades</h3><p>Longstanding trade relationships and a consistent quality expectation.</p></article></div></div></section>
 
-      <section className="section area-section"><div className="site-container area-grid"><div><span className="eyebrow">Close to home</span><h2>Built for Raleigh and Wake County Homes.</h2><p>Local knowledge matters—from permit expectations and inspections to the materials that perform in North Carolina’s climate.</p><div className="area-list">{serviceAreas.map((area) => <span key={area}><MapPin size={15} />{area}</span>)}</div></div><div className="area-image"><ResponsiveImage src="/images/projects/walsh-sunroom-03.webp" alt="Completed Versatile Edge Walsh sunroom with abundant windows and comfortable seating" sizes="(max-width: 760px) calc(100vw - 30px), 50vw" /></div></div></section>
+      <section className="section area-section"><div className="site-container area-grid"><div><span className="eyebrow">Close to home</span><h2>Built for Raleigh and Wake County Homes.</h2><p>Local knowledge matters—from permit expectations and inspections to the materials that perform in North Carolina’s climate.</p><div className="area-list">{serviceAreas.map((area) => { const page = serviceAreaPages.find((item) => item.city === area); return page ? <a href={`/service-areas/${page.slug}`} key={area}><MapPin size={15} />{area}</a> : <span key={area}><MapPin size={15} />{area}</span>; })}</div></div><div className="area-image"><ResponsiveImage src="/images/projects/walsh-sunroom-03.webp" alt="Completed Versatile Edge Walsh sunroom with abundant windows and comfortable seating" sizes="(max-width: 760px) calc(100vw - 30px), 50vw" /></div></div></section>
     </>
   );
 }

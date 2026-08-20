@@ -16,10 +16,17 @@ const routes = [
   "/services/window-replacement", "/projects",
   "/projects/hutter-whole-house-remodel-addition", "/projects/johnson-bathroom",
   "/projects/brown-bathroom", "/projects/walsh-sunroom-deck",
-  "/projects/janet-home-addition", "/process", "/contact", "/privacy",
+  "/projects/janet-home-addition", "/service-areas/raleigh-nc",
+  "/service-areas/cary-nc", "/service-areas/wake-forest-nc",
+  "/service-areas/apex-nc", "/service-areas/morrisville-nc",
+  "/service-areas/fuquay-varina-nc", "/service-areas/holly-springs-nc",
+  "/service-areas/knightdale-nc", "/service-areas/wendell-nc",
+  "/service-areas/rolesville-nc", "/service-areas/garner-nc",
+  "/process", "/contact", "/privacy",
 ];
 const serviceRoutes = routes.filter((route) => route.startsWith("/services/"));
 const projectRoutes = routes.filter((route) => route.startsWith("/projects/"));
+const serviceAreaRoutes = routes.filter((route) => route.startsWith("/service-areas/"));
 
 function htmlPath(route) {
   if (route === "/") return path.join(output, "index.html");
@@ -161,11 +168,49 @@ test("project detail schema contains only its matching breadcrumb hierarchy", as
   }
 });
 
-test("all structured-data URLs use schema.org or the production domain without staging leakage", async () => {
+test("service-area schema matches each visible service, exact FAQs, and real hierarchy", async () => {
+  assert.equal(serviceAreaRoutes.length, 11);
+  for (const route of serviceAreaRoutes) {
+    const html = await readFile(htmlPath(route), "utf8");
+    const documents = schemas(html);
+    const service = nodesOfType(documents, "Service");
+    const faqs = nodesOfType(documents, "FAQPage");
+    const breadcrumbs = nodesOfType(documents, "BreadcrumbList");
+    const city = service[0]?.areaServed?.name;
+
+    assert.equal(service.length, 1, route);
+    assert.equal(service[0]["@id"], `${productionOrigin}${route}#service`);
+    assert.equal(service[0].name, `Home Remodeling in ${city}, NC`);
+    assert.equal(service[0].url, `${productionOrigin}${route}`);
+    assert.equal(service[0].provider["@id"], contractorId);
+    assert.deepEqual(service[0].areaServed, {
+      "@type": "City", name: city,
+      containedInPlace: { "@type": "State", name: "North Carolina" },
+    });
+    assert.ok(html.includes(service[0].description));
+
+    assert.equal(faqs.length, 1, route);
+    const visible = visibleFaqs(html);
+    const structured = faqs[0].mainEntity.map((question) => ({ question: question.name, answer: question.acceptedAnswer.text }));
+    assert.deepEqual(structured, visible, `${route} FAQ parity`);
+    assert.equal(structured.length, city === "Raleigh" ? 7 : 6, `${route} FAQ count`);
+
+    assert.equal(breadcrumbs.length, 1, route);
+    assert.deepEqual(breadcrumbs[0].itemListElement, [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${productionOrigin}/` },
+      { "@type": "ListItem", position: 2, name: `${city} Home Remodeling`, item: `${productionOrigin}${route}` },
+    ]);
+    assert.equal(nodesOfType(documents, "OfferCatalog").length, 0, route);
+    assert.equal(nodesOfType(documents, "Organization").length, 0, route);
+  }
+});
+
+test("all structured-data URLs use schema.org or the production domain without development-host leakage", async () => {
   for (const route of [...routes, "/404"]) {
     const documents = schemas(await readFile(htmlPath(route), "utf8"));
     for (const url of httpUrls(documents)) {
       assert.equal(url.includes("staging.versatileedgellc.com"), false, `${route}: ${url}`);
+      assert.equal(url.includes("targeting.versatileedgellc.com"), false, `${route}: ${url}`);
       assert.ok(
         url === "https://schema.org" || new URL(url).origin === productionOrigin,
         `${route} contains unsupported structured-data URL ${url}`,

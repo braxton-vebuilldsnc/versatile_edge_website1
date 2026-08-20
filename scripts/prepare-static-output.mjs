@@ -114,6 +114,10 @@ function generatedNormalizationRules(urls) {
     "RewriteCond %{THE_REQUEST} \\s/+index(?:\\.html)?/?(?:[?\\s]) [NC]",
     "RewriteRule ^index(?:\\.html)?/?$ https://staging.versatileedgellc.com/ [R=301,L,NE]",
     "",
+    "RewriteCond %{HTTP_HOST} ^targeting\\.versatileedgellc\\.com(?::[0-9]+)?$ [NC]",
+    "RewriteCond %{THE_REQUEST} \\s/+index(?:\\.html)?/?(?:[?\\s]) [NC]",
+    "RewriteRule ^index(?:\\.html)?/?$ https://targeting.versatileedgellc.com/ [R=301,L,NE]",
+    "",
     "RewriteCond %{HTTP_HOST} ^(?:www\\.)?versatileedgellc\\.com(?::[0-9]+)?$ [NC]",
     `RewriteCond %{THE_REQUEST} \\s/+${routePattern}(?:\\.html|/)(?:[?\\s]) [NC]`,
     `RewriteRule ^(${routePattern})(?:\\.html|/)$ https://versatileedgellc.com/$1 [R=301,L,NE]`,
@@ -121,6 +125,10 @@ function generatedNormalizationRules(urls) {
     "RewriteCond %{HTTP_HOST} ^staging\\.versatileedgellc\\.com(?::[0-9]+)?$ [NC]",
     `RewriteCond %{THE_REQUEST} \\s/+${routePattern}(?:\\.html|/)(?:[?\\s]) [NC]`,
     `RewriteRule ^(${routePattern})(?:\\.html|/)$ https://staging.versatileedgellc.com/$1 [R=301,L,NE]`,
+    "",
+    "RewriteCond %{HTTP_HOST} ^targeting\\.versatileedgellc\\.com(?::[0-9]+)?$ [NC]",
+    `RewriteCond %{THE_REQUEST} \\s/+${routePattern}(?:\\.html|/)(?:[?\\s]) [NC]`,
+    `RewriteRule ^(${routePattern})(?:\\.html|/)$ https://targeting.versatileedgellc.com/$1 [R=301,L,NE]`,
     "# END GENERATED ROUTE NORMALIZATION",
   ].join("\n");
 }

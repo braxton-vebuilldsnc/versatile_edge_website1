@@ -15,6 +15,14 @@ type ProjectSchemaInput = {
   title: string;
 };
 
+type ServiceAreaSchemaInput = {
+  slug: string;
+  city: string;
+  state: string;
+  description: string;
+  faq: readonly (readonly [string, string])[];
+};
+
 function productionUrl(pathname: string) {
   return new URL(pathname, productionOrigin).href.replace(/\/$/, pathname === "/" ? "/" : "");
 }
@@ -91,6 +99,46 @@ export function projectBreadcrumbSchema(project: ProjectSchemaInput) {
       { "@type": "ListItem", position: 1, name: "Home", item: `${productionOrigin}/` },
       { "@type": "ListItem", position: 2, name: "Projects", item: `${productionOrigin}/projects` },
       { "@type": "ListItem", position: 3, name: project.title, item: url },
+    ],
+  };
+}
+
+export function serviceAreaPageSchema(page: ServiceAreaSchemaInput) {
+  const url = productionUrl(`/service-areas/${page.slug}`);
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${url}#service`,
+        name: `Home Remodeling in ${page.city}, NC`,
+        description: page.description,
+        serviceType: "Residential home remodeling and renovations",
+        url,
+        provider: { "@id": contractorId },
+        areaServed: {
+          "@type": "City",
+          name: page.city,
+          containedInPlace: { "@type": "State", name: page.state },
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${url}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: `${productionOrigin}/` },
+          { "@type": "ListItem", position: 2, name: `${page.city} Home Remodeling`, item: url },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${url}#faq`,
+        mainEntity: page.faq.map(([question, answer]) => ({
+          "@type": "Question",
+          name: question,
+          acceptedAnswer: { "@type": "Answer", text: answer },
+        })),
+      },
     ],
   };
 }

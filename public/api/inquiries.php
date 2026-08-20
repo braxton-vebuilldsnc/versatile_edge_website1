@@ -478,7 +478,17 @@ if ($contentLength > $absoluteRequestLimit) {
 $configPath = getenv('VERSATILE_EDGE_CONFIG_PATH');
 if (!is_string($configPath) || $configPath === '') {
     $documentRoot = rtrim((string) ($_SERVER['DOCUMENT_ROOT'] ?? dirname(__DIR__, 2)), DIRECTORY_SEPARATOR);
-    $configPath = dirname($documentRoot) . DIRECTORY_SEPARATOR . 'versatile-edge-private' . DIRECTORY_SEPARATOR . 'inquiry-config.php';
+    $configCandidates = [
+        dirname($documentRoot) . DIRECTORY_SEPARATOR . 'versatile-edge-private' . DIRECTORY_SEPARATOR . 'inquiry-config.php',
+        dirname(dirname($documentRoot)) . DIRECTORY_SEPARATOR . 'versatile-edge-private' . DIRECTORY_SEPARATOR . 'inquiry-config.php',
+    ];
+    $configPath = $configCandidates[0];
+    foreach (array_unique($configCandidates) as $candidate) {
+        if (is_file($candidate) && is_readable($candidate)) {
+            $configPath = $candidate;
+            break;
+        }
+    }
 }
 if (!is_file($configPath) || !is_readable($configPath)) {
     error_log('Versatile Edge inquiry: private configuration file was not found.');

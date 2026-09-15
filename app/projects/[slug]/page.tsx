@@ -5,7 +5,7 @@ import { PageHero } from "@/components/page-hero";
 import { ResponsiveImage } from "@/components/responsive-image";
 import { JsonLd } from "@/components/json-ld";
 import { buttonVariants } from "@/components/ui/button";
-import { namedProjects } from "@/lib/site-data";
+import { namedProjects, projectImageAltText } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 import { projectBreadcrumbSchema } from "@/lib/structured-data";
 
@@ -22,8 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = namedProjects.find((item) => item.slug === slug);
   if (!project) return {};
   return {
-    title: project.title,
-    description: project.overview,
+    title: "seoTitle" in project ? { absolute: project.seoTitle } : project.title,
+    description: "metaDescription" in project ? project.metaDescription : project.overview,
     alternates: { canonical: `https://versatileedgellc.com/projects/${project.slug}` },
     openGraph: { images: [project.heroImage] },
   };
@@ -48,6 +48,11 @@ export default async function NamedProjectPage({ params }: Props) {
           <div>
             <p>{project.overview}</p>
             <span className="project-status">{project.status}</span>
+            {"relatedLinks" in project && project.relatedLinks && (
+              <div className="service-area-priority-links">
+                {project.relatedLinks.map((link) => <a href={link.href} className="text-link" key={link.href}>{link.label} <ArrowRight size={18} /></a>)}
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -83,7 +88,7 @@ export default async function NamedProjectPage({ params }: Props) {
               <div className="project-story-gallery">
                 {room.images.map((image, index) => (
                   <figure className={room.images.length === 1 ? "project-story-image project-story-image-natural" : index === 0 && room.images.length > 2 ? `project-story-image project-story-image-wide${roomIndex === 0 ? " project-story-image-wide-lead" : ""}` : "project-story-image"} key={image}>
-                    <ResponsiveImage src={`/images/projects/${image}`} alt={`${project.title}: ${room.name}, view ${index + 1}`} sizes="(max-width: 760px) calc(100vw - 30px), (max-width: 1240px) 50vw, 610px" />
+                    <ResponsiveImage src={`/images/projects/${image}`} alt={projectImageAltText[image] ?? `${project.title}: ${room.name}, view ${index + 1}`} sizes="(max-width: 760px) calc(100vw - 30px), (max-width: 1240px) 50vw, 610px" />
                   </figure>
                 ))}
               </div>

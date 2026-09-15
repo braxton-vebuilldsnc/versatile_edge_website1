@@ -106,6 +106,10 @@ export const services = [
     intro:
       "North Carolina outdoor spaces need sound framing, weather-conscious materials, and details that connect naturally to the existing home. We build for comfort now and durability over time.",
     highlights: ["Decks and screened porches", "Covered outdoor living", "Durable, climate-aware materials"],
+    projectSpotlight: {
+      slug: "mazingo-covered-porch-addition",
+      label: "Follow the Mazingo covered porch addition in Raleigh",
+    },
     faq: [
       ["Can you add a roof or screened enclosure?", "Yes. We evaluate the existing structure, rooflines, drainage, and permit requirements before finalizing the design."],
       ["Which decking materials do you use?", "Material recommendations depend on appearance, maintenance expectations, exposure, and budget."],
@@ -148,6 +152,7 @@ export const services = [
 ] as const;
 
 export const projects = [
+  { title: "Mazingo – Covered Porch Addition", category: "Outdoor Living", location: "Raleigh, NC", image: "/images/projects/mazingo-covered-porch-framing-overall.webp", summary: "An in-progress 21-by-14-foot covered porch addition with elevated framing and a new gable roof connected to the existing townhouse." },
   { title: "Hutter Kitchen — Gathering Island", category: "Kitchens", location: "Historic Raleigh, NC", image: "/images/projects/hutter-kitchen-05.webp", summary: "A generous working island, tailored white cabinetry, warm brass lighting, and a dedicated pantry create a kitchen made for everyday gathering." },
   { title: "Hutter Kitchen — Family Room Addition", category: "Kitchens", location: "Versatile Edge Project", image: "/images/projects/hutter-kitchen-03.webp", summary: "The renovated kitchen opens naturally into a light-filled family room addition, creating an inviting everyday gathering space around the home’s original brick fireplace." },
   { title: "Hutter Kitchen — Cooking Wall", category: "Kitchens", location: "Versatile Edge Project", image: "/images/projects/hutter-kitchen-02.webp", summary: "Integrated appliances, a statement range hood, and full-height geometric tile bring performance and visual rhythm to the cooking zone." },
@@ -177,6 +182,28 @@ export const projects = [
 ];
 
 export const namedProjects = [
+  {
+    slug: "mazingo-covered-porch-addition",
+    title: "Mazingo – Covered Porch Addition",
+    shortTitle: "Mazingo – Covered Porch",
+    seoTitle: "Mazingo Covered Porch Addition in Raleigh, NC | Versatile Edge",
+    metaDescription: "Follow the Mazingo covered porch addition in Raleigh, featuring a 21-by-14-foot structure, insulated roof, finished ceiling, recessed lights and ceiling fan.",
+    type: "Covered porch addition",
+    status: "In Progress",
+    heroImage: "/images/projects/mazingo-covered-porch-framing-overall.webp",
+    overview: "This in-progress Raleigh townhouse project adds an approximately 21-by-14-foot covered porch designed to create a more comfortable and usable outdoor living area. The new roof structure connects the porch to the existing home and will include an insulated roof assembly, finished ceiling, recessed lighting, and a ceiling fan.",
+    relatedLinks: [
+      { href: "/services/porches-and-decks", label: "Explore Porches & Decks" },
+      { href: "/service-areas/raleigh-nc", label: "Raleigh remodeling" },
+    ],
+    rooms: [
+      {
+        name: "Construction Progress",
+        description: "Framing is underway for the new elevated porch and gable roof. These construction-stage views show the supporting posts, floor framing, roof framing, gable sheathing, and the connection between the new structure and the existing townhouse. Additional photographs will be added as roofing, electrical work, insulation, ceiling finishes, and final details are completed.",
+        images: ["mazingo-covered-porch-roof-framing-detail.webp"],
+      },
+    ],
+  },
   {
     slug: "hutter-whole-house-remodel-addition",
     title: "Hutter – Whole House Remodel and Addition",
@@ -210,6 +237,7 @@ export const namedProjects = [
     overview: "A multi-room renovation in Raleigh, NC, including a bright bathroom with marble-look surfaces and a carefully built frameless shower, plus a new wet bar with fitted cabinetry.",
     rooms: [
       { name: "Finished Bathroom", description: "Large-format surfaces, a mosaic shower floor, recessed niche, and glass enclosure maximize light and function.", images: ["brown-bath-02.webp"] },
+      { name: "Finished Interior Rooms", description: "Finished-room views document bright interior spaces with new flooring, windows, doors, recessed lighting, and ceiling fans.", images: ["brown-finished-open-room.webp", "brown-finished-room-three-windows.webp", "brown-finished-room-french-doors.webp", "brown-finished-room-high-windows.webp", "brown-finished-hall-window.webp", "brown-finished-room-entry-view.webp"] },
       { name: "Wet Bar & Behind the Build", description: "Working photographs document the new wet bar cabinetry, layout checks, shower-base preparation, and the construction beneath the finished rooms.", images: ["brown-working-vanity-install.webp", "brown-working-vanity-dry-fit.webp", "brown-working-shower-base.webp"] },
     ],
   },
@@ -230,6 +258,8 @@ export const namedProjects = [
       { name: "Foundations & Masonry", description: "Excavation, concrete footings, masonry foundation walls, and brick piers establish the footprint and structural support for the addition.", images: ["janet-progress-0066.webp", "janet-progress-0079.webp", "janet-progress-0080.webp"] },
       { name: "Floor Framing & Sheathing", description: "The floor system ties the new foundation together and creates the working platform for the addition’s wall framing.", images: ["janet-progress-0130.webp", "janet-progress-0131.webp"] },
       { name: "Wall Framing", description: "New exterior and interior walls begin defining the addition’s rooms, openings, and connection back into the existing home.", images: ["janet-progress-0135.webp", "janet-progress-0136.webp", "janet-progress-0137.webp"] },
+      { name: "Later Framing Progress", description: "Later construction views show the roof framing and additional interior wall framing taking shape.", images: ["janet-roof-framing-interior.webp", "janet-interior-wall-framing-progress.webp"] },
+      { name: "Exterior Doors & Windows", description: "New exterior doors and windows are shown during installation while the surrounding wall assembly remains exposed.", images: ["janet-exterior-door-window-installation.webp", "janet-door-window-weather-barrier.webp", "janet-exterior-window-installation.webp"] },
     ],
   },
 ] as const;
@@ -347,6 +377,7 @@ export const serviceAreaPages: readonly ServiceAreaPage[] = [
       },
     ],
     projectSlugs: [
+      "mazingo-covered-porch-addition",
       "hutter-whole-house-remodel-addition",
       "brown-bathroom",
       "janet-home-addition",
@@ -374,7 +405,7 @@ export const serviceAreaPages: readonly ServiceAreaPage[] = [
       ],
       [
         "Which Versatile Edge projects can Raleigh homeowners review?",
-        "The completed Hutter whole-house remodel and addition in Historic Raleigh and the completed Brown multiple-room renovation in Raleigh show finished work. The Janet home addition in Five Points documents an active project in progress.",
+        "The completed Hutter whole-house remodel and addition in Historic Raleigh and the completed Brown multiple-room renovation in Raleigh show finished work. The Janet home addition in Five Points and the Mazingo covered porch addition document active projects in progress.",
       ],
       [
         "How do I confirm whether my Raleigh property is within the service area?",
@@ -1486,8 +1517,9 @@ type ServiceAreaProjectPresentation = {
 // changing project facts or implying a project occurred in an unsupported city.
 export const serviceAreaProjectPresentation: Readonly<Record<string, ServiceAreaProjectPresentation>> = {
   "raleigh-nc": {
-    projectSlugs: ["hutter-whole-house-remodel-addition", "brown-bathroom", "janet-home-addition"],
+    projectSlugs: ["mazingo-covered-porch-addition", "hutter-whole-house-remodel-addition", "brown-bathroom", "janet-home-addition"],
     cardImages: {
+      "mazingo-covered-porch-addition": "/images/projects/mazingo-covered-porch-framing-overall.webp",
       "hutter-whole-house-remodel-addition": "/images/projects/hutter-living-01-corrected.webp",
       "brown-bathroom": "/images/projects/brown-bath-02.webp",
       "janet-home-addition": "/images/projects/janet-progress-0135.webp",
@@ -1630,6 +1662,22 @@ export function projectPageForTitle(title: string) {
   const project = namedProjects.find((item) => title.startsWith(item.title.split(" – ")[0]));
   return project ? `/projects/${project.slug}` : undefined;
 }
+
+export const projectImageAltText: Readonly<Record<string, string>> = {
+  "mazingo-covered-porch-framing-overall.webp": "Wide construction view of the in-progress Mazingo elevated covered porch framing and gable roof attached to a Raleigh townhouse",
+  "mazingo-covered-porch-roof-framing-detail.webp": "Closer construction view of the Mazingo covered porch posts, floor framing, roof rafters, gable sheathing, and townhouse connection",
+  "janet-roof-framing-interior.webp": "Interior view of exposed roof rafters, wall framing, and subfloor in the Janet home addition",
+  "janet-interior-wall-framing-progress.webp": "Interior wall framing with window openings and exposed electrical boxes in the Janet home addition",
+  "janet-exterior-door-window-installation.webp": "Angled view of newly installed dark green double doors and window within exposed exterior wall sheathing on the Janet addition",
+  "janet-door-window-weather-barrier.webp": "Front view of newly installed dark green double doors and window surrounded by exposed weather barrier on the Janet addition",
+  "janet-exterior-window-installation.webp": "Close view of a newly installed dark green window within exposed exterior weather barrier on the Janet addition",
+  "brown-finished-open-room.webp": "Wide view of a finished Brown project room with light wood flooring, recessed lights, and three high windows",
+  "brown-finished-room-three-windows.webp": "Finished Brown project room with light wood flooring, ceiling fan, recessed lights, and three windows",
+  "brown-finished-room-french-doors.webp": "Finished Brown project room with light wood flooring, ceiling fan, recessed lights, and glass double doors",
+  "brown-finished-room-high-windows.webp": "Finished Brown project room with light wood flooring, recessed lights, and three high windows",
+  "brown-finished-hall-window.webp": "Finished Brown project hall with a central window, two doorways, and a sloped ceiling",
+  "brown-finished-room-entry-view.webp": "Finished Brown project room viewed toward an interior doorway with light wood flooring, ceiling fan, and recessed lights",
+};
 
 export const processSteps = [
   { number: "01", title: "Consultation & site visit", text: "We walk the property, listen to your goals, and identify the conditions that will shape the work." },

@@ -138,7 +138,8 @@ for (const file of exportedHtmlFiles) await prepareResponsiveImages(file);
 
 const sitemapUrls = [];
 for (const file of exportedHtmlFiles) {
-  if (path.basename(file) === "404.html") continue;
+  const basename = path.basename(file);
+  if (basename === "404.html" || basename === "google8074095bd8605207.html") continue;
 
   const html = await readFile(file, "utf8");
   const robots = html.match(/<meta name="robots" content="([^"]+)"/)?.[1] ?? "";

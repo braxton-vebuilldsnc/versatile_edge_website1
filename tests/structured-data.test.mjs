@@ -17,6 +17,7 @@ const routes = [
   "/projects/hutter-whole-house-remodel-addition", "/projects/johnson-bathroom",
   "/projects/brown-bathroom", "/projects/walsh-sunroom-deck",
   "/projects/janet-home-addition", "/service-areas/raleigh-nc",
+  "/projects/mazingo-covered-porch-addition",
   "/service-areas/cary-nc", "/service-areas/wake-forest-nc",
   "/service-areas/apex-nc", "/service-areas/morrisville-nc",
   "/service-areas/fuquay-varina-nc", "/service-areas/holly-springs-nc",

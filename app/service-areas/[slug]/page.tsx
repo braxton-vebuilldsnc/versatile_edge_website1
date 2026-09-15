@@ -5,7 +5,7 @@ import { JsonLd } from "@/components/json-ld";
 import { OwnerIntroduction } from "@/components/owner-introduction";
 import { ResponsiveImage } from "@/components/responsive-image";
 import { buttonVariants } from "@/components/ui/button";
-import { namedProjects, processSteps, serviceAreaPages, serviceAreaProjectPresentation, services } from "@/lib/site-data";
+import { namedProjects, processSteps, projectImageAltText, serviceAreaPages, serviceAreaProjectPresentation, services } from "@/lib/site-data";
 import { serviceAreaPageSchema } from "@/lib/structured-data";
 import { cn } from "@/lib/utils";
 
@@ -173,7 +173,7 @@ export default async function ServiceAreaPage({ params }: Props) {
               const local = (page.locallyVerifiedProjectSlugs ?? page.projectSlugs).includes(project.slug);
               return (
                 <article className={index === 0 ? "project-card project-card-wide" : "project-card"} key={project.slug}>
-                  <ResponsiveImage src={projectPresentation?.cardImages[project.slug] ?? project.heroImage} alt={`${project.title}, ${local ? `a verified ${page.city} project` : "a Versatile Edge project example"}`} sizes="(max-width: 760px) calc(100vw - 30px), (max-width: 1240px) 50vw, 610px" />
+                  <ResponsiveImage src={projectPresentation?.cardImages[project.slug] ?? project.heroImage} alt={projectImageAltText[(projectPresentation?.cardImages[project.slug] ?? project.heroImage).split("/").at(-1) ?? ""] ?? `${project.title}, ${local ? `a verified ${page.city} project` : "a Versatile Edge project example"}`} sizes="(max-width: 760px) calc(100vw - 30px), (max-width: 1240px) 50vw, 610px" />
                   <div className="project-card-overlay">
                     <span>{local ? `${page.city} · ` : "Service-area example · "}{project.status} · {project.type}</span>
                     <h2>{project.title}</h2><p>{project.overview}</p>

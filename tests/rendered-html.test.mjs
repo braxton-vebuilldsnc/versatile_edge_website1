@@ -23,6 +23,7 @@ const publicRoutes = [
   "/projects/brown-bathroom",
   "/projects/walsh-sunroom-deck",
   "/projects/janet-home-addition",
+  "/projects/mazingo-covered-porch-addition",
   "/service-areas/raleigh-nc",
   "/service-areas/cary-nc",
   "/service-areas/wake-forest-nc",
@@ -113,7 +114,7 @@ test("generates responsive images without upscaling and prioritizes only page he
     assert.match(hero, /srcset=/, `${route} hero should be responsive`);
   }
   const home = await readFile(htmlPath("/"), "utf8");
-  assert.match(home, /hutter-kitchen-05\.webp"[^>]*loading="lazy"/);
+  assert.match(home, /walsh-sunroom-03\.webp"[^>]*loading="lazy"/);
   const service = await readFile(htmlPath("/services/kitchen-renovations"), "utf8");
   assert.match(service, /hutter-kitchen-02\.webp"[^>]*loading="lazy"/);
   const project = await readFile(htmlPath("/projects/hutter-whole-house-remodel-addition"), "utf8");
@@ -263,7 +264,7 @@ test("uses native document navigation on the static website", async () => {
 });
 
 test("exports the approved content and global back-to-top control", async () => {
-  const [home, services, process, projects, hutter, brown, johnson, walsh, janet] = await Promise.all([
+  const [home, services, process, projects, hutter, brown, johnson, walsh, janet, mazingo, raleigh, porches] = await Promise.all([
     readFile(htmlPath("/"), "utf8"),
     readFile(htmlPath("/services"), "utf8"),
     readFile(htmlPath("/process"), "utf8"),
@@ -273,6 +274,9 @@ test("exports the approved content and global back-to-top control", async () => 
     readFile(htmlPath("/projects/johnson-bathroom"), "utf8"),
     readFile(htmlPath("/projects/walsh-sunroom-deck"), "utf8"),
     readFile(htmlPath("/projects/janet-home-addition"), "utf8"),
+    readFile(htmlPath("/projects/mazingo-covered-porch-addition"), "utf8"),
+    readFile(htmlPath("/service-areas/raleigh-nc"), "utf8"),
+    readFile(htmlPath("/services/porches-and-decks"), "utf8"),
   ]);
 
   assert.match(home, /Quality Renovations and Builds\./);
@@ -292,8 +296,28 @@ test("exports the approved content and global back-to-top control", async () => 
   assert.match(hutter, /New Family Room Addition/);
   assert.match(johnson, /Wake Forest, NC/);
   assert.match(brown, /Raleigh, NC/);
+  assert.match(brown, /Finished Interior Rooms/);
+  assert.match(brown, /brown-finished-open-room/);
+  assert.match(brown, /alt="Wide view of a finished Brown project room with light wood flooring, recessed lights, and three high windows"/);
   assert.match(walsh, /Apex, NC/);
   assert.match(janet, /Five Points, Raleigh, NC/);
+  assert.match(janet, /Later Framing Progress/);
+  assert.match(janet, /Exterior Doors &amp; Windows/);
+  assert.match(janet, /janet-roof-framing-interior/);
+  assert.match(janet, /alt="Interior view of exposed roof rafters, wall framing, and subfloor in the Janet home addition"/);
+  assert.match(mazingo, /<title>Mazingo Covered Porch Addition in Raleigh, NC \| Versatile Edge<\/title>/);
+  assert.match(mazingo, /<meta name="description" content="Follow the Mazingo covered porch addition in Raleigh, featuring a 21-by-14-foot structure, insulated roof, finished ceiling, recessed lights and ceiling fan\./);
+  assert.match(mazingo, /<link rel="canonical" href="https:\/\/versatileedgellc\.com\/projects\/mazingo-covered-porch-addition"/);
+  assert.match(mazingo, /This in-progress Raleigh townhouse project adds an approximately 21-by-14-foot covered porch/);
+  assert.match(mazingo, /Framing is underway for the new elevated porch and gable roof/);
+  assert.match(mazingo, /href="\/services\/porches-and-decks"/);
+  assert.match(mazingo, /href="\/service-areas\/raleigh-nc"/);
+  assert.match(mazingo, /mazingo-covered-porch-framing-overall[^>]*loading="eager"[^>]*fetchPriority="high"/);
+  assert.match(mazingo, /mazingo-covered-porch-roof-framing-detail[^>]*alt="Closer construction view of the Mazingo covered porch posts, floor framing, roof rafters, gable sheathing, and townhouse connection"/);
+  assert.equal((mazingo.match(/<img[^>]+src="\/images\/projects\/mazingo-covered-porch-framing-overall\.webp"/g) ?? []).length, 1, "primary image should not be duplicated on its project page");
+  assert.match(projects, /href="\/projects\/mazingo-covered-porch-addition"/);
+  assert.match(raleigh, /href="\/projects\/mazingo-covered-porch-addition"/);
+  assert.match(porches, /href="\/projects\/mazingo-covered-porch-addition"/);
   for (const route of publicRoutes) {
     assert.match(await readFile(htmlPath(route), "utf8"), /aria-label="Back to top"/, route);
   }
@@ -432,7 +456,7 @@ test("exports substantive, distinct copy and licensed local imagery for the four
 
 test("uses truthful, varied project-card and priority-image presentations across city pages", async () => {
   const expected = {
-    "raleigh-nc": ["hutter-whole-house-remodel-addition", "brown-bathroom", "janet-home-addition"],
+    "raleigh-nc": ["mazingo-covered-porch-addition", "hutter-whole-house-remodel-addition", "brown-bathroom", "janet-home-addition"],
     "cary-nc": ["walsh-sunroom-deck", "brown-bathroom", "johnson-bathroom"],
     "wake-forest-nc": ["johnson-bathroom", "hutter-whole-house-remodel-addition", "walsh-sunroom-deck"],
     "apex-nc": ["walsh-sunroom-deck", "hutter-whole-house-remodel-addition", "brown-bathroom"],
@@ -458,12 +482,12 @@ test("uses truthful, varied project-card and priority-image presentations across
     const links = [...section.matchAll(/href="\/projects\/([^"]+)"/g)].map((match) => match[1]);
     assert.deepEqual(links, projectSlugs, `${slug} project-card order`);
     const images = [...section.matchAll(/<img[^>]+src="([^"]+)"/g)].map((match) => match[1]);
-    assert.equal(images.length, 3, `${slug} project-card image count`);
+    assert.equal(images.length, projectSlugs.length, `${slug} project-card image count`);
     imageSequences.add(images.join("|"));
 
     if (localProjects[slug]) {
-      const localAltCount = [...section.matchAll(new RegExp(`a verified ${localLabels[slug]} project`, "g"))].length;
-      assert.equal(localAltCount, localProjects[slug].size, `${slug} verified-local image labels`);
+      const localLabelCount = [...section.matchAll(new RegExp(`>${localLabels[slug]} · `, "g"))].length;
+      assert.equal(localLabelCount, localProjects[slug].size, `${slug} verified-local project labels`);
     } else {
       assert.doesNotMatch(section, /a verified [^"<]+ project/i, `${slug} must not claim a local project`);
     }

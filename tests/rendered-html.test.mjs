@@ -18,6 +18,7 @@ const publicRoutes = [
   "/services/home-additions",
   "/services/window-replacement",
   "/projects",
+  "/projects/mid-century-bath-renovation-cary",
   "/projects/hutter-whole-house-remodel-addition",
   "/projects/johnson-bathroom",
   "/projects/brown-bathroom",
@@ -460,7 +461,7 @@ test("exports substantive, distinct copy and licensed local imagery for the four
 test("uses truthful, varied project-card and priority-image presentations across city pages", async () => {
   const expected = {
     "raleigh-nc": ["mazingo-covered-porch-addition", "hutter-whole-house-remodel-addition", "brown-bathroom", "janet-home-addition"],
-    "cary-nc": ["walsh-sunroom-deck", "brown-bathroom", "johnson-bathroom"],
+    "cary-nc": ["mid-century-bath-renovation-cary", "walsh-sunroom-deck", "brown-bathroom"],
     "wake-forest-nc": ["johnson-bathroom", "hutter-whole-house-remodel-addition", "walsh-sunroom-deck"],
     "apex-nc": ["walsh-sunroom-deck", "hutter-whole-house-remodel-addition", "brown-bathroom"],
     "morrisville-nc": ["brown-bathroom", "johnson-bathroom", "hutter-whole-house-remodel-addition"],
@@ -473,10 +474,11 @@ test("uses truthful, varied project-card and priority-image presentations across
   };
   const localProjects = {
     "raleigh-nc": new Set(expected["raleigh-nc"]),
+    "cary-nc": new Set(["mid-century-bath-renovation-cary"]),
     "wake-forest-nc": new Set(["johnson-bathroom"]),
     "apex-nc": new Set(["walsh-sunroom-deck"]),
   };
-  const localLabels = { "raleigh-nc": "Raleigh", "wake-forest-nc": "Wake Forest", "apex-nc": "Apex" };
+  const localLabels = { "raleigh-nc": "Raleigh", "cary-nc": "Cary", "wake-forest-nc": "Wake Forest", "apex-nc": "Apex" };
   const imageSequences = new Set();
 
   for (const [slug, projectSlugs] of Object.entries(expected)) {

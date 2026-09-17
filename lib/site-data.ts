@@ -152,6 +152,7 @@ export const services = [
 ] as const;
 
 export const projects = [
+  { title: "Mid-Century Bath Renovation", category: "Bathrooms", location: "Cary, NC", image: "/images/projects/mid-century-bath-cary-shower.webp", summary: "A Cary bathroom renovation with a green tiled shower, walnut double vanity, patterned wallcovering, and open wood shelving." },
   { title: "Mazingo – Covered Porch Addition", category: "Outdoor Living", location: "Raleigh, NC", image: "/images/projects/mazingo-covered-porch-framing-overall.webp", summary: "An in-progress 21-by-14-foot covered porch addition with elevated framing and a new gable roof connected to the existing townhouse." },
   { title: "Hutter Kitchen — Gathering Island", category: "Kitchens", location: "Historic Raleigh, NC", image: "/images/projects/hutter-kitchen-05.webp", summary: "A generous working island, tailored white cabinetry, warm brass lighting, and a dedicated pantry create a kitchen made for everyday gathering." },
   { title: "Hutter Kitchen — Family Room Addition", category: "Kitchens", location: "Versatile Edge Project", image: "/images/projects/hutter-kitchen-03.webp", summary: "The renovated kitchen opens naturally into a light-filled family room addition, creating an inviting everyday gathering space around the home’s original brick fireplace." },
@@ -182,6 +183,26 @@ export const projects = [
 ];
 
 export const namedProjects = [
+  {
+    slug: "mid-century-bath-renovation-cary",
+    title: "Mid-Century Bath Renovation",
+    shortTitle: "Mid-Century Bath",
+    seoTitle: "Mid-Century Bathroom Renovation in Cary, NC | Versatile Edge",
+    metaDescription: "See a completed mid-century bathroom renovation in Cary, NC, featuring a tiled walk-in shower, walnut double vanity, patterned wallcovering, and open wood shelving.",
+    type: "Bathroom renovation",
+    status: "Completed project",
+    heroImage: "/images/projects/mid-century-bath-cary-shower.webp",
+    overview: "A completed bathroom renovation in Cary, NC, pairing a walk-in shower with green vertical tile and black fixtures, a walnut double vanity, patterned wallcovering, and open wood shelving for practical daily storage.",
+    relatedLinks: [
+      { href: "/services/bathroom-renovations", label: "Explore bathroom renovations" },
+      { href: "/service-areas/cary-nc", label: "Cary remodeling" },
+    ],
+    rooms: [
+      { name: "Walk-In Shower", description: "A clear glass enclosure keeps the tall green tile, black shower system, and open shower base visible from the room.", images: ["mid-century-bath-cary-shower.webp"] },
+      { name: "Double Vanity", description: "The walnut double vanity, individual mirrors, warm sconces, and patterned wallcovering give the everyday space a tailored mid-century character.", images: ["mid-century-bath-cary-vanity.webp"] },
+      { name: "Open Storage", description: "Built-in wood shelving adds accessible space for towels and daily essentials while carrying the vanity’s warmth through the room.", images: ["mid-century-bath-cary-shelving.webp"] },
+    ],
+  },
   {
     slug: "mazingo-covered-porch-addition",
     title: "Mazingo – Covered Porch Addition",
@@ -509,17 +530,17 @@ export const serviceAreaPages: readonly ServiceAreaPage[] = [
         linkLabel: "See Cary Healthy Homes information",
       },
     ],
-    projectSlugs: ["hutter-whole-house-remodel-addition", "johnson-bathroom", "walsh-sunroom-deck"],
+    projectSlugs: ["mid-century-bath-renovation-cary", "hutter-whole-house-remodel-addition", "walsh-sunroom-deck"],
     projectHeading: "Project examples for planning a Cary remodel.",
     projectIntroduction:
-      "These completed Versatile Edge projects illustrate relevant kitchen, bathroom, addition, and outdoor-living work across the service area. They are examples of capability and are not presented as Cary properties.",
-    locallyVerifiedProjectSlugs: [],
+      "The Mid-Century Bath Renovation is a completed Cary project. The other completed projects shown illustrate relevant work from the wider service area and are identified accordingly.",
+    locallyVerifiedProjectSlugs: ["mid-century-bath-renovation-cary"],
     faq: [
       ["Does a remodeling project in Cary require a permit?", "Many additions, alterations, decks, and plumbing, electrical, or mechanical changes require permits. The exact applications and inspections depend on the address and scope, so requirements should be confirmed before construction."],
       ["What should be reviewed before planning a Cary deck or screened porch?", "Review the survey, property lines, setbacks, easements, drainage, structural connection, stairs, roof conditions, and any applicable neighborhood requirements before committing to a footprint."],
       ["Can Versatile Edge coordinate a kitchen and adjacent-room remodel together?", "Yes. When rooms share circulation, finishes, structure, or utilities, one coordinated scope can reduce conflicts and create a more cohesive result."],
       ["Can a Cary bathroom remodel support aging in place?", "Yes. Depending on the room, planning can consider shower access, clear floor space, lighting, blocking, slip-conscious surfaces, storage, and fixtures that are easier to use."],
-      ["Are the featured projects located in Cary?", "No. The featured Hutter, Johnson, and Walsh projects are relevant examples from the wider Versatile Edge service area and are not represented as Cary properties."],
+      ["Are the featured projects located in Cary?", "The Mid-Century Bath Renovation is a completed Cary project. Other projects shown may be relevant examples from the wider service area and are identified accordingly."],
       ["How do I start a Cary remodeling conversation?", "Share the Cary property address, the rooms or exterior areas involved, the problems you want to solve, desired timing, and a realistic investment range through the consultation form."],
     ],
   },
@@ -1527,8 +1548,9 @@ export const serviceAreaProjectPresentation: Readonly<Record<string, ServiceArea
     priorityImages: {},
   },
   "cary-nc": {
-    projectSlugs: ["walsh-sunroom-deck", "brown-bathroom", "johnson-bathroom"],
+    projectSlugs: ["mid-century-bath-renovation-cary", "walsh-sunroom-deck", "brown-bathroom"],
     cardImages: {
+      "mid-century-bath-renovation-cary": "/images/projects/mid-century-bath-cary-vanity.webp",
       "walsh-sunroom-deck": "/images/projects/walsh-sunroom-02.webp",
       "brown-bathroom": "/images/projects/brown-working-vanity-install.webp",
       "johnson-bathroom": "/images/projects/johnson-bath-01.webp",
@@ -1664,6 +1686,9 @@ export function projectPageForTitle(title: string) {
 }
 
 export const projectImageAltText: Readonly<Record<string, string>> = {
+  "mid-century-bath-cary-shower.webp": "Front view of a Cary bathroom walk-in shower with green vertical tile, black fixtures, and clear glass enclosure",
+  "mid-century-bath-cary-vanity.webp": "Cary bathroom double walnut vanity with patterned wallcovering, individual mirrors, and warm sconces",
+  "mid-century-bath-cary-shelving.webp": "Open wood shelves with towels and storage beside the walnut vanity in a Cary bathroom renovation",
   "mazingo-covered-porch-framing-overall.webp": "Wide construction view of the in-progress Mazingo elevated covered porch framing and gable roof attached to a Raleigh townhouse",
   "mazingo-covered-porch-roof-framing-detail.webp": "Closer construction view of the Mazingo covered porch posts, floor framing, roof rafters, gable sheathing, and townhouse connection",
   "janet-roof-framing-interior.webp": "Interior view of exposed roof rafters, wall framing, and subfloor in the Janet home addition",

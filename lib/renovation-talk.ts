@@ -9,6 +9,7 @@ export type RenovationArticle = {
   imageAlt: string;
   featured?: boolean;
   searchText: string;
+  body: "renovation-costs" | "kitchen-cabinet-construction";
 };
 
 export const renovationArticles: readonly RenovationArticle[] = [
@@ -23,6 +24,19 @@ export const renovationArticles: readonly RenovationArticle[] = [
     imageAlt: "Versatile Edge team preparing cabinetry during an interior renovation",
     featured: true,
     searchText: "renovation costs cost per square foot new construction demolition protection existing structure mechanical systems concealed conditions contingency variance occupied home work hours engineering permits inspections kitchen bathroom planning Raleigh Wake County",
+    body: "renovation-costs",
+  },
+  {
+    slug: "how-to-compare-kitchen-cabinet-construction",
+    title: "How to Compare Kitchen Cabinet Construction",
+    description: "A practical guide to cabinet boxes, plywood and MDF, face-frame construction, full-overlay doors, and the details that matter in a Raleigh kitchen renovation.",
+    excerpt: "Cabinet terms can sound interchangeable until you see how box material, face frames, door overlay, drawers, and installation details come together in a finished kitchen.",
+    datePublished: "2026-09-17",
+    topics: ["Kitchens", "Materials & Products"],
+    image: "/images/projects/hutter-kitchen-05.webp",
+    imageAlt: "Completed Versatile Edge kitchen with painted cabinetry and a large island",
+    searchText: "kitchen cabinets cabinet construction plywood MDF medium density fiberboard face frame frameless full overlay standard reveal partial overlay doors drawers dovetail soft close J&K Cabinetry Raleigh Wake County",
+    body: "kitchen-cabinet-construction",
   },
 ];
 

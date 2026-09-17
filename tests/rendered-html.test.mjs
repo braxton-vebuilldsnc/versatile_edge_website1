@@ -25,6 +25,7 @@ const publicRoutes = [
   "/projects/janet-home-addition",
   "/projects/mazingo-covered-porch-addition",
   "/renovation-talk",
+  "/renovation-talk/how-to-compare-kitchen-cabinet-construction",
   "/renovation-talk/why-renovations-cost-more-per-square-foot-than-new-construction",
   "/service-areas/raleigh-nc",
   "/service-areas/cary-nc",

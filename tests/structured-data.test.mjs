@@ -18,7 +18,7 @@ const routes = [
   "/projects/brown-bathroom", "/projects/walsh-sunroom-deck",
   "/projects/janet-home-addition", "/service-areas/raleigh-nc",
   "/projects/mazingo-covered-porch-addition",
-  "/renovation-talk", "/renovation-talk/why-renovations-cost-more-per-square-foot-than-new-construction",
+  "/renovation-talk", "/renovation-talk/how-to-compare-kitchen-cabinet-construction", "/renovation-talk/why-renovations-cost-more-per-square-foot-than-new-construction",
   "/service-areas/cary-nc", "/service-areas/wake-forest-nc",
   "/service-areas/apex-nc", "/service-areas/morrisville-nc",
   "/service-areas/fuquay-varina-nc", "/service-areas/holly-springs-nc",

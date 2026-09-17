@@ -48,7 +48,7 @@ export const services = [
     title: "Interior Remodeling",
     shortTitle: "Remodeling",
     icon: Hammer,
-    image: "/images/projects/kitchen-modern.webp",
+    image: "/images/projects/kitchen-modern-gas-range.webp",
     eyebrow: "Make the space work better",
     summary:
       "Rework dated or disconnected interiors with thoughtful layouts, durable materials, and construction details built for daily life.",

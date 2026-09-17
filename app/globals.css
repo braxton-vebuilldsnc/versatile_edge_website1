@@ -110,6 +110,7 @@ h3 { line-height: 1.25; }
 .article-content { padding-top: clamp(56px, 6vw, 90px); }
 .article-body { min-width: 0; }
 .article-body > img { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; margin-bottom: 46px; }
+.article-body > img.article-feature-image--full { aspect-ratio: auto; object-fit: contain; }
 .article-body > p, .article-body > h2 { max-width: 800px; }
 .article-body > p { margin-bottom: 24px; color: #3e4a56; font-size: 1.04rem; }
 .article-body > p.lead { color: var(--ink); font-size: clamp(1.25rem, 2vw, 1.62rem); }

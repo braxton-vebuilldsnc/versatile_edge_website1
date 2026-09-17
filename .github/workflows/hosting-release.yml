@@ -13,6 +13,16 @@ on:
         required: true
         type: boolean
         default: false
+      activate_release:
+        description: Atomically switch the verified Hosting.com release into the public directory
+        required: true
+        type: boolean
+        default: false
+      release_sha:
+        description: Commit SHA of the verified release to activate
+        required: false
+        type: string
+        default: ""
 
 permissions:
   contents: read
@@ -84,3 +94,35 @@ jobs:
             find . -maxdepth 3 -type d \( -name public_html -o -name htdocs -o -name www -o -path "./releases/versatile-edge/*" \) -print | sort
             find . -maxdepth 3 -type f -name index.html -print | sort
           '
+
+  activate-release:
+    if: inputs.activate_release && inputs.release_sha != ''
+    runs-on: ubuntu-24.04
+    environment: hosting-release
+    steps:
+      - name: Configure restricted Hosting.com SSH access
+        env:
+          HOSTING_SSH_KEY: ${{ secrets.HOSTING_SSH_KEY }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$HOSTING_SSH_KEY" > ~/.ssh/hosting_deploy
+          chmod 600 ~/.ssh/hosting_deploy
+          ssh-keyscan -H s20849.use2.stableserver.net >> ~/.ssh/known_hosts
+      - name: Activate verified public release with rollback preserved
+        env:
+          RELEASE_SHA: ${{ inputs.release_sha }}
+        run: |
+          ssh -i ~/.ssh/hosting_deploy versatil@s20849.use2.stableserver.net "RELEASE_SHA='$RELEASE_SHA' bash -s" <<'REMOTE'
+            set -euo pipefail
+            release_path="/home/versatil/releases/versatile-edge/${RELEASE_SHA}"
+            test -s "${release_path}/index.html"
+            test -s "${release_path}/.htaccess"
+            test -s "${release_path}/api/inquiries.php"
+            test -d /home/versatil/public_html
+            backup_path="/home/versatil/public_html.rollback-$(date +%Y%m%d%H%M%S)"
+            ln -s "${release_path}" /home/versatil/public_html.next
+            mv /home/versatil/public_html "${backup_path}"
+            mv /home/versatil/public_html.next /home/versatil/public_html
+            test -s /home/versatil/public_html/index.html
+            printf 'Activated %s; rollback retained at %s\n' "${release_path}" "${backup_path}"
+          REMOTE

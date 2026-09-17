@@ -23,6 +23,11 @@ on:
         required: false
         type: string
         default: ""
+      hosting_host:
+        description: Hosting server to inspect, upload to, or activate
+        required: true
+        type: string
+        default: s20849.use2.stableserver.net
 
 permissions:
   contents: read
@@ -54,6 +59,8 @@ jobs:
     if: inputs.upload_release
     runs-on: ubuntu-24.04
     environment: hosting-release
+    env:
+      HOSTING_HOST: ${{ inputs.hosting_host }}
     steps:
       - uses: actions/download-artifact@v4
         with:
@@ -66,18 +73,20 @@ jobs:
           install -d -m 700 ~/.ssh
           printf '%s\n' "$HOSTING_SSH_KEY" > ~/.ssh/hosting_deploy
           chmod 600 ~/.ssh/hosting_deploy
-          ssh-keyscan -H s20849.use2.stableserver.net >> ~/.ssh/known_hosts
+          ssh-keyscan -H "$HOSTING_HOST" >> ~/.ssh/known_hosts
       - name: Upload non-public release
         run: |
           release_path="releases/versatile-edge/${GITHUB_SHA}"
-          ssh -i ~/.ssh/hosting_deploy versatil@s20849.use2.stableserver.net "mkdir -p '$release_path'"
-          rsync -a --delete -e 'ssh -i ~/.ssh/hosting_deploy' dist/client/ "versatil@s20849.use2.stableserver.net:$release_path/"
-          ssh -i ~/.ssh/hosting_deploy versatil@s20849.use2.stableserver.net "test -s '$release_path/index.html' && test -s '$release_path/.htaccess' && test -s '$release_path/api/inquiries.php'"
+          ssh -i ~/.ssh/hosting_deploy "versatil@$HOSTING_HOST" "mkdir -p '$release_path'"
+          rsync -a --delete -e "ssh -i ~/.ssh/hosting_deploy" dist/client/ "versatil@$HOSTING_HOST:$release_path/"
+          ssh -i ~/.ssh/hosting_deploy "versatil@$HOSTING_HOST" "test -s '$release_path/index.html' && test -s '$release_path/.htaccess' && test -s '$release_path/api/inquiries.php'"
 
   inspect-hosting:
     if: inputs.inspect_hosting
     runs-on: ubuntu-24.04
     environment: hosting-release
+    env:
+      HOSTING_HOST: ${{ inputs.hosting_host }}
     steps:
       - name: Configure restricted Hosting.com SSH access
         env:
@@ -86,10 +95,10 @@ jobs:
           install -d -m 700 ~/.ssh
           printf '%s\n' "$HOSTING_SSH_KEY" > ~/.ssh/hosting_deploy
           chmod 600 ~/.ssh/hosting_deploy
-          ssh-keyscan -H s20849.use2.stableserver.net >> ~/.ssh/known_hosts
+          ssh-keyscan -H "$HOSTING_HOST" >> ~/.ssh/known_hosts
       - name: Inspect release and public directories
         run: |
-          ssh -i ~/.ssh/hosting_deploy versatil@s20849.use2.stableserver.net '
+          ssh -i ~/.ssh/hosting_deploy "versatil@$HOSTING_HOST" '
             pwd
             ls -ld ./public_html
             readlink -f ./public_html
@@ -103,6 +112,8 @@ jobs:
     if: inputs.activate_release && inputs.release_sha != ''
     runs-on: ubuntu-24.04
     environment: hosting-release
+    env:
+      HOSTING_HOST: ${{ inputs.hosting_host }}
     steps:
       - name: Configure restricted Hosting.com SSH access
         env:
@@ -111,12 +122,12 @@ jobs:
           install -d -m 700 ~/.ssh
           printf '%s\n' "$HOSTING_SSH_KEY" > ~/.ssh/hosting_deploy
           chmod 600 ~/.ssh/hosting_deploy
-          ssh-keyscan -H s20849.use2.stableserver.net >> ~/.ssh/known_hosts
+          ssh-keyscan -H "$HOSTING_HOST" >> ~/.ssh/known_hosts
       - name: Activate verified public release with rollback preserved
         env:
           RELEASE_SHA: ${{ inputs.release_sha }}
         run: |
-          ssh -i ~/.ssh/hosting_deploy versatil@s20849.use2.stableserver.net "RELEASE_SHA='$RELEASE_SHA' bash -s" <<'REMOTE'
+          ssh -i ~/.ssh/hosting_deploy "versatil@$HOSTING_HOST" "RELEASE_SHA='$RELEASE_SHA' bash -s" <<'REMOTE'
             set -euo pipefail
             release_path="/home/versatil/releases/versatile-edge/${RELEASE_SHA}"
             test -s "${release_path}/index.html"

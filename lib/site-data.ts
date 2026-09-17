@@ -151,6 +151,64 @@ export const services = [
   },
 ] as const;
 
+export const servicePageContent: Record<string, {
+  planningTitle: string;
+  planningIntro: string;
+  planningItems: readonly [string, string][];
+  valueTitle: string;
+  valueParagraphs: readonly string[];
+}> = {
+  "whole-home-renovations": {
+    planningTitle: "A whole-home plan has to sequence the work.",
+    planningIntro: "The decisions are connected: opening a wall can affect electrical and HVAC work; a new floor may need to meet existing rooms; and a finish choice may affect the schedule months earlier. We help put those decisions in the right order.",
+    planningItems: [["Scope and priorities", "Identify which rooms, systems, and daily-life problems matter most before the project is priced."], ["Phasing and living plans", "Decide whether the home can stay occupied, what must remain usable, and how the work should move through the house."], ["Selections and lead times", "Coordinate major materials early enough that cabinetry, fixtures, windows, and finishes support the construction schedule."]],
+    valueTitle: "The goal is one home, not a collection of renovations.",
+    valueParagraphs: ["A whole-home project is where disciplined coordination matters most. We bring the structural, mechanical, finish, and scheduling conversations together before they become expensive field decisions.", "That gives homeowners a clearer path through a large investment: what is included, what needs to be decided, how the work will affect the household, and how each room supports the next."]
+  },
+  "interior-remodeling": {
+    planningTitle: "Start with how the house actually works now.",
+    planningIntro: "Interior remodeling is often less about adding square footage and more about fixing circulation, storage, light, and the places where an existing layout makes daily life harder than it should be.",
+    planningItems: [["Movement through the rooms", "Look at door swings, furniture zones, sightlines, and pinch points before changing walls or finishes."], ["Structure and utilities", "Determine what is inside the walls and whether engineering, electrical, plumbing, or HVAC changes are part of the real scope."], ["A practical finish plan", "Coordinate flooring, trim, lighting, paint, and built-ins so the renovated space feels connected to the rest of the home."]],
+    valueTitle: "Good remodeling solves the reason a room is not working.",
+    valueParagraphs: ["A room can look updated and still be frustrating to use. We focus first on the decisions that improve the way it functions, then build the finishes and details around that plan.", "That approach is especially helpful when several connected rooms need attention. It avoids treating each doorway, floor transition, fixture, or storage need as an isolated decision."]
+  },
+  "kitchen-renovations": {
+    planningTitle: "The kitchen has to work before it can simply look new.",
+    planningIntro: "Cabinet style and countertops matter, but a successful kitchen starts with storage, landing space, appliance clearances, lighting, and the way people move through the room during a normal day.",
+    planningItems: [["Layout and work zones", "Plan cooking, prep, cleanup, refrigeration, and seating around real household routines rather than a one-size-fits-all triangle."], ["Cabinetry and storage", "Work through drawer and pantry needs, appliance integration, cabinet construction, and the details that affect usable storage."], ["Systems behind the finishes", "Coordinate ventilation, dedicated electrical needs, plumbing locations, lighting layers, and any structural changes before cabinets are ordered."]],
+    valueTitle: "A kitchen is a coordinated construction project.",
+    valueParagraphs: ["The visible pieces arrive late in the process. Before then, the room may need demolition, framing, trade work, inspections, drywall, flooring, and careful measurement for cabinets and countertops.", "As a complimentary part of working with Versatile Edge, our team can meet you at cabinet, countertop, tile, appliance, and other showrooms to help with selections. It is practical, no-cost guidance to help you compare options, keep the choices aligned with the plan, and create a kitchen that feels right for your home.", "Versatile Edge manages those moving parts so the plan for the finished kitchen is supported by what is behind the walls and beneath the surfaces—not just by a rendering or a product list."]
+  },
+  "bathroom-renovations": {
+    planningTitle: "Bathrooms are small rooms with a lot happening inside them.",
+    planningIntro: "A bathroom renovation brings plumbing, electrical, ventilation, waterproofing, tile, glass, storage, and fixture clearances into a compact space. The construction details must work together before the finish work begins.",
+    planningItems: [["Shower and moisture details", "Plan the shower footprint, waterproofing system, drainage, niches, glass, and tile layout as one coordinated assembly."], ["Storage and daily use", "Consider vanity width, drawer storage, mirror and lighting locations, towel storage, and clear floor space around fixtures."], ["Access and systems", "Review plumbing locations, exhaust ventilation, electrical needs, framing, and any accessibility goals before the room is opened up."]],
+    valueTitle: "The details behind the tile matter as much as the tile itself.",
+    valueParagraphs: ["A well-built bathroom protects the home from moisture while making everyday use easier. That requires careful sequencing—rough work and waterproofing must be right before the finished surfaces can be installed.", "As a complimentary part of working with Versatile Edge, our team can meet you at tile, cabinet, countertop, plumbing-fixture, and other showrooms to help with selections. It is practical, no-cost guidance to help bring the individual choices together into a bathroom that fits the plan and your home.", "Whether the scope is a compact hall bath or a primary suite, we coordinate the trades and finish decisions so the room feels considered, durable, and straightforward to live with."]
+  },
+  "porches-and-decks": {
+    planningTitle: "Outdoor work has to respect both the house and the site.",
+    planningIntro: "A porch or deck changes how a home meets the yard. It also involves structural connection, drainage, rooflines, stairs, guards, material exposure, and the property conditions that shape what can be built.",
+    planningItems: [["Connection and structure", "Review the existing house, attachment points, posts, footings, roof transitions, and the structural work required for a durable addition."], ["Comfort and use", "Plan shade, screening, ceiling treatments, lighting, fans, stairs, cooking areas, and furniture zones around how the space will be used."], ["Site and approvals", "Check property lines, setbacks, easements, drainage, and applicable permits before a footprint or roofline is finalized."]],
+    valueTitle: "The best outdoor rooms feel like they belonged there from the start.",
+    valueParagraphs: ["We balance the visible design with the construction details that help an exterior project hold up: water management, appropriate materials, durable framing, and connections that make sense for the existing home.", "That is how a deck, screened porch, or covered space becomes more than an add-on—it becomes a useful extension of everyday living."]
+  },
+  "home-additions": {
+    planningTitle: "An addition begins with the property as much as the floor plan.",
+    planningIntro: "The house, lot, utilities, rooflines, setbacks, drainage, and code requirements all influence what makes sense. Early planning helps turn a need for more room into an addition that is actually buildable.",
+    planningItems: [["The site and the existing home", "Review access, setbacks, grading, roof and wall connections, utilities, and how new work will meet the existing structure."], ["The new space", "Define the rooms, circulation, storage, daylight, and flexibility the addition needs to provide for the household."], ["The construction path", "Coordinate design decisions, engineering where needed, permits, selections, and a sequence that protects both the new work and the occupied home."]],
+    valueTitle: "More square footage should feel like it was always part of the house.",
+    valueParagraphs: ["A successful addition solves a space problem without creating a visual or functional disconnect. We consider exterior proportions, interior transitions, systems, materials, and everyday movement as one project.", "Because additions involve so many linked decisions, clear planning early on is one of the most valuable parts of the work. It gives the construction team and homeowner a shared path forward."]
+  },
+  "window-replacement": {
+    planningTitle: "A replacement window is only as good as its installation.",
+    planningIntro: "Windows affect light, comfort, views, operation, exterior appearance, and the wall assembly around them. Choosing a unit is important; fitting it correctly into the existing home is just as important.",
+    planningItems: [["Condition and scope", "Assess operation, frame condition, drafts, water concerns, glass performance, and whether a repair, insert, or full-frame replacement best fits the home."], ["Water management", "Plan flashing, drainage, air sealing, insulation, and exterior transitions so the opening is protected as part of the wall."], ["Finish integration", "Coordinate interior trim, exterior casing, color, grille patterns, and adjacent finishes so the new unit belongs with the house."]],
+    valueTitle: "The opening deserves as much attention as the window itself.",
+    valueParagraphs: ["Window work can uncover conditions at the sill, framing, trim, or exterior cladding that need to be addressed before the final installation. A careful scope makes room for those realities instead of treating the job as a simple swap.", "Our focus is a clean, durable installation that improves operation and appearance while respecting the surrounding wall, trim, and finishes."]
+  },
+};
+
 export const projects = [
   { title: "Mid-Century Bath Renovation", category: "Bathrooms", location: "Cary, NC", image: "/images/projects/mid-century-bath-cary-shower.webp", summary: "A Cary bathroom renovation with a green tiled shower, walnut double vanity, patterned wallcovering, and open wood shelving." },
   { title: "Mazingo – Covered Porch Addition", category: "Outdoor Living", location: "Raleigh, NC", image: "/images/projects/mazingo-covered-porch-framing-overall.webp", summary: "An in-progress 21-by-14-foot covered porch addition with elevated framing and a new gable roof connected to the existing townhouse." },

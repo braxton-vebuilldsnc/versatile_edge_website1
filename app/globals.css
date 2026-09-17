@@ -184,6 +184,11 @@ h3 { line-height: 1.25; }
 .area-list a { border-bottom: 2px solid var(--accent); }
 .area-list a:hover { background: var(--navy); color: white; }
 .area-image img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+.realistic-budget { background: #142536; color: white; }
+.realistic-budget-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: clamp(44px, 7vw, 100px); align-items: start; }
+.realistic-budget h2 { color: white; }
+.realistic-budget p { color: rgba(255,255,255,.72); }
+.realistic-budget .lead { color: white; }
 
 .owner-introduction { background: #e8ecef; }
 .owner-introduction-grid { display: grid; grid-template-columns: minmax(300px, .78fr) minmax(0, 1.22fr); align-items: center; gap: clamp(44px, 7vw, 100px); }
@@ -255,6 +260,12 @@ h3 { line-height: 1.25; }
 .service-detail-panel span { display: flex; gap: 10px; padding: 14px 0; border-top: 1px solid rgba(255,255,255,.16); font-size: .87rem; }
 .service-detail-panel span svg { color: var(--accent); flex: none; }
 .service-detail-panel a { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding: 15px; background: var(--accent); color: var(--navy); font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+.service-planning { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(44px, 7vw, 100px); align-items: start; }
+.service-planning-list { border-top: 1px solid var(--line); }
+.service-planning-list article { display: grid; grid-template-columns: 44px 1fr; gap: 18px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+.service-planning-list article > span { color: var(--accent); font-size: .72rem; font-weight: 800; letter-spacing: .1em; }
+.service-planning-list h3 { margin: 0 0 7px; font-size: 1.06rem; }
+.service-planning-list p { margin: 0; color: var(--muted); }
 .faq-section { display: grid; grid-template-columns: .65fr 1.35fr; gap: 70px; }
 .faq-section details { border-top: 1px solid var(--line); }
 .faq-section details:last-child { border-bottom: 1px solid var(--line); }
@@ -399,7 +410,7 @@ h3 { line-height: 1.25; }
   .hero-proof div { min-height: 108px; padding: 18px 14px; }
   .hero-proof strong { font-size: 1.4rem; }
   .hero-proof span { font-size: .6rem; }
-  .split-intro, .editorial-grid, .section-heading, .feature-project-grid, .trust-grid, .area-grid, .image-text, .image-text.reverse, .service-detail, .faq-section, .renovation-layout { grid-template-columns: 1fr; gap: 28px; }
+  .split-intro, .editorial-grid, .section-heading, .feature-project-grid, .trust-grid, .area-grid, .realistic-budget-grid, .image-text, .image-text.reverse, .service-detail, .service-planning, .faq-section, .renovation-layout { grid-template-columns: 1fr; gap: 28px; }
   .owner-introduction-grid { grid-template-columns: 1fr; gap: 42px; }
   .owner-video-wrap { width: min(88%, 420px); }
   .owner-video-wrap::before { inset: 14px -14px -14px 14px; }

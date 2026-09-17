@@ -8,6 +8,11 @@ on:
         required: true
         type: boolean
         default: false
+      inspect_hosting:
+        description: Inspect Hosting.com directories without changing the public site
+        required: true
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -58,3 +63,24 @@ jobs:
           ssh -i ~/.ssh/hosting_deploy versatil@s20849.use2.stableserver.net "mkdir -p '$release_path'"
           rsync -a --delete -e 'ssh -i ~/.ssh/hosting_deploy' dist/client/ "versatil@s20849.use2.stableserver.net:$release_path/"
           ssh -i ~/.ssh/hosting_deploy versatil@s20849.use2.stableserver.net "test -s '$release_path/index.html' && test -s '$release_path/.htaccess' && test -s '$release_path/api/inquiries.php'"
+
+  inspect-hosting:
+    if: inputs.inspect_hosting
+    runs-on: ubuntu-24.04
+    environment: hosting-release
+    steps:
+      - name: Configure restricted Hosting.com SSH access
+        env:
+          HOSTING_SSH_KEY: ${{ secrets.HOSTING_SSH_KEY }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$HOSTING_SSH_KEY" > ~/.ssh/hosting_deploy
+          chmod 600 ~/.ssh/hosting_deploy
+          ssh-keyscan -H s20849.use2.stableserver.net >> ~/.ssh/known_hosts
+      - name: Inspect release and public directories
+        run: |
+          ssh -i ~/.ssh/hosting_deploy versatil@s20849.use2.stableserver.net '
+            pwd
+            find . -maxdepth 3 -type d \( -name public_html -o -name htdocs -o -name www -o -path "./releases/versatile-edge/*" \) -print | sort
+            find . -maxdepth 3 -type f -name index.html -print | sort
+          '

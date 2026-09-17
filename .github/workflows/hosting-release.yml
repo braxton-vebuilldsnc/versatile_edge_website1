@@ -91,6 +91,10 @@ jobs:
         run: |
           ssh -i ~/.ssh/hosting_deploy versatil@s20849.use2.stableserver.net '
             pwd
+            ls -ld ./public_html
+            readlink -f ./public_html
+            test -s ./public_html/renovation-talk.html && echo "renovation-talk.html present"
+            test -s ./public_html/renovation-talk/why-renovations-cost-more-per-square-foot-than-new-construction.html && echo "article HTML present"
             find . -maxdepth 3 -type d \( -name public_html -o -name htdocs -o -name www -o -path "./releases/versatile-edge/*" \) -print | sort
             find . -maxdepth 3 -type f -name index.html -print | sort
           '

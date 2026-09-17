@@ -24,6 +24,8 @@ const publicRoutes = [
   "/projects/walsh-sunroom-deck",
   "/projects/janet-home-addition",
   "/projects/mazingo-covered-porch-addition",
+  "/renovation-talk",
+  "/renovation-talk/why-renovations-cost-more-per-square-foot-than-new-construction",
   "/service-areas/raleigh-nc",
   "/service-areas/cary-nc",
   "/service-areas/wake-forest-nc",

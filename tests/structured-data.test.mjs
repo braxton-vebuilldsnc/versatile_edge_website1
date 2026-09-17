@@ -18,6 +18,7 @@ const routes = [
   "/projects/brown-bathroom", "/projects/walsh-sunroom-deck",
   "/projects/janet-home-addition", "/service-areas/raleigh-nc",
   "/projects/mazingo-covered-porch-addition",
+  "/renovation-talk", "/renovation-talk/why-renovations-cost-more-per-square-foot-than-new-construction",
   "/service-areas/cary-nc", "/service-areas/wake-forest-nc",
   "/service-areas/apex-nc", "/service-areas/morrisville-nc",
   "/service-areas/fuquay-varina-nc", "/service-areas/holly-springs-nc",
@@ -167,6 +168,27 @@ test("project detail schema contains only its matching breadcrumb hierarchy", as
     assert.equal(items[2].item, `${productionOrigin}${route}`);
     assert.ok(html.includes(items[2].name));
   }
+});
+
+test("Renovation Talk article has matching canonical, BlogPosting, and breadcrumb data", async () => {
+  const route = "/renovation-talk/why-renovations-cost-more-per-square-foot-than-new-construction";
+  const html = await readFile(htmlPath(route), "utf8");
+  const documents = schemas(html);
+  const articles = nodesOfType(documents, "BlogPosting");
+  const breadcrumbs = nodesOfType(documents, "BreadcrumbList");
+  const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+
+  assert.equal(articles.length, 1);
+  assert.equal(articles[0].mainEntityOfPage["@id"], `${productionOrigin}${route}`);
+  assert.equal(articles[0].author["@id"], contractorId);
+  assert.equal(articles[0].publisher["@id"], contractorId);
+  assert.equal(new URL(canonical).href, new URL(`${productionOrigin}${route}`).href);
+  assert.equal(breadcrumbs.length, 1);
+  assert.deepEqual(breadcrumbs[0].itemListElement.map(({ position, name, item }) => ({ position, name, item })), [
+    { position: 1, name: "Home", item: `${productionOrigin}/` },
+    { position: 2, name: "Renovation Talk", item: `${productionOrigin}/renovation-talk` },
+    { position: 3, name: articles[0].headline, item: `${productionOrigin}${route}` },
+  ]);
 });
 
 test("service-area schema matches each visible service, exact FAQs, and real hierarchy", async () => {

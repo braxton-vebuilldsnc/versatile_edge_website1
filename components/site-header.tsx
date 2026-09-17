@@ -38,6 +38,7 @@ export function SiteHeader() {
               </div>
             </div>
             <a href="/process">Our Process</a>
+            <a href="/renovation-talk">Renovation Talk</a>
           </nav>
           <a href="/contact" className={cn(buttonVariants({ size: "sm" }), "header-cta")}>Request consultation</a>
           <button className="menu-toggle" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(!open)}>
@@ -52,6 +53,7 @@ export function SiteHeader() {
             <a href="/projects" onClick={close}>Projects</a>
             {namedProjects.map((project) => <a className="mobile-project-link" key={project.slug} href={`/projects/${project.slug}`} onClick={close}>{project.shortTitle}</a>)}
             <a href="/process" onClick={close}>Our Process</a>
+            <a href="/renovation-talk" onClick={close}>Renovation Talk</a>
             <a href="/contact" onClick={close}>Request consultation</a>
           </nav>
         )}

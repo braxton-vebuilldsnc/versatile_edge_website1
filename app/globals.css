@@ -250,6 +250,14 @@ h3 { line-height: 1.25; }
 .image-text img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
 .image-text.reverse { grid-template-columns: 1.1fr .9fr; }
 .service-list article { display: grid; grid-template-columns: 70px 1fr 1fr; gap: 48px; align-items: center; padding: 44px 0; border-top: 1px solid var(--line); }
+.kitchen-design-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.kitchen-design-gallery figure { margin: 0; }
+.kitchen-design-gallery img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.kitchen-design-gallery figcaption { margin-top: 12px; color: var(--muted); font-size: .92rem; line-height: 1.6; }
+.kitchen-coordination-copy p + p { margin-top: 18px; }
+.kitchen-construction-section { align-items: start; }
+.kitchen-construction-images { display: grid; gap: 18px; margin-top: 42px; }
+.kitchen-construction-images img { aspect-ratio: 16 / 9; }
 .service-list-index { align-self: start; color: var(--accent-foreground); font-weight: 800; }
 .service-list h2 { margin-bottom: 18px; font-size: clamp(2rem, 3.6vw, 3.8rem); }
 .service-list p { color: var(--muted); }
@@ -393,6 +401,7 @@ h3 { line-height: 1.25; }
 }
 
 @media (max-width: 760px) {
+  .kitchen-construction-images { margin-top: 0; }
   body { padding-bottom: 54px; }
   .section { padding: 58px 0; }
   .site-container { width: min(100% - 30px, 1240px); }
@@ -410,7 +419,7 @@ h3 { line-height: 1.25; }
   .hero-proof div { min-height: 108px; padding: 18px 14px; }
   .hero-proof strong { font-size: 1.4rem; }
   .hero-proof span { font-size: .6rem; }
-  .split-intro, .editorial-grid, .section-heading, .feature-project-grid, .trust-grid, .area-grid, .realistic-budget-grid, .image-text, .image-text.reverse, .service-detail, .service-planning, .faq-section, .renovation-layout { grid-template-columns: 1fr; gap: 28px; }
+  .split-intro, .editorial-grid, .section-heading, .feature-project-grid, .trust-grid, .area-grid, .realistic-budget-grid, .image-text, .image-text.reverse, .service-detail, .service-planning, .faq-section, .renovation-layout, .kitchen-design-gallery { grid-template-columns: 1fr; gap: 28px; }
   .owner-introduction-grid { grid-template-columns: 1fr; gap: 42px; }
   .owner-video-wrap { width: min(88%, 420px); }
   .owner-video-wrap::before { inset: 14px -14px -14px 14px; }

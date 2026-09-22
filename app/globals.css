@@ -13,6 +13,8 @@
   --accent-strong: #f6c45d;
   --accent-foreground: #8a5a00;
   --line: #d5dadd;
+  --body-copy-size: 16.25px;
+  --body-copy-line-height: 1.65;
 }
 
 @theme inline {
@@ -26,7 +28,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-sans), sans-serif; font-size: 16px; line-height: 1.65; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-sans), sans-serif; font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
 a { text-decoration: none; }
 img { display: block; max-width: 100%; }
 button, input, select, textarea { font: inherit; }
@@ -87,7 +89,7 @@ h3 { line-height: 1.25; }
 .renovation-card { padding: 20px 22px; background: white; border: 1px solid var(--line); }
 .renovation-card h3 { margin: 0 0 14px; font-family: var(--font-display), serif; font-size: 1.65rem; line-height: 1.12; }
 .renovation-card h3 a { color: var(--navy); }
-.renovation-card > p:not(.article-topics) { max-width: 720px; margin-bottom: 16px; color: var(--muted); font-size: .9rem; }
+.renovation-card > p:not(.article-topics) { max-width: 720px; margin-bottom: 16px; color: var(--muted); font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
 .renovation-card time, .article-header time { color: var(--muted); font-size: .75rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
 .renovation-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
 .renovation-card .text-link { margin: 0; }
@@ -112,7 +114,7 @@ h3 { line-height: 1.25; }
 .article-body > img { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; margin-bottom: 46px; }
 .article-body > img.article-feature-image--full { aspect-ratio: auto; object-fit: contain; }
 .article-body > p, .article-body > h2 { max-width: 800px; }
-.article-body > p { margin-bottom: 24px; color: #3e4a56; font-size: 1.04rem; }
+.article-body > p { margin-bottom: 24px; color: #3e4a56; font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
 .article-body > p.lead { color: var(--ink); font-size: clamp(1.25rem, 2vw, 1.62rem); }
 .article-body > h2 { margin: 48px 0 18px; color: var(--navy); font-size: clamp(2rem, 3.5vw, 3.25rem); }
 .article-body p a { color: var(--navy); font-weight: 800; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; }
@@ -139,7 +141,7 @@ h3 { line-height: 1.25; }
 .split-intro > div:last-child, .editorial-grid > div:last-child { padding-top: 22px; }
 .section-heading { display: grid; grid-template-columns: 1.3fr .7fr; align-items: end; gap: 60px; margin-bottom: 44px; }
 .section-heading h2 { margin-bottom: 0; }
-.section-heading > p { color: var(--muted); font-size: 1.05rem; }
+.section-heading > p { color: var(--muted); font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
 .services-section { background: var(--soft); }
 .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #c6cdd2; border-left: 1px solid #c6cdd2; }
 .service-tile { position: relative; min-height: 300px; padding: 28px; border-right: 1px solid #c6cdd2; border-bottom: 1px solid #c6cdd2; transition: .3s ease; }
@@ -147,7 +149,7 @@ h3 { line-height: 1.25; }
 .service-number { display: block; margin-bottom: 40px; color: var(--muted); font-size: .72rem; letter-spacing: .18em; }
 .service-tile svg { color: var(--accent); }
 .service-tile h3 { margin: 18px 0 12px; font-family: var(--font-display), serif; font-size: 1.55rem; }
-.service-tile p { color: var(--muted); font-size: .88rem; }
+.service-tile p { color: var(--muted); font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
 .service-tile:hover p, .service-tile:hover .service-number { color: rgba(255,255,255,.68); }
 .service-arrow { position: absolute; right: 24px; bottom: 24px; }
 .dark-section { background: var(--navy); color: white; }
@@ -167,7 +169,7 @@ h3 { line-height: 1.25; }
 .process-grid article:not(:last-child) { margin-right: 25px; }
 .process-grid article > span { display: inline-block; margin-top: -2px; padding-top: 22px; border-top: 2px solid var(--accent); color: var(--navy); font-size: .72rem; font-weight: 800; }
 .process-grid h3 { margin: 24px 0 12px; font-family: var(--font-display), serif; font-size: 1.45rem; }
-.process-grid p { color: var(--muted); font-size: .88rem; }
+.process-grid p { color: var(--muted); font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
 .trust-section { background: #142536; color: white; }
 .trust-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: 72px; }
 .trust-grid h2 { color: white; }
@@ -176,7 +178,7 @@ h3 { line-height: 1.25; }
 .trust-points article { padding: 30px; border-left: 1px solid rgba(255,255,255,.15); border-bottom: 1px solid rgba(255,255,255,.15); }
 .trust-points svg { color: var(--accent); }
 .trust-points h3 { margin: 18px 0 10px; }
-.trust-points p { color: rgba(255,255,255,.62); font-size: .86rem; }
+.trust-points p { color: rgba(255,255,255,.62); font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
 .area-grid, .image-text { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: clamp(44px, 7vw, 100px); }
 .area-grid p { color: var(--muted); }
 .area-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
@@ -231,7 +233,7 @@ h3 { line-height: 1.25; }
 .service-area-planning-grid article { min-height: 330px; padding: 30px; border-right: 1px solid rgba(255,255,255,.2); border-bottom: 1px solid rgba(255,255,255,.2); }
 .service-area-planning-grid article > span { color: var(--accent); font-size: .72rem; font-weight: 900; letter-spacing: .12em; }
 .service-area-planning-grid h3 { margin: 40px 0 14px; font-family: var(--font-display), serif; font-size: 1.8rem; }
-.service-area-planning-grid p { color: rgba(255,255,255,.68); font-size: .9rem; }
+.service-area-planning-grid p { color: rgba(255,255,255,.68); font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
 .service-area-planning-grid a { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding-bottom: 4px; color: white; border-bottom: 2px solid var(--accent); font-size: .72rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 .service-area-project-grid .project-card-wide img { object-position: center 55%; }
 .service-area-trust-links { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 36px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
@@ -246,7 +248,7 @@ h3 { line-height: 1.25; }
 .values-grid article { padding: 30px; border-left: 1px solid #c9d0d5; }
 .values-grid svg { color: var(--accent); }
 .values-grid h3 { margin: 22px 0 12px; }
-.values-grid p { color: var(--muted); font-size: .9rem; }
+.values-grid p { color: var(--muted); font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
 .image-text img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
 .image-text.reverse { grid-template-columns: 1.1fr .9fr; }
 .service-list article { display: grid; grid-template-columns: 70px 1fr 1fr; gap: 48px; align-items: center; padding: 44px 0; border-top: 1px solid var(--line); }
@@ -256,11 +258,9 @@ h3 { line-height: 1.25; }
 .kitchen-design-gallery figcaption { margin-top: 12px; color: var(--muted); font-size: .92rem; line-height: 1.6; }
 .kitchen-coordination-copy p + p { margin-top: 18px; }
 .kitchen-construction-section { align-items: start; }
-main:has(.kitchen-design-gallery) .service-detail p,
-main:has(.kitchen-design-gallery) .service-planning p,
-main:has(.kitchen-design-gallery) .section-heading > p,
-main:has(.kitchen-design-gallery) .kitchen-coordination-copy p,
-main:has(.kitchen-design-gallery) .faq-section details p { font-size: 16.25px; line-height: 1.65; }
+.service-detail p:not(.lead),
+.service-planning-list p,
+.faq-section details p { font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
 .kitchen-construction-images { display: grid; gap: 18px; margin-top: 42px; }
 .kitchen-construction-images img { aspect-ratio: 16 / 9; }
 .service-list-index { align-self: start; color: var(--accent-foreground); font-weight: 800; }
@@ -301,13 +301,13 @@ main:has(.kitchen-design-gallery) .faq-section details p { font-size: 16.25px; l
 .project-card-overlay { position: absolute; inset: auto 0 0; padding: 80px 34px 30px; color: white; background: linear-gradient(transparent, rgba(7,25,47,.92)); }
 .project-card-overlay span { color: var(--accent); font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 .project-card-overlay h2 { margin: 8px 0; color: white; font-size: clamp(2rem, 3vw, 3.3rem); }
-.project-card-overlay p { max-width: 640px; margin-bottom: 0; color: rgba(255,255,255,.72); }
+.project-card-overlay p { max-width: 640px; margin-bottom: 0; color: rgba(255,255,255,.72); font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
 .project-card-link { display: inline-flex; margin-top: 18px; padding-bottom: 3px; color: white; border-bottom: 2px solid var(--accent); font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 
 .project-story-intro { background: var(--soft); }
 .project-story-summary { display: grid; grid-template-columns: .9fr 1.1fr; gap: 8vw; align-items: start; }
 .project-story-summary h2 { max-width: 560px; margin-top: 10px; }
-.project-story-summary p { color: var(--muted); font-size: 1.1rem; line-height: 1.8; }
+.project-story-summary p { color: var(--muted); font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
 .project-status { display: inline-block; margin-top: 16px; padding: 8px 12px; color: var(--navy); background: white; border-left: 3px solid var(--accent); font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .project-jobsite-video { background: var(--navy); color: white; }
 .project-jobsite-video-grid { display: grid; grid-template-columns: minmax(280px, .7fr) minmax(0, 1.3fr); align-items: center; gap: clamp(55px, 9vw, 130px); }
@@ -321,7 +321,7 @@ main:has(.kitchen-design-gallery) .faq-section details p { font-size: 16.25px; l
 .project-room-heading { display: grid; grid-template-columns: 80px minmax(0, 720px); gap: 28px; margin-bottom: 32px; }
 .project-room-number { color: var(--accent-foreground); font-size: .78rem; font-weight: 900; letter-spacing: .12em; }
 .project-room-heading h2 { margin: 0 0 10px; }
-.project-room-heading p { margin: 0; color: var(--muted); font-size: 1.04rem; line-height: 1.75; }
+.project-room-heading p { margin: 0; color: var(--muted); font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
 .project-story-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .project-story-image { height: 440px; margin: 0; overflow: hidden; background: var(--slate); }
 .project-story-image-wide { grid-column: 1 / -1; height: 650px; }
@@ -449,7 +449,7 @@ main:has(.kitchen-design-gallery) .faq-section details p { font-size: 16.25px; l
   .project-card-overlay { padding: 44px 20px 18px; }
   .project-card-overlay span { font-size: .6rem; letter-spacing: .08em; }
   .project-card-overlay h2 { margin: 5px 0; font-size: clamp(1.35rem, 7vw, 1.9rem); line-height: 1.08; }
-  .project-card-overlay p { font-size: .8rem; line-height: 1.45; }
+  .project-card-overlay p { font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
   .project-card-link { margin-top: 11px; font-size: .68rem; }
   .project-story-summary { grid-template-columns: 1fr; gap: 24px; }
   .project-jobsite-video-grid { grid-template-columns: 1fr; gap: 42px; }
@@ -486,7 +486,7 @@ main:has(.kitchen-design-gallery) .faq-section details p { font-size: 16.25px; l
 @media (max-width: 480px) {
   .project-card-overlay { padding: 28px 14px 12px; }
   .project-card-overlay h2 { font-size: 1.22rem; }
-  .project-card-overlay p { font-size: .74rem; line-height: 1.32; }
+  .project-card-overlay p { font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
 }
 
 @media (max-width: 420px) {

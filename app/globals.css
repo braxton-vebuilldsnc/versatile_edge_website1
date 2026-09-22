@@ -256,7 +256,11 @@ h3 { line-height: 1.25; }
 .kitchen-design-gallery figcaption { margin-top: 12px; color: var(--muted); font-size: .92rem; line-height: 1.6; }
 .kitchen-coordination-copy p + p { margin-top: 18px; }
 .kitchen-construction-section { align-items: start; }
-.kitchen-coordination-copy p { font-size: 16.25px; line-height: 1.65; }
+main:has(.kitchen-design-gallery) .service-detail p,
+main:has(.kitchen-design-gallery) .service-planning p,
+main:has(.kitchen-design-gallery) .section-heading > p,
+main:has(.kitchen-design-gallery) .kitchen-coordination-copy p,
+main:has(.kitchen-design-gallery) .faq-section details p { font-size: 16.25px; line-height: 1.65; }
 .kitchen-construction-images { display: grid; gap: 18px; margin-top: 42px; }
 .kitchen-construction-images img { aspect-ratio: 16 / 9; }
 .service-list-index { align-self: start; color: var(--accent-foreground); font-weight: 800; }

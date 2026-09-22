@@ -80,6 +80,25 @@ jobs:
           ssh -i ~/.ssh/hosting_deploy "versatil@$HOSTING_HOST" "mkdir -p '$release_path'"
           rsync -a --delete -e "ssh -i ~/.ssh/hosting_deploy" dist/client/ "versatil@$HOSTING_HOST:$release_path/"
           ssh -i ~/.ssh/hosting_deploy "versatil@$HOSTING_HOST" "test -s '$release_path/index.html' && test -s '$release_path/.htaccess' && test -s '$release_path/api/inquiries.php'"
+      - name: Activate the uploaded release with rollback preserved
+        if: inputs.activate_release
+        env:
+          RELEASE_SHA: ${{ github.sha }}
+        run: |
+          ssh -i ~/.ssh/hosting_deploy "versatil@$HOSTING_HOST" "RELEASE_SHA='$RELEASE_SHA' bash -s" <<'REMOTE'
+            set -euo pipefail
+            release_path="/home/versatil/releases/versatile-edge/${RELEASE_SHA}"
+            test -s "${release_path}/index.html"
+            test -s "${release_path}/.htaccess"
+            test -s "${release_path}/api/inquiries.php"
+            test -d /home/versatil/public_html
+            backup_path="/home/versatil/public_html.rollback-$(date +%Y%m%d%H%M%S)"
+            ln -s "${release_path}" /home/versatil/public_html.next
+            mv /home/versatil/public_html "${backup_path}"
+            mv /home/versatil/public_html.next /home/versatil/public_html
+            test -s /home/versatil/public_html/index.html
+            printf 'Activated %s; rollback retained at %s\n' "${release_path}" "${backup_path}"
+          REMOTE
 
   inspect-hosting:
     if: inputs.inspect_hosting
@@ -109,7 +128,7 @@ jobs:
           '
 
   activate-release:
-    if: inputs.activate_release && inputs.release_sha != ''
+    if: inputs.activate_release && !inputs.upload_release && inputs.release_sha != ''
     runs-on: ubuntu-24.04
     environment: hosting-release
     env:

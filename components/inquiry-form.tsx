@@ -7,6 +7,7 @@ import { services } from "@/lib/site-data";
 
 declare global {
   interface Window {
+    gtag?: (...args: unknown[]) => void;
     turnstile?: {
       render: (container: HTMLElement, options: { sitekey: string }) => string;
       remove: (widgetId: string) => void;
@@ -66,6 +67,11 @@ export function InquiryForm() {
       });
       const data = await response.json() as { message?: string };
       if (!response.ok) throw new Error(data.message || "We could not send your inquiry.");
+      window.gtag?.("event", "conversion", {
+        send_to: "AW-11226844396/uwnjCLaUtIEdEOyZsOkp",
+        value: 1.0,
+        currency: "USD",
+      });
       setStatus("sent"); setMessage("Thank you. Your project details have been sent to Versatile Edge."); form.reset();
     } catch (error) {
       window.turnstile?.reset(turnstileWidget.current ?? undefined);

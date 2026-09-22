@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Playfair_Display } from "next/font/google";
+import Script from "next/script";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { BackToTop } from "@/components/back-to-top";
@@ -34,5 +35,5 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       ...["Raleigh", "Cary", "Wake Forest", "Apex", "Morrisville", "Fuquay-Varina", "Holly Springs"].map((name) => ({ "@type": "City", name })),
     ],
   };
-  return <html lang="en"><body className={`${manrope.variable} ${playfair.variable}`}><a className="skip-link" href="#main">Skip to content</a><SiteHeader /><main id="main">{children}</main><SiteFooter /><BackToTop /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} /></body></html>;
+  return <html lang="en"><head><Script async src="https://www.googletagmanager.com/gtag/js?id=AW-11226844396" strategy="afterInteractive" /><Script id="google-ads-tag" strategy="afterInteractive">{`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-11226844396');`}</Script></head><body className={`${manrope.variable} ${playfair.variable}`}><a className="skip-link" href="#main">Skip to content</a><SiteHeader /><main id="main">{children}</main><SiteFooter /><BackToTop /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} /></body></html>;
 }

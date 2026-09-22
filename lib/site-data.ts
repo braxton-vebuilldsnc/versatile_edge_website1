@@ -68,7 +68,7 @@ export const services = [
     image: "/images/projects/hutter-kitchen-04.webp",
     eyebrow: "The heart of the home, reconsidered",
     summary:
-      "Create a kitchen with better flow, purposeful storage, durable finishes, and the right atmosphere for everyday life.",
+      "Versatile Edge creates kitchens with better flow, purposeful storage, durable finishes, and the right atmosphere for everyday life.",
     intro:
       "From targeted upgrades to full gut renovations, we coordinate cabinetry, surfaces, lighting, flooring, tile, plumbing, electrical work, and layout changes around the way your household actually uses the kitchen.",
     highlights: ["Functional layout planning", "Cabinetry and finish coordination", "Lighting, plumbing, and electrical updates"],

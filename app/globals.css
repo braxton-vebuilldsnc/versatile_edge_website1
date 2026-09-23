@@ -35,6 +35,7 @@ img { display: block; max-width: 100%; }
 button, input, select, textarea { font: inherit; }
 :where(a, button, input, select, textarea, summary, video):focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
 h1, h2, h3, p { margin-top: 0; }
+h1, h2 { margin-bottom: 12px; }
 h1, h2 { font-family: var(--font-display), serif; font-weight: 500; letter-spacing: -0.035em; line-height: 1.03; }
 h1, h2 { font-size: var(--heading-size); }
 h3 { line-height: 1.25; }

@@ -354,6 +354,7 @@ h3 { line-height: 1.25; }
 .project-room-heading h2 { margin: 0 0 10px; }
 .project-room-heading p { margin: 0; color: var(--muted); font-size: var(--body-copy-size); line-height: var(--body-copy-line-height); }
 .project-story-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.project-room-note { margin: 16px 0 0; color: var(--muted); font-size: 0.85rem; font-style: italic; }
 .project-story-image { height: 440px; margin: 0; overflow: hidden; background: var(--slate); }
 .project-story-image-wide { grid-column: 1 / -1; height: 650px; }
 .project-story-image img { width: 100%; height: 100%; object-fit: cover; }

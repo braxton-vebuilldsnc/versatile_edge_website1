@@ -210,6 +210,7 @@ export const servicePageContent: Record<string, {
 };
 
 export const projects = [
+  { title: "Custom Woodworking Projects", category: "Custom Woodworking", location: "Versatile Edge Project", image: "/images/projects/custom-woodworking-builtins-staged.png", summary: "Custom fireplace built-ins, closet storage, and entry landing zones tailored to everyday life." },
   { title: "Mid-Century Bath Renovation", category: "Bathrooms", location: "Cary, NC", image: "/images/projects/mid-century-bath-cary-shower.webp", summary: "A Cary bathroom renovation with a green tiled shower, walnut double vanity, patterned wallcovering, and open wood shelving." },
   { title: "Mazingo – Covered Porch Addition", category: "Outdoor Living", location: "Raleigh, NC", image: "/images/projects/mazingo-covered-porch-framing-overall.webp", summary: "An in-progress 21-by-14-foot covered porch addition with elevated framing and a new gable roof connected to the existing townhouse." },
   { title: "Hutter Kitchen — Gathering Island", category: "Kitchens", location: "Historic Raleigh, NC", image: "/images/projects/hutter-kitchen-05.webp", summary: "A generous working island, tailored white cabinetry, warm brass lighting, and a dedicated pantry create a kitchen made for everyday gathering." },
@@ -241,6 +242,22 @@ export const projects = [
 ];
 
 export const namedProjects = [
+  {
+    slug: "custom-woodworking-projects",
+    title: "Custom Woodworking Projects",
+    shortTitle: "Custom Woodworking",
+    seoTitle: "Custom Woodworking Projects | Versatile Edge",
+    metaDescription: "Explore custom built-ins, fireplace cabinetry, and closet storage crafted by Versatile Edge.",
+    type: "Custom woodworking",
+    status: "Completed project",
+    heroImage: "/images/projects/custom-woodworking-builtins-before-stage.png",
+    overview: "Custom built-ins and organized storage make the home work harder while adding a finished, tailored character to everyday spaces.",
+    rooms: [
+      { name: "Fireplace Built-Ins", description: "Custom cabinetry frames the fireplace with integrated shelving, lower storage, and warm shelf lighting.", images: ["custom-woodworking-builtins-before-stage.png", "custom-woodworking-builtins-staged.png"], caption: "The television, shelf lighting, and decorative styling in the staged image were added with the help of AI to illustrate the finished design potential." },
+      { name: "Custom Closet Storage", description: "Purpose-built closet cabinetry adds open shelving, hanging zones, drawers, and a durable wood work surface for a more organized everyday routine.", images: ["custom-woodworking-closet.png"] },
+      { name: "Entry Landing Zone", description: "A custom mudroom-style landing zone pairs a durable bench, open cubbies, and a row of hooks to keep bags, shoes, and daily essentials organized right at the door.", images: ["custom-woodworking-mudroom-entry.jpeg"] },
+    ],
+  },
   {
     slug: "mid-century-bath-renovation-cary",
     title: "Mid-Century Bath Renovation",
@@ -1744,6 +1761,10 @@ export function projectPageForTitle(title: string) {
 }
 
 export const projectImageAltText: Readonly<Record<string, string>> = {
+  "custom-woodworking-builtins-before-stage.png": "White custom fireplace built-ins with warm shelf lighting, lower cabinets, and an empty television wall",
+  "custom-woodworking-builtins-staged.png": "White custom fireplace built-ins with shelf lighting, styled decor, and a television above the mantel",
+  "custom-woodworking-closet.png": "Custom white closet system with hanging rails, open shelves, drawers, a wood work surface, and a floor mirror",
+  "custom-woodworking-mudroom-entry.jpeg": "Custom entry landing zone with a dark wood bench, open cubbies, a shiplap back wall, and black coat hooks",
   "mid-century-bath-cary-shower.webp": "Front view of a Cary bathroom walk-in shower with green vertical tile, black fixtures, and clear glass enclosure",
   "mid-century-bath-cary-vanity.webp": "Cary bathroom double walnut vanity with patterned wallcovering, individual mirrors, and warm sconces",
   "mid-century-bath-cary-shelving.webp": "Open wood shelves with towels and storage beside the walnut vanity in a Cary bathroom renovation",

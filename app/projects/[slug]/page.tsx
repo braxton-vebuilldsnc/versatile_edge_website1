@@ -85,13 +85,16 @@ export default async function NamedProjectPage({ params }: Props) {
               <div><h2>{room.name}</h2><p>{room.description}</p></div>
             </div>
             {room.images.length > 0 && (
-              <div className="project-story-gallery">
-                {room.images.map((image, index) => (
-                  <figure className={room.images.length === 1 ? "project-story-image project-story-image-natural" : index === 0 && room.images.length > 2 ? `project-story-image project-story-image-wide${roomIndex === 0 ? " project-story-image-wide-lead" : ""}` : "project-story-image"} key={image}>
-                    <ResponsiveImage src={`/images/projects/${image}`} alt={projectImageAltText[image] ?? `${project.title}: ${room.name}, view ${index + 1}`} sizes="(max-width: 760px) calc(100vw - 30px), (max-width: 1240px) 50vw, 610px" />
-                  </figure>
-                ))}
-              </div>
+              <>
+                <div className="project-story-gallery">
+                  {room.images.map((image, index) => (
+                    <figure className={room.images.length === 1 ? "project-story-image project-story-image-natural" : index === 0 && room.images.length > 2 ? `project-story-image project-story-image-wide${roomIndex === 0 ? " project-story-image-wide-lead" : ""}` : "project-story-image"} key={image}>
+                      <ResponsiveImage src={`/images/projects/${image}`} alt={projectImageAltText[image] ?? `${project.title}: ${room.name}, view ${index + 1}`} sizes="(max-width: 760px) calc(100vw - 30px), (max-width: 1240px) 50vw, 610px" />
+                    </figure>
+                  ))}
+                </div>
+                {"caption" in room && room.caption && <p className="project-room-note">{room.caption}</p>}
+              </>
             )}
           </div>
         </section>

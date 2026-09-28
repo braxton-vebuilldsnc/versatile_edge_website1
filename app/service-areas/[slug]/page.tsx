@@ -1,17 +1,33 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ArrowRight, ClipboardCheck, MessageSquareText, ShieldCheck } from "lucide-react";
+import { ArrowRight, ClipboardCheck, MessageSquareText, Phone, ShieldCheck } from "lucide-react";
 import { JsonLd } from "@/components/json-ld";
 import { OwnerIntroduction } from "@/components/owner-introduction";
 import { ResponsiveImage } from "@/components/responsive-image";
 import { buttonVariants } from "@/components/ui/button";
-import { namedProjects, processSteps, projectImageAltText, serviceAreaPages, serviceAreaProjectPresentation, services } from "@/lib/site-data";
+import { namedProjects, phoneDisplay, phoneHref, processSteps, projectImageAltText, serviceAreaPages, serviceAreaProjectPresentation, services } from "@/lib/site-data";
 import { serviceAreaPageSchema } from "@/lib/structured-data";
 import { cn } from "@/lib/utils";
 
 export const dynamicParams = false;
 
 type Props = { params: Promise<{ slug: string }> };
+
+// These links give homeowners a useful path to closely related service areas,
+// while making the site's local coverage easier to navigate and understand.
+const nearbyAreaSlugs: Record<string, readonly string[]> = {
+  "raleigh-nc": ["cary-nc", "garner-nc", "knightdale-nc", "wake-forest-nc"],
+  "cary-nc": ["morrisville-nc", "apex-nc", "holly-springs-nc", "raleigh-nc"],
+  "wake-forest-nc": ["rolesville-nc", "raleigh-nc", "knightdale-nc", "wendell-nc"],
+  "apex-nc": ["cary-nc", "holly-springs-nc", "fuquay-varina-nc", "raleigh-nc"],
+  "morrisville-nc": ["cary-nc", "raleigh-nc", "apex-nc", "holly-springs-nc"],
+  "fuquay-varina-nc": ["holly-springs-nc", "apex-nc", "garner-nc", "cary-nc"],
+  "holly-springs-nc": ["apex-nc", "fuquay-varina-nc", "cary-nc", "garner-nc"],
+  "knightdale-nc": ["wendell-nc", "rolesville-nc", "raleigh-nc", "wake-forest-nc"],
+  "wendell-nc": ["knightdale-nc", "rolesville-nc", "raleigh-nc", "garner-nc"],
+  "rolesville-nc": ["wake-forest-nc", "knightdale-nc", "wendell-nc", "raleigh-nc"],
+  "garner-nc": ["raleigh-nc", "fuquay-varina-nc", "holly-springs-nc", "cary-nc"],
+};
 
 export function generateStaticParams() {
   return serviceAreaPages.map(({ slug }) => ({ slug }));
@@ -22,12 +38,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = serviceAreaPages.find((item) => item.slug === slug);
   if (!page) return {};
   const url = `https://versatileedgellc.com/service-areas/${page.slug}`;
+  const searchTitle = `${page.city} Home Remodeling Contractor | Versatile Edge`;
   return {
-    title: { absolute: page.title },
+    title: { absolute: searchTitle },
     description: page.description,
     alternates: { canonical: url },
-    openGraph: { title: page.title, description: page.description, url, type: "website", images: [{ url: page.heroImage, alt: page.heroAlt }] },
-    twitter: { card: "summary_large_image", title: page.title, description: page.description, images: [page.heroImage] },
+    openGraph: { title: searchTitle, description: page.description, url, type: "website", images: [{ url: page.heroImage, alt: page.heroAlt }] },
+    twitter: { card: "summary_large_image", title: searchTitle, description: page.description, images: [page.heroImage] },
   };
 }
 
@@ -45,6 +62,10 @@ export default async function ServiceAreaPage({ params }: Props) {
     const service = services.find((item) => item.slug === serviceSlug);
     return service ? [service] : [];
   });
+  const nearbyAreas = (nearbyAreaSlugs[page.slug] ?? []).flatMap((areaSlug) => {
+    const area = serviceAreaPages.find((item) => item.slug === areaSlug);
+    return area ? [area] : [];
+  });
 
   return (
     <>
@@ -56,7 +77,10 @@ export default async function ServiceAreaPage({ params }: Props) {
           <span className="eyebrow light">{page.eyebrow}</span>
           <h1>{page.h1}</h1>
           <p>{page.heroLead ?? "Thoughtful renovation planning, dependable project management, and coordinated construction for Raleigh homes."}</p>
-          <a href="/contact" className="hero-link">Discuss your {page.city} project <ArrowRight size={18} /></a>
+          <div className="page-hero-actions page-hero-actions-conversion">
+            <a href="/contact" className="hero-link">Discuss your {page.city} project <ArrowRight size={18} /></a>
+            <a href={phoneHref} className="hero-call-link"><Phone size={17} /> Call {phoneDisplay}</a>
+          </div>
         </div>
         {page.heroCredit && (
           <p className="service-area-image-credit">
@@ -211,6 +235,22 @@ export default async function ServiceAreaPage({ params }: Props) {
           <div>{page.faq.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div>
         </div>
       </section>
+
+      {nearbyAreas.length > 0 && (
+        <section className="section service-area-nearby soft-section">
+          <div className="site-container section-heading">
+            <div><span className="eyebrow">Across Wake County</span><h2>Explore nearby remodeling service areas.</h2></div>
+            <p>Versatile Edge serves homeowners across Raleigh, Wake County, and surrounding Triangle communities. Browse a nearby area to see local planning context and relevant remodeling services.</p>
+          </div>
+          <div className="site-container service-area-nearby-links">
+            {nearbyAreas.map((area) => (
+              <a href={`/service-areas/${area.slug}`} key={area.slug}>
+                <span>{area.city} home remodeling</span><ArrowRight size={18} />
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="section project-story-cta">
         <div className="site-container project-story-cta-inner">

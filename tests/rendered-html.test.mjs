@@ -18,6 +18,7 @@ const publicRoutes = [
   "/services/home-additions",
   "/services/window-replacement",
   "/projects",
+  "/projects/custom-woodworking-projects",
   "/projects/mid-century-bath-renovation-cary",
   "/projects/hutter-whole-house-remodel-addition",
   "/projects/johnson-bathroom",
@@ -352,11 +353,11 @@ test("exports the approved Raleigh service-area content, metadata, and discovery
     readFile(htmlPath("/about"), "utf8"),
     readFile(path.join(root, "deployment", "IMAGE-SOURCES.md"), "utf8"),
   ]);
-  assert.match(raleigh, /<title>Raleigh Home Remodeling &amp; Renovations \| Versatile Edge LLC<\/title>/);
+  assert.match(raleigh, /<title>Raleigh Home Remodeling Contractor \| Versatile Edge<\/title>/);
   assert.match(raleigh, /<meta name="description" content="Explore Raleigh home remodeling with Versatile Edge, a licensed NC general contractor for kitchens, bathrooms, additions, screened porches, and renovations\."/);
   assert.match(raleigh, /<h1>Home Remodeling in Raleigh, North Carolina<\/h1>/);
   assert.match(raleigh, /<link rel="canonical" href="https:\/\/versatileedgellc\.com\/service-areas\/raleigh-nc"/);
-  assert.match(raleigh, /<meta property="og:title" content="Raleigh Home Remodeling &amp; Renovations \| Versatile Edge LLC"/);
+  assert.match(raleigh, /<meta property="og:title" content="Raleigh Home Remodeling Contractor \| Versatile Edge"/);
   assert.match(raleigh, /<meta property="og:url" content="https:\/\/versatileedgellc\.com\/service-areas\/raleigh-nc"/);
   assert.match(raleigh, /raleigh-nc-capitol\.webp/);
   assert.match(raleigh, /North Carolina State Capitol framed by trees in downtown Raleigh/);
@@ -408,10 +409,10 @@ test("exports all eleven approved service-area pages with unique metadata, local
 
 test("exports substantive, distinct copy and licensed local imagery for the four added city pages", async () => {
   const additions = [
-    ["Knightdale", "knightdale-nc", "Knightdale Home Remodeling | Versatile Edge LLC", "knightdale-nc-landmark.webp", "Knightdale building permits"],
-    ["Wendell", "wendell-nc", "Wendell Home Remodeling &amp; Renovations | Versatile Edge", "wendell-nc-landmark.webp", "state historic-district record"],
-    ["Rolesville", "rolesville-nc", "Rolesville Home Remodeling | Versatile Edge LLC", "rolesville-nc-landmark.webp", "Town permit guide"],
-    ["Garner", "garner-nc", "Garner Home Remodeling &amp; Renovations | Versatile Edge LLC", "garner-nc-landmark.webp", "Garner Inspections"],
+    ["Knightdale", "knightdale-nc", "Knightdale Home Remodeling Contractor | Versatile Edge", "knightdale-nc-landmark.webp", "Knightdale building permits"],
+    ["Wendell", "wendell-nc", "Wendell Home Remodeling Contractor | Versatile Edge", "wendell-nc-landmark.webp", "state historic-district record"],
+    ["Rolesville", "rolesville-nc", "Rolesville Home Remodeling Contractor | Versatile Edge", "rolesville-nc-landmark.webp", "Town permit guide"],
+    ["Garner", "garner-nc", "Garner Home Remodeling Contractor | Versatile Edge", "garner-nc-landmark.webp", "Garner Inspections"],
   ];
   const sourceInventory = await readFile(path.join(root, "deployment", "IMAGE-SOURCES.md"), "utf8");
   const substantiveParagraphSets = [];
@@ -500,8 +501,8 @@ test("uses truthful, varied project-card and priority-image presentations across
 
   assert.equal(imageSequences.size, 11, "each city should have a distinct project-card image sequence");
   const styles = await readFile(path.join(root, "app", "globals.css"), "utf8");
-  assert.match(styles, /\.section \{ padding: clamp\(68px, 7vw, 104px\) 0; \}/);
-  assert.match(styles, /@media \(max-width: 760px\) \{[\s\S]*?\.section \{ padding: 58px 0; \}/);
+  assert.match(styles, /\.section \{ padding: clamp\(52px, 5vw, 76px\) 0; \}/);
+  assert.match(styles, /@media \(max-width: 760px\) \{[\s\S]*?\.section \{ padding: 46px 0; \}/);
   assert.match(styles, /\.page-hero \.service-area-image-credit/);
 });
 

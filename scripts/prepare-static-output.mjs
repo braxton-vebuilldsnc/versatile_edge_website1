@@ -191,9 +191,23 @@ for (const file of requiredFiles) {
 }
 
 // Source photographs are preserved in public/ for local archival work but are
-// not deployment assets. All site references use the optimized WebP versions.
+// not deployment assets. Keep an original only when rendered HTML directly
+// references it; otherwise a cleanup here could leave a deployed page with a
+// broken image despite a successful build.
+const directlyReferencedProjectAssets = new Set();
+for (const file of exportedHtmlFiles) {
+  const html = await readFile(file, "utf8");
+  for (const match of html.matchAll(/(?:src|poster)="(\/images\/projects\/[^"?]+)(?:\?[^\"]*)?"/g)) {
+    directlyReferencedProjectAssets.add(path.posix.basename(match[1]));
+  }
+}
+
 for (const entry of await readdir(projectImages, { withFileTypes: true })) {
-  if (entry.isFile() && path.extname(entry.name).toLowerCase() !== ".webp") {
+  if (
+    entry.isFile()
+    && path.extname(entry.name).toLowerCase() !== ".webp"
+    && !directlyReferencedProjectAssets.has(entry.name)
+  ) {
     await rm(path.join(projectImages, entry.name));
   }
 }

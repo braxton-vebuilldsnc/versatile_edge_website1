@@ -14,7 +14,7 @@ export function OwnerIntroduction({ showAboutLink = false }: OwnerIntroductionPr
             playsInline
             preload="metadata"
             poster="/videos/don-owner-introduction-poster.webp"
-            aria-label="Video introduction from Don, owner of Versatile Edge"
+            aria-label="Video introduction from Don Rice, owner of Versatile Edge"
           >
             <source src="/videos/don-owner-introduction.m4v" type="video/mp4" />
             Your browser does not support embedded video.
@@ -24,10 +24,10 @@ export function OwnerIntroduction({ showAboutLink = false }: OwnerIntroductionPr
         <div className="owner-introduction-copy">
           <span className="eyebrow">Meet the owner</span>
           <h2>A personal commitment behind every project.</h2>
-          <p className="lead">Don brings more than 20 years of construction experience—and direct accountability—to every Versatile Edge project.</p>
+          <p className="lead">Don Rice brings more than 20 years of construction experience—and direct accountability—to every Versatile Edge project.</p>
           <p>Hear how he approaches residential remodeling, homeowner communication, and the responsibility of working inside someone’s home.</p>
           <dl className="owner-details">
-            <div><dt>Don</dt><dd>Owner, Versatile Edge LLC</dd></div>
+            <div><dt>Don Rice</dt><dd>Owner, Versatile Edge LLC</dd></div>
             <div><dt>NC License</dt><dd>General Contractor #107393</dd></div>
           </dl>
           {showAboutLink && <a href="/about" className="text-link">More about Versatile Edge <ArrowRight size={18} /></a>}

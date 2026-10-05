@@ -8,7 +8,7 @@ import { JsonLd } from "@/components/json-ld";
 import { ResponsiveImage } from "@/components/responsive-image";
 import { serviceCatalogSchema } from "@/lib/structured-data";
 
-const homepageDescription = "Versatile Edge provides quality home remodeling in Raleigh, NC, including kitchens, bathrooms, additions, screened porches, decks, windows, and whole-home renovations.";
+const homepageDescription = "Versatile Edge is a locally owned, independent Raleigh home remodeling company offering kitchens, bathrooms, additions, screened porches, decks, windows, and whole-home renovations.";
 
 export const metadata: Metadata = {
   title: { absolute: "Home Remodeling Raleigh NC | Versatile Edge LLC" },
@@ -45,7 +45,7 @@ export default function Home() {
         <div className="hero-proof"><div><strong>20+</strong><span>Years of construction experience</span></div><div><strong>#107393</strong><span>NC General Contractor license</span></div><div><strong>Local</strong><span>Wake County permitting expertise</span></div></div>
       </section>
 
-      <section className="intro-band section"><div className="site-container split-intro"><div><span className="eyebrow">A better-built experience</span><h2>Raleigh Home Remodeling, Built Around the Way You Live.</h2></div><div><p className="lead">Versatile Edge is a licensed residential general contractor helping Raleigh and Wake County homeowners transform outdated, undersized, and underperforming spaces through thoughtful renovations and quality construction.</p><p>We bring planning, communication, and construction together—so you understand what is happening, why it matters, and what comes next.</p><a href="/about" className="text-link">Meet Versatile Edge <ArrowRight size={18} /></a></div></div></section>
+      <section className="intro-band section"><div className="site-container split-intro"><div><span className="eyebrow">A better-built experience</span><h2>Raleigh Home Remodeling, Built Around the Way You Live.</h2></div><div><p className="lead">Versatile Edge is a <strong>locally owned, independently operated</strong> residential general contractor helping Raleigh and Wake County homeowners transform outdated, undersized, and underperforming spaces through thoughtful renovations and quality construction.</p><p>We are not a franchise. We bring planning, communication, and construction together—so you understand what is happening, why it matters, and what comes next.</p><a href="/about" className="text-link">Meet Versatile Edge <ArrowRight size={18} /></a></div></div></section>
 
       <section className="section realistic-budget"><div className="site-container realistic-budget-grid"><div><span className="eyebrow light">A clearer investment from the start</span><h2>We treat a renovation as an upgrade to your home.</h2></div><div><p className="lead">A proposal can look less expensive when it is built around builder-grade fixtures, tile, cabinets, or other low allowances. But when those placeholders do not reflect what you actually want in your home, the cost rises as selections are made.</p><p>Versatile Edge builds allowances around realistic upgrade-level selections and the scope needed to install them well. That gives you a clearer expectation of the final investment from the beginning—rather than a low initial number that grows once you choose the products you want.</p><p>In the end, a low allowance does not make the finished renovation less expensive. It can simply delay the honest conversation about cost.</p></div></div></section>
 

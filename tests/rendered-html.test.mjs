@@ -330,12 +330,13 @@ test("exports the approved content and global back-to-top control", async () => 
 test("exports the approved homepage SEO metadata and contractor schema", async () => {
   const home = await readFile(htmlPath("/"), "utf8");
   assert.match(home, /<title>Home Remodeling Raleigh NC \| Versatile Edge LLC<\/title>/);
-  assert.match(home, /<meta name="description" content="Versatile Edge provides quality home remodeling in Raleigh, NC, including kitchens, bathrooms, additions, screened porches, decks, windows, and whole-home renovations\."/);
+  assert.match(home, /<meta name="description" content="Versatile Edge is a locally owned, independent Raleigh home remodeling company offering kitchens, bathrooms, additions, screened porches, decks, windows, and whole-home renovations\."/);
   // Vinext normalizes the root URL by omitting its trailing slash in rendered HTML.
   assert.match(home, /<link rel="canonical" href="https:\/\/versatileedgellc\.com\/?"/);
   assert.match(home, /<meta property="og:title" content="Home Remodeling Raleigh NC \| Versatile Edge LLC"/);
   assert.match(home, /Raleigh Home Remodeling, Built Around the Way You Live\./);
-  assert.match(home, /licensed residential general contractor helping Raleigh and Wake County homeowners/);
+  assert.match(home, /<strong>locally owned, independently operated<\/strong> residential general contractor helping Raleigh and Wake County homeowners/);
+  assert.match(home, /We are not a franchise\./);
   assert.match(home, /href="\/projects\/hutter-whole-house-remodel-addition"/);
   assert.match(home, /Built for Raleigh and Wake County Homes\./);
   assert.match(home, /href="\/service-areas\/raleigh-nc"/);
@@ -416,7 +417,7 @@ test("exports substantive, distinct copy and licensed local imagery for the four
   const sourceInventory = await readFile(path.join(root, "deployment", "IMAGE-SOURCES.md"), "utf8");
   const substantiveParagraphSets = [];
   const approvedSharedOwnerCopy = new Set([
-    "Don brings more than 20 years of construction experience—and direct accountability—to every Versatile Edge project.",
+    "Don Rice brings more than 20 years of construction experience—and direct accountability—to every Versatile Edge project.",
     "Hear how he approaches residential remodeling, homeowner communication, and the responsibility of working inside someone’s home.",
   ]);
 

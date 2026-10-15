@@ -287,8 +287,9 @@ function smtp_command($socket, string $command, array $expected): void
 
 function build_email(array $config, array $fields, array $attachments): array
 {
-    $address = sprintf('%s, %s, %s %s', $fields['street'], $fields['city'], strtoupper($fields['state']), $fields['zip']);
-    $mapLink = 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode($address);
+    $hasAddress = $fields['street'] !== '' && $fields['city'] !== '' && $fields['state'] !== '' && $fields['zip'] !== '';
+    $address = $hasAddress ? sprintf('%s, %s, %s %s', $fields['street'], $fields['city'], strtoupper($fields['state']), $fields['zip']) : 'Not provided yet';
+    $mapLink = $hasAddress ? 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode($address) : null;
     $rows = [
         'Project' => $fields['projectType'],
         'Timeline' => $fields['timeline'],
@@ -309,10 +310,10 @@ function build_email(array $config, array $fields, array $attachments): array
     $htmlBody = '<div style="font-family:Arial,sans-serif;color:#15202e;max-width:680px">'
         . '<div style="background:#0b213d;color:white;padding:26px"><h1 style="margin:0;font-size:24px">New Versatile Edge project inquiry</h1></div>'
         . '<div style="padding:24px;border:1px solid #d5dadd">' . $htmlRows
-        . '<p><a style="display:inline-block;background:#f1b544;color:#0b213d;padding:12px 16px;font-weight:bold;text-decoration:none" href="' . html($mapLink) . '">Review property on Google Maps</a></p>'
+        . ($mapLink ? '<p><a style="display:inline-block;background:#f1b544;color:#0b213d;padding:12px 16px;font-weight:bold;text-decoration:none" href="' . html($mapLink) . '">Review property on Google Maps</a></p>' : '')
         . (count($attachments) > 0 ? '<p><strong>Attachments:</strong> ' . count($attachments) . ' included with this email.</p>' : '')
         . '</div></div>';
-    $plainBody = "New Versatile Edge project inquiry\n\n" . $plainRows . "Review property: {$mapLink}\n";
+    $plainBody = "New Versatile Edge project inquiry\n\n" . $plainRows . ($mapLink ? "Review property: {$mapLink}\n" : '');
 
     $mixed = 'mixed_' . bin2hex(random_bytes(16));
     $alternative = 'alt_' . bin2hex(random_bytes(16));
@@ -519,22 +520,26 @@ if (field('companyWebsite', 200) !== '') {
     respond(200, 'accepted', 'Your project details were sent successfully.');
 }
 
+$quickLead = field('formVariant', 40) === 'landing';
 $fields = [
     'projectType' => field('projectType', 100),
-    'timeline' => field('timeline', 100),
-    'budget' => field('budget', 100),
+    'timeline' => $quickLead ? 'Planning ahead' : field('timeline', 100),
+    'budget' => $quickLead ? 'Not sure yet' : field('budget', 100),
     'description' => field('description', 5000),
-    'referral' => field('referral', 100),
-    'street' => field('street', 200),
-    'city' => field('city', 100),
-    'state' => strtoupper(field('state', 2)),
-    'zip' => field('zip', 10),
+    'referral' => $quickLead ? 'Web search' : field('referral', 100),
+    'street' => $quickLead ? '' : field('street', 200),
+    'city' => $quickLead ? '' : field('city', 100),
+    'state' => $quickLead ? '' : strtoupper(field('state', 2)),
+    'zip' => $quickLead ? '' : field('zip', 10),
     'firstName' => field('firstName', 100),
     'lastName' => field('lastName', 100),
     'email' => field('email', 254),
     'phone' => field('phone', 40),
 ];
-foreach ($fields as $value) {
+foreach ($fields as $key => $value) {
+    if ($quickLead && in_array($key, ['description', 'street', 'city', 'state', 'zip'], true)) {
+        continue;
+    }
     if ($value === '') {
         respond(400, 'required_fields', 'Please complete every required field.');
     }
@@ -542,16 +547,16 @@ foreach ($fields as $value) {
 if (!filter_var($fields['email'], FILTER_VALIDATE_EMAIL)) {
     respond(400, 'invalid_email', 'Please enter a valid email address.');
 }
-if (!preg_match('/^[A-Z]{2}$/', $fields['state'])) {
+if (!$quickLead && !preg_match('/^[A-Z]{2}$/', $fields['state'])) {
     respond(400, 'invalid_state', 'Please enter a two-letter state abbreviation.');
 }
-if (!preg_match('/^\d{5}(?:-\d{4})?$/', $fields['zip'])) {
+if (!$quickLead && !preg_match('/^\d{5}(?:-\d{4})?$/', $fields['zip'])) {
     respond(400, 'invalid_zip', 'Please enter a valid ZIP code.');
 }
 if (strlen(preg_replace('/\D+/', '', $fields['phone'])) < 10) {
     respond(400, 'invalid_phone', 'Please enter a valid phone number.');
 }
-if (strlen($fields['description']) < 20) {
+if (!$quickLead && strlen($fields['description']) < 20) {
     respond(400, 'description_too_short', 'Please add a little more detail about your project.');
 }
 $allowedProjectTypes = [

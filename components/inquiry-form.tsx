@@ -19,7 +19,7 @@ declare global {
 const budgets = ["Under $25,000", "$25,000 – $50,000", "$50,000 – $75,000", "$75,000 – $100,000", "$100,000 – $150,000", "$150,000 – $200,000", "$200,000 – $300,000", "Over $300,000", "Not sure yet"];
 const referrals = ["Neighbor or friend", "Yard sign", "Web search", "Social media", "Print advertisement", "Repeat client", "Other"];
 
-export function InquiryForm() {
+export function InquiryForm({ compact = false }: { compact?: boolean }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [message, setMessage] = useState("");
   const turnstileContainer = useRef<HTMLDivElement>(null);
@@ -80,6 +80,18 @@ export function InquiryForm() {
   }
   return (
     <form className="inquiry-form" onSubmit={submit} encType="multipart/form-data">
+      {compact && <input type="hidden" name="formVariant" value="landing" />}
+      {compact ? <>
+        <div className="form-section"><span className="form-step">01</span><div><h2>Start with the basics</h2><p>Tell us what you are considering, and we’ll follow up to talk through the details.</p></div></div>
+        <div className="form-grid">
+          <label className="full">What are you interested in? *<select name="projectType" required defaultValue=""><option value="" disabled>Select a project type</option>{services.map((s) => <option key={s.slug}>{s.title}</option>)}</select></label>
+          <label>First name *<input name="firstName" autoComplete="given-name" required /></label>
+          <label>Last name *<input name="lastName" autoComplete="family-name" required /></label>
+          <label>Email *<input name="email" type="email" autoComplete="email" required /></label>
+          <label>Phone number *<input name="phone" type="tel" autoComplete="tel" required /></label>
+          <label className="full">A little about your project <textarea name="description" rows={4} placeholder="For example: a new screened porch, a kitchen that needs better flow, or a bathroom remodel." /></label>
+        </div>
+      </> : <>
       <div className="form-section"><span className="form-step">01</span><div><h2>About your project</h2><p>Give us enough context to prepare for a useful first conversation.</p></div></div>
       <div className="form-grid">
         <label>Project type *<select name="projectType" required defaultValue=""><option value="" disabled>Select a service</option>{services.map((s) => <option key={s.slug}>{s.title}</option>)}</select></label>
@@ -103,6 +115,7 @@ export function InquiryForm() {
         <label>Phone number *<input name="phone" type="tel" autoComplete="tel" required /></label>
         <label className="full upload-label"><span><Paperclip size={18} /> Project photos or plans</span><input name="files" type="file" multiple accept="image/jpeg,image/png,image/webp,image/heic,application/pdf" /><small>Up to 5 images or PDFs, 10 MB each.</small></label>
       </div>
+      </>}
       <input name="companyWebsite" className="honeypot" tabIndex={-1} autoComplete="off" aria-hidden="true" />
       {turnstileSiteKey && <div className="cf-turnstile" ref={turnstileContainer} />}
       <label className="consent"><input name="consent" type="checkbox" required /> <span>I agree that Versatile Edge may use this information to evaluate my property and respond to my inquiry. *</span></label>

@@ -42,6 +42,7 @@ const publicRoutes = [
   "/service-areas/garner-nc",
   "/process",
   "/contact",
+  "/decks-porches-sunrooms",
   "/privacy",
 ];
 

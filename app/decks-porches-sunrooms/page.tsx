@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { ArrowRight, Phone, Star } from "lucide-react";
 import { InquiryForm } from "@/components/inquiry-form";
 import { OutdoorHeroCarousel, OutdoorHeroHeadline } from "@/components/outdoor-hero-carousel";
@@ -48,6 +49,9 @@ const options = [
 export default function DecksPorchesSunroomsPage() {
   return (
     <>
+      <Script id="google-ads-decks-porches-sunrooms-tag" strategy="afterInteractive">
+        {`gtag('config', 'AW-18513529553');`}
+      </Script>
       <section className="outdoor-hero">
         <OutdoorHeroCarousel />
         <div className="outdoor-hero-overlay" />

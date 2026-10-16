@@ -193,6 +193,36 @@ h3 { line-height: 1.25; }
 .realistic-budget h2 { color: white; }
 .realistic-budget p { color: rgba(255,255,255,.72); }
 .realistic-budget .lead { color: white; }
+.font-review { min-height: 100vh; background: var(--paper); color: var(--ink); }
+.font-review-label { padding: 14px 0; color: white; background: var(--navy); font-family: var(--review-sans); }
+.font-review-label .site-container { display: flex; justify-content: space-between; gap: 20px; font-size: .78rem; letter-spacing: .06em; }
+.font-review-label strong { color: var(--accent); font-weight: 600; }
+.font-review-hero { padding: clamp(82px, 11vw, 150px) 0; background: var(--soft); }
+.font-review-hero .site-container { max-width: 1120px; }
+.font-review-eyebrow { display: inline-block; margin-bottom: 16px; color: var(--navy); font-family: var(--review-sans); font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.font-review h1, .font-review h2 { font-family: var(--review-display); font-weight: var(--review-display-weight); letter-spacing: var(--review-display-spacing); line-height: 1.04; }
+.font-review h1 { max-width: 1020px; margin: 0 0 26px; font-size: clamp(3.4rem, 7vw, 7rem); }
+.font-review h2 { margin: 0; font-size: clamp(2.5rem, 4.5vw, 4.7rem); }
+.font-review p, .font-review a { font-family: var(--review-sans); }
+.font-review-hero p { max-width: 680px; margin-bottom: 24px; font-size: 1.2rem; line-height: 1.55; }
+.font-review a { display: inline-flex; align-items: center; gap: 9px; color: var(--navy); border-bottom: 2px solid var(--accent); padding-bottom: 5px; font-size: .76rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.font-review-intro, .font-review-details { padding: clamp(68px, 8vw, 116px) 0; }
+.font-review-intro .site-container, .font-review-details .site-container { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(42px, 8vw, 120px); }
+.font-review-intro p, .font-review-details p { color: var(--muted); font-size: 1rem; }
+.font-review-intro .font-review-lead { color: var(--ink); font-size: clamp(1.2rem, 1.8vw, 1.55rem); line-height: 1.48; }
+.font-review-details { color: white; background: #142536; }
+.font-review-details .font-review-eyebrow { color: var(--accent); }
+.font-review-details h2 { color: white; }
+.font-review-details p { color: rgba(255,255,255,.72); }
+.font-review-source { --review-sans: var(--review-source-sans); --review-display: var(--review-source-serif); --review-display-weight: 600; --review-display-spacing: -.025em; }
+.font-review-libre { --review-sans: var(--review-work-sans); --review-display: var(--review-libre-baskerville); --review-display-weight: 400; --review-display-spacing: -.018em; }
+.font-review-instrument { --review-sans: var(--review-instrument-sans); --review-display: var(--review-instrument-serif); --review-display-weight: 400; --review-display-spacing: -.028em; }
+.font-review-source-dm { --review-sans: var(--review-dm-sans); --review-display: var(--review-source-serif); --review-display-weight: 600; --review-display-spacing: -.025em; }
+.font-review-source-work { --review-sans: var(--review-work-sans); --review-display: var(--review-source-serif); --review-display-weight: 600; --review-display-spacing: -.025em; }
+.font-review-source-instrument { --review-sans: var(--review-instrument-sans); --review-display: var(--review-source-serif); --review-display-weight: 600; --review-display-spacing: -.025em; }
+.font-review-playfair-dm { --review-sans: var(--review-dm-sans); --review-display: var(--review-playfair); --review-display-weight: 500; --review-display-spacing: -.035em; }
+.font-review-playfair-work { --review-sans: var(--review-work-sans); --review-display: var(--review-playfair); --review-display-weight: 500; --review-display-spacing: -.035em; }
+.font-review-playfair-instrument { --review-sans: var(--review-instrument-sans); --review-display: var(--review-playfair); --review-display-weight: 500; --review-display-spacing: -.035em; }
 
 .owner-introduction { background: #e8ecef; }
 .owner-introduction-grid { display: grid; grid-template-columns: minmax(300px, .78fr) minmax(0, 1.22fr); align-items: center; gap: clamp(44px, 7vw, 100px); }
@@ -258,7 +288,7 @@ h3 { line-height: 1.25; }
 .outdoor-hero-content { position: relative; z-index: 1; max-width: 930px; padding-block: 70px; }
 .outdoor-hero-promo { display: inline-flex; align-items: center; gap: 14px; margin-bottom: 22px; padding: 15px 20px; color: white; background: #e56445; border: 2px solid var(--accent); box-shadow: 8px 8px 0 var(--accent); font-size: .92rem; font-weight: 900; letter-spacing: .11em; line-height: 1.2; text-transform: uppercase; transform: rotate(-1.5deg); }
 .outdoor-hero-promo b { padding-left: 12px; border-left: 1px solid rgba(255,255,255,.58); font-weight: 900; }
-.outdoor-ad-masthead { display: flex; justify-content: space-between; max-width: 720px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,.45); color: rgba(255,255,255,.82); font-size: .67rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.outdoor-ad-masthead { display: flex; justify-content: space-between; width: min(720px, calc(100% - 245px)); padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,.45); color: rgba(255,255,255,.82); font-size: .67rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
 .outdoor-kicker { display: block; margin-top: 50px; color: var(--accent); font-size: .72rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
 .outdoor-hero h1 { max-width: 920px; margin: 8px 0 22px; color: white; font-size: clamp(3.2rem, 5.65vw, 6.1rem); line-height: .9; letter-spacing: -.075em; text-shadow: 0 4px 30px rgba(0,0,0,.16); }
 .outdoor-hero h1 em { color: var(--accent); font-style: italic; }
@@ -619,6 +649,8 @@ h3 { line-height: 1.25; }
   .hero-proof span { font-size: .6rem; }
   .split-intro, .editorial-grid, .section-heading, .feature-project-grid, .trust-grid, .area-grid, .realistic-budget-grid, .image-text, .image-text.reverse, .service-detail, .service-planning, .faq-section, .renovation-layout, .kitchen-design-gallery, .bathroom-design-gallery, .kitchen-landing-intro-inner, .kitchen-final-cta-inner { grid-template-columns: 1fr; gap: 28px; }
   .owner-introduction-grid { grid-template-columns: 1fr; gap: 42px; }
+  .font-review-label .site-container, .font-review-intro .site-container, .font-review-details .site-container { grid-template-columns: 1fr; gap: 24px; }
+  .font-review-label .site-container { display: grid; }
   .owner-video-wrap { width: min(88%, 420px); }
   .owner-video-wrap::before { inset: 14px -14px -14px 14px; }
   .split-intro > div:last-child, .editorial-grid > div:last-child { padding-top: 0; }

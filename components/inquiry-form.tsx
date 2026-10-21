@@ -68,7 +68,7 @@ export function InquiryForm({ compact = false }: { compact?: boolean }) {
       const data = await response.json() as { message?: string };
       if (!response.ok) throw new Error(data.message || "We could not send your inquiry.");
       window.gtag?.("event", "conversion", {
-        send_to: "AW-11226844396/uwnjCLaUtIEdEOyZsOkp",
+        send_to: "AW-18513529553/jd5fCKDg2aQdENGV-PtE",
         value: 1.0,
         currency: "USD",
       });

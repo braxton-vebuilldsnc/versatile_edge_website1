@@ -68,6 +68,10 @@ export default function DecksPorchesSunroomsPage() {
 
       <ScrollReveal><section className="outdoor-ad-options" id="options">
         <div className="site-container outdoor-ad-options-heading"><span>Choose your<br />outside way!</span><p>Start with the space that fits how you want to live. These Raleigh starting prices help begin the conversation; your final proposal follows a review of your home and property.</p></div>
+        <div className="site-container outdoor-options-offer">
+          <div><span>Limited Raleigh offer</span><strong>Save up to <em>$1,500</em> on your project<sup>*</sup></strong><p>Discount is determined by the total cost of the project and is limited to the first 10 projects that go under contract before December 1.</p></div>
+          <a href="#consultation" className={buttonVariants({ size: "lg" })}>Request a consultation <ArrowRight size={18} /></a>
+        </div>
         <div className="site-container outdoor-ad-option-grid">
           {options.map((option, index) => <article className="outdoor-option" key={option.name}>
             <button className="outdoor-option-image" type="button" aria-label={`Magnify ${option.name} image`}>
@@ -98,9 +102,7 @@ export default function DecksPorchesSunroomsPage() {
         <div className="site-container outdoor-why-now-grid">
           <div className="outdoor-why-now-sticker"><span>Build now.</span><strong>Enjoy<br />more.</strong><small>Raleigh outside living</small></div>
           <div className="outdoor-why-now-copy"><span className="eyebrow">A better season starts with a plan</span><h2>Why build <i>now?</i></h2><p>Start your project conversation now and make more room for the seasons ahead. You can plan your new space without putting life—or holiday entertaining—on hold.</p><div className="outdoor-why-now-reasons"><span>Enjoy it in the weather made for being outside</span><span>Minimal disruption to everyday living</span><span>Keep holiday entertaining comfortably intact</span></div></div>
-          <div className="outdoor-offer"><span>Limited Raleigh offer</span><strong>Up to<br /><em>$1,500</em><br />off<sup>*</sup></strong><p>Start your project conversation now and make more room for the seasons ahead.</p><a href="#consultation" className={buttonVariants({ size: "lg" })}>Claim your consultation <ArrowRight size={18} /></a></div>
         </div>
-        <div className="site-container outdoor-offer-terms"><span>* Offer terms</span><p>Discount is determined by the total cost of the project. The discount is limited to the first 10 projects that go under contract before December 1. It cannot be combined with other offers, has no cash value, and may be modified or withdrawn at any time. Contact Versatile Edge for complete details.</p></div>
       </section></ScrollReveal>
 
       <ScrollReveal><section className="outdoor-ad-intro">

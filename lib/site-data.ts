@@ -295,8 +295,13 @@ export const namedProjects = [
     rooms: [
       {
         name: "Construction Progress",
-        description: "Framing is underway for the new elevated porch and gable roof. These construction-stage views show the supporting posts, floor framing, roof framing, gable sheathing, and the connection between the new structure and the existing townhouse. Additional photographs will be added as roofing, electrical work, insulation, ceiling finishes, and final details are completed.",
-        images: ["mazingo-covered-porch-roof-framing-detail.webp"],
+        description: "Construction is progressing on the new elevated porch and gable roof. These updated exterior views show the porch structure, stairs, railings, lattice skirting, gable, and connection to the existing townhouse. Additional photographs will be added as the remaining finish details are completed.",
+        images: [
+          "mazingo-covered-porch-roof-framing-detail.webp",
+          "mazingo-covered-porch-exterior-front.webp",
+          "mazingo-covered-porch-exterior-wide.webp",
+          "mazingo-covered-porch-exterior-side.webp",
+        ],
       },
     ],
   },
@@ -1770,6 +1775,9 @@ export const projectImageAltText: Readonly<Record<string, string>> = {
   "mid-century-bath-cary-shelving.webp": "Open wood shelves with towels and storage beside the walnut vanity in a Cary bathroom renovation",
   "mazingo-covered-porch-framing-overall.webp": "Wide construction view of the in-progress Mazingo elevated covered porch framing and gable roof attached to a Raleigh townhouse",
   "mazingo-covered-porch-roof-framing-detail.webp": "Closer construction view of the Mazingo covered porch posts, floor framing, roof rafters, gable sheathing, and townhouse connection",
+  "mazingo-covered-porch-exterior-front.webp": "Front exterior view of the Mazingo covered porch addition with new wood stairs and railings",
+  "mazingo-covered-porch-exterior-wide.webp": "Wide exterior view of the Mazingo covered porch addition, new stairs, railing, gable, and roof connection",
+  "mazingo-covered-porch-exterior-side.webp": "Side exterior view of the Mazingo covered porch addition with gable, railings, and lattice skirting",
   "janet-roof-framing-interior.webp": "Interior view of exposed roof rafters, wall framing, and subfloor in the Janet home addition",
   "janet-interior-wall-framing-progress.webp": "Interior wall framing with window openings and exposed electrical boxes in the Janet home addition",
   "janet-exterior-door-window-installation.webp": "Angled view of newly installed dark green double doors and window within exposed exterior wall sheathing on the Janet addition",

@@ -30,11 +30,11 @@ const options = [
     alt: "Family enjoying dinner on an open composite deck at a Raleigh home in fall",
   },
   {
-    name: "10 × 10 screened porch with shed roof",
+    name: "10 × 10 screened porch",
     startingPrice: "$35,000",
     note: "Ideal for shade, breezes, and bug-free evenings. Cost can vary with height, roof integration, interior finishing, and site conditions. Engineering may be required.",
     image: "/images/landing-pages/raleigh-screened-porch-spring.webp",
-    alt: "Finished Raleigh screened porch with a shed roof during spring",
+    alt: "Finished Raleigh screened porch during spring",
   },
   {
     name: "10 × 10 A-frame sunroom addition",
@@ -74,11 +74,14 @@ export default function DecksPorchesSunroomsPage() {
         </div>
         <div className="site-container outdoor-ad-option-grid">
           {options.map((option, index) => <article className="outdoor-option" key={option.name}>
-            <button className="outdoor-option-image" type="button" aria-label={`Magnify ${option.name} image`}>
-              <ResponsiveImage src={option.image} alt={option.alt} sizes="(max-width: 760px) calc(100vw - 30px), 33vw" />
-              <span>Tap to zoom</span>
-            </button>
-            <div><span className="outdoor-option-number">0{index + 1} / Raleigh living</span><h3>{option.name}</h3><div className="outdoor-price"><small>Typically starting at</small><strong>{option.startingPrice}</strong></div><p>{option.note}</p><a href="#consultation" className="text-link">Plan this space <ArrowRight size={17} /></a></div>
+            <div className="outdoor-option-media">
+              <button className="outdoor-option-image" type="button" aria-label={`Magnify ${option.name} image`}>
+                <ResponsiveImage src={option.image} alt={option.alt} sizes="(max-width: 760px) calc(100vw - 30px), 33vw" />
+                <span>Tap to zoom</span>
+              </button>
+              {index === 1 ? <a className="outdoor-project-spotlight" href="/projects/mazingo-covered-porch-addition"><span>Visit one of our<br />current projects</span><ArrowRight size={18} aria-hidden="true" /></a> : null}
+            </div>
+            <div className="outdoor-option-content"><span className="outdoor-option-number">0{index + 1} / Raleigh living</span><h3>{option.name}</h3><div className="outdoor-price"><small>Typically starting at</small><strong>{option.startingPrice}</strong></div><p>{option.note}</p><a href="#consultation" className="text-link">Plan this space <ArrowRight size={17} /></a></div>
           </article>)}
         </div>
       </section></ScrollReveal>

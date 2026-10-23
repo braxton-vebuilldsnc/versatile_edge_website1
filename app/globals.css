@@ -325,7 +325,7 @@ h3 { line-height: 1.25; }
 .outdoor-offer-terms span { color: var(--accent); font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
 .outdoor-offer-terms p { margin: 0; }
 .outdoor-craftsmanship { padding: clamp(42px, 5vw, 64px) 0; overflow: hidden; background: #edf1e9; }
-.outdoor-craftsmanship-grid { display: grid; grid-template-columns: .58fr 1.26fr .72fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
+.outdoor-craftsmanship-grid { display: grid; grid-template-columns: .58fr 1.42fr; gap: clamp(24px, 5vw, 72px); align-items: center; }
 .outdoor-craftsmanship-mark { color: var(--navy); font-family: var(--font-display), serif; line-height: .82; letter-spacing: -.065em; }
 .outdoor-craftsmanship-mark > span { display: block; margin-bottom: 6px; font-size: clamp(1.45rem, 2.25vw, 2.3rem); }
 .outdoor-craftsmanship-mark strong { display: block; font-size: clamp(3rem, 4.2vw, 4.6rem); font-weight: 500; }
@@ -336,13 +336,13 @@ h3 { line-height: 1.25; }
 .outdoor-craftsmanship-list { display: flex; flex-wrap: wrap; gap: 7px 18px; margin-top: 16px; padding-top: 12px; border-top: 2px solid var(--navy); }
 .outdoor-craftsmanship-list span { color: var(--navy); font-size: .66rem; font-weight: 900; letter-spacing: .02em; }
 .outdoor-craftsmanship-list span::before { content: "✦"; margin-right: 6px; color: #e56445; }
-.outdoor-google-ratings { display: flex; flex-direction: column; min-height: 0; padding: 19px; color: white; background: var(--navy); box-shadow: 9px 9px 0 var(--accent); transition: transform .25s ease, box-shadow .25s ease; }
-.outdoor-google-ratings:hover { color: white; box-shadow: 13px 13px 0 #e56445; transform: translate(-3px, -3px); }
+.outdoor-consultation-review { display: flex; flex-direction: column; margin-top: 32px; padding-top: 18px; color: white; border-top: 1px solid rgba(255,255,255,.3); transition: color .2s ease; }
+.outdoor-consultation-review:hover { color: white; }
 .outdoor-google-stars { display: flex; gap: 3px; color: var(--accent); }
 .outdoor-google-stars svg { width: 15px; height: 15px; }
 .outdoor-google-score { margin-top: 8px; color: white; font-size: .58rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
-.outdoor-google-ratings q { display: block; margin: 10px 0; color: rgba(255,255,255,.9); font-family: var(--font-display), serif; font-size: 1.02rem; font-style: italic; letter-spacing: -.03em; line-height: 1.05; }
-.outdoor-google-ratings small { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: rgba(255,255,255,.78); font-size: .54rem; font-weight: 800; letter-spacing: .06em; line-height: 1.25; text-transform: uppercase; }
+.outdoor-consultation-review q { display: block; max-width: 360px; margin: 10px 0; color: rgba(255,255,255,.9); font-family: var(--font-display), serif; font-size: 1.02rem; font-style: italic; letter-spacing: -.03em; line-height: 1.05; }
+.outdoor-consultation-review small { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,.78); font-size: .54rem; font-weight: 800; letter-spacing: .06em; line-height: 1.25; text-transform: uppercase; }
 .outdoor-ad-options { padding: clamp(72px, 9vw, 130px) 0 54px; background: #fff8e9; }
 .outdoor-ad-options-heading { display: flex; justify-content: space-between; gap: 34px; align-items: end; padding-bottom: 27px; border-bottom: 4px solid var(--navy); }
 .outdoor-ad-options-heading > span { color: var(--navy); font-family: var(--font-display), serif; font-size: clamp(2.2rem, 4vw, 4.25rem); line-height: .9; letter-spacing: -.055em; }
@@ -602,7 +602,6 @@ h3 { line-height: 1.25; }
   .outdoor-why-now-grid { grid-template-columns: .62fr 1.15fr; }
   .outdoor-offer { grid-column: 1 / -1; justify-self: end; width: min(100%, 410px); }
   .outdoor-craftsmanship-grid { grid-template-columns: .7fr 1.15fr; }
-  .outdoor-google-ratings { grid-column: 1 / -1; justify-self: end; width: min(100%, 390px); }
 }
 
 @media (max-width: 760px) {
@@ -670,7 +669,7 @@ h3 { line-height: 1.25; }
   .outdoor-craftsmanship-copy h2 { font-size: clamp(2.45rem, 11vw, 3.45rem); }
   .outdoor-craftsmanship-list { display: grid; gap: 0; }
   .outdoor-craftsmanship-list span { padding: 8px 0; border-bottom: 1px solid #b8c0bb; }
-  .outdoor-google-ratings { justify-self: stretch; width: auto; min-height: 0; margin: 6px 9px 0 0; }
+  .outdoor-consultation-review { margin-top: 24px; }
   .outdoor-ad-options-heading { display: grid; align-items: start; }
   .outdoor-ad-options-heading p { max-width: 520px; }
   .outdoor-options-offer { display: grid; align-items: start; gap: 18px; padding: 20px; }

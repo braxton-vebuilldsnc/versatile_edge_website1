@@ -122,7 +122,7 @@ export default function DecksPorchesSunroomsPage() {
           <div><span className="eyebrow light">Request your outside-living consultation</span><h2>Tell us what you want to enjoy at home.</h2><p>Share your Raleigh-area property, your outside-living goals, and a realistic investment range. We’ll review the details before following up.</p><a href={phoneHref} className="outdoor-form-phone"><Phone size={18} /> Call {phoneDisplay}</a></div>
           <div className="form-panel"><InquiryForm compact /></div>
         </div>
-      </ScrollReveal>
+      </section></ScrollReveal>
     </>
   );
 }

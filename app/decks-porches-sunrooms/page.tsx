@@ -23,22 +23,22 @@ export const metadata: Metadata = {
 
 const options = [
   {
-    name: "10 × 15 composite deck",
-    range: "$18,000–$35,000",
+    name: "10 × 10 composite deck",
+    startingPrice: "$15,000",
     note: "A practical starting point for a well-built deck with quality composite materials, stairs, railings, and a thoughtful connection to the home. Cost can vary with deck height, decking material, railing material, and site conditions.",
     image: "/images/landing-pages/raleigh-open-deck-family-fall-v2.webp",
     alt: "Family enjoying dinner on an open composite deck at a Raleigh home in fall",
   },
   {
-    name: "10 × 15 screened porch with shed roof",
-    range: "$40,000–$70,000",
+    name: "10 × 10 screened porch with shed roof",
+    startingPrice: "$35,000",
     note: "Ideal for shade, breezes, and bug-free evenings. Cost can vary with height, decking and railing materials, roof integration, interior finishing, and site conditions. Engineering may be required for covered porches.",
     image: "/images/landing-pages/raleigh-screened-porch-spring.webp",
     alt: "Finished Raleigh screened porch with a shed roof during spring",
   },
   {
-    name: "10 × 15 A-frame sunroom addition",
-    range: "$80,000–$135,000",
+    name: "10 × 10 A-frame sunroom addition",
+    startingPrice: "$70,000",
     note: "A conditioned, window-filled room that can add entertaining space year-round. Cost can vary with height, decking and railing materials, interior finishing, structure, glazing, HVAC, foundations, and roof connection. Engineering may be required for sunroom additions.",
     image: "/images/landing-pages/raleigh-a-frame-sunroom-fall.webp",
     alt: "A-frame sunroom addition connected to a Raleigh home in fall",
@@ -81,7 +81,7 @@ export default function DecksPorchesSunroomsPage() {
           <div className="outdoor-why-now-copy"><span className="eyebrow">A better season starts with a plan</span><h2>Why build <i>now?</i></h2><p>Starting your deck, porch, or sunroom project now puts your new space in reach for Raleigh’s most comfortable outside seasons. You can plan ahead without putting life—or holiday entertaining—on hold.</p><div className="outdoor-why-now-reasons"><span>Enjoy it in the weather made for being outside</span><span>Minimal disruption to everyday living</span><span>Keep holiday entertaining comfortably intact</span></div></div>
           <div className="outdoor-offer"><span>Limited Raleigh offer</span><strong>Up to<br /><em>$1,500</em><br />off<sup>*</sup></strong><p>Start your project conversation now and make more room for the seasons ahead.</p><a href="#consultation" className={buttonVariants({ size: "lg" })}>Claim your consultation <ArrowRight size={18} /></a></div>
         </div>
-        <div className="site-container outdoor-offer-terms"><span>* Offer terms</span><p>Available for qualifying deck, porch, and sunroom projects with a signed contract of $20,000 or more. Limited to the first five qualifying projects placed under contract. Offer amount is determined by final project scope, cannot be combined with other offers, has no cash value, and may be modified or withdrawn at any time. Contact Versatile Edge for complete details.</p></div>
+        <div className="site-container outdoor-offer-terms"><span>* Offer terms</span><p>Discount is determined by the total cost of the project. The discount is limited to the first 10 projects that go under contract before December 1. It cannot be combined with other offers, has no cash value, and may be modified or withdrawn at any time. Contact Versatile Edge for complete details.</p></div>
       </section></ScrollReveal>
 
       <ScrollReveal><section className="outdoor-craftsmanship">
@@ -93,14 +93,14 @@ export default function DecksPorchesSunroomsPage() {
       </section></ScrollReveal>
 
       <ScrollReveal><section className="outdoor-ad-options" id="options">
-        <div className="site-container outdoor-ad-options-heading"><span>Choose your<br />outside way!</span><p>Start with the space that fits how you want to live. These Raleigh planning ranges help begin the conversation; your final proposal follows a review of your home and property.</p></div>
+        <div className="site-container outdoor-ad-options-heading"><span>Choose your<br />outside way!</span><p>Start with the space that fits how you want to live. These Raleigh starting prices help begin the conversation; your final proposal follows a review of your home and property.</p></div>
         <div className="site-container outdoor-ad-option-grid">
           {options.map((option, index) => <article className="outdoor-option" key={option.name}>
             <button className="outdoor-option-image" type="button" aria-label={`Magnify ${option.name} image`}>
               <ResponsiveImage src={option.image} alt={option.alt} sizes="(max-width: 760px) calc(100vw - 30px), 33vw" />
               <span>Tap to zoom</span>
             </button>
-            <div><span className="outdoor-option-number">0{index + 1} / Raleigh living</span><h3>{option.name}</h3><div className="outdoor-price"><small>Planning range</small><strong>{option.range}</strong></div><p>{option.note}</p><a href="#consultation" className="text-link">Plan this space <ArrowRight size={17} /></a></div>
+            <div><span className="outdoor-option-number">0{index + 1} / Raleigh living</span><h3>{option.name}</h3><div className="outdoor-price"><small>Typically starting at</small><strong>{option.startingPrice}</strong></div><p>{option.note}</p><a href="#consultation" className="text-link">Plan this space <ArrowRight size={17} /></a></div>
           </article>)}
         </div>
       </section></ScrollReveal>
@@ -122,7 +122,7 @@ export default function DecksPorchesSunroomsPage() {
           <div><span className="eyebrow light">Request your outside-living consultation</span><h2>Tell us what you want to enjoy at home.</h2><p>Share your Raleigh-area property, your outside-living goals, and a realistic investment range. We’ll review the details before following up.</p><a href={phoneHref} className="outdoor-form-phone"><Phone size={18} /> Call {phoneDisplay}</a></div>
           <div className="form-panel"><InquiryForm compact /></div>
         </div>
-      </section></ScrollReveal>
+      </ScrollReveal>
     </>
   );
 }

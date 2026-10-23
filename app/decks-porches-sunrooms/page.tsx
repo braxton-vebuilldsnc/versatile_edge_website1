@@ -104,25 +104,6 @@ export default function DecksPorchesSunroomsPage() {
         </div>
       </section></ScrollReveal>
 
-      <ScrollReveal><section className="outdoor-ad-intro">
-        <div className="site-container">
-          <div className="outdoor-ad-volume"><span>Make room for</span><strong>more<br /><i>good days.</i></strong><em>Decks · porches · sunrooms</em></div>
-          <div className="outdoor-ad-copy"><span className="eyebrow">The good stuff happens out here</span><h2>Your favorite<br /><i>part of home.</i></h2><p>One good outside space changes the whole feel of a weekend: dinner lingers, the game gets louder, friends stay later, and a quiet evening feels like an actual escape.</p><p>Designed and built for Raleigh and Wake County homes by Versatile Edge.</p></div>
-          <figure className="outdoor-intro-image"><ResponsiveImage src="/images/landing-pages/raleigh-open-deck-family-fall-v2.webp" alt="Family gathered around an outside dinner table at a Raleigh home" sizes="(max-width: 760px) calc(100vw - 30px), 29vw" /><figcaption>Make the most of Raleigh’s best weather.</figcaption></figure>
-        </div>
-      </section></ScrollReveal>
-
-      <ScrollReveal><section className="outdoor-ad-season">
-        <div className="site-container outdoor-ad-season-grid">
-          <div className="outdoor-season-stamp">Raleigh homes<br /><strong>outside</strong></div>
-          <div><span className="eyebrow light">Your next favorite room is waiting</span><h2>Enjoy this fall.<br /><i>And every season after.</i></h2></div>
-          <div><p>Good outside additions take planning. Start now, and we can understand the property, build the right scope, and create the place you want to come home to.</p><a href="#consultation" className={buttonVariants({ size: "lg" })}>Let’s create your space <ArrowRight size={18} /></a></div>
-        </div>
-      </section></ScrollReveal>
-
-      <section className="outdoor-ad-note">
-        <div className="site-container"><span>Versatile Edge LLC</span><p>Licensed NC General Contractor #107393</p><a href="/about">Our approach <ArrowRight size={16} /></a></div>
-      </section>
     </>
   );
 }
